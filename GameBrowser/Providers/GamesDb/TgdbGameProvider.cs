@@ -92,44 +92,44 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         protected override bool NeedsRefreshInternal(BaseItem item, BaseProviderInfo providerInfo)
         {
-            //if (item.DontFetchMeta) return false;
+            if (item.DontFetchMeta) return false;
 
-            //if (ConfigurationManager.Configuration.SaveLocalMeta && HasFileSystemStampChanged(item, providerInfo))
-            //{
-            //    item.SetProviderId("Tgdb", null);
-            //    return true;
-            //}
+            if (ConfigurationManager.Configuration.SaveLocalMeta && HasFileSystemStampChanged(item, providerInfo))
+            {
+                item.SetProviderId("Tgdb", null);
+                return true;
+            }
 
-            //if (providerInfo.LastRefreshStatus == ProviderRefreshStatus.CompletedWithErrors)
-            //{
-            //    return true;
-            //}
+            if (providerInfo.LastRefreshStatus == ProviderRefreshStatus.CompletedWithErrors)
+            {
+                return true;
+            }
 
-            //// Item wasn't last checked by this provider
-            //if (ProviderVersion != providerInfo.ProviderVersion)
-            //{
-            //    return true;
-            //}
+            // Item wasn't last checked by this provider
+            if (ProviderVersion != providerInfo.ProviderVersion)
+            {
+                return true;
+            }
 
 
-            //var downloadDate = providerInfo.LastRefreshed;
+            var downloadDate = providerInfo.LastRefreshed;
 
-            //if (ConfigurationManager.Configuration.MetadataRefreshDays == -1 && downloadDate != DateTime.MinValue)
-            //{
-            //    return true;
-            //}
+            if (ConfigurationManager.Configuration.MetadataRefreshDays == -1 && downloadDate != DateTime.MinValue)
+            {
+                return true;
+            }
 
-            //if (DateTime.Today.Subtract(item.DateCreated).TotalDays > 180 && downloadDate != DateTime.MinValue)
-            //{
-            //    return false;
-            //}
+            if (DateTime.Today.Subtract(item.DateCreated).TotalDays > 180 && downloadDate != DateTime.MinValue)
+            {
+                return false;
+            }
 
-            //if (DateTime.Today.Subtract(downloadDate).TotalDays < ConfigurationManager.Configuration.MetadataRefreshDays)
-            //{
-            //    return false;
-            //}
+            if (DateTime.Today.Subtract(downloadDate).TotalDays < ConfigurationManager.Configuration.MetadataRefreshDays)
+            {
+                return false;
+            }
 
-            //if (HasAltMeta(item)) return false;
+            if (HasAltMeta(item)) return false;
 
             return true;
         }
