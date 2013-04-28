@@ -206,7 +206,7 @@ namespace GameBrowser.Providers.GamesDb
 
             try
             {
-                using (var stream = await _httpClient.Get(url, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
+                using (var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
                 {
                     var doc = new XmlDocument();
                     doc.Load(stream);
@@ -323,7 +323,7 @@ namespace GameBrowser.Providers.GamesDb
                     {
                         game.SetImage(ImageType.Banner, await _providerManager.DownloadAndSaveImage(game,
                             TgdbUrls.BaseImagePath + bannerUrl, "banner" + Path.GetExtension(bannerUrl), false,
-                            Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                            Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
                     }
                     catch (HttpException)
                     {
@@ -345,7 +345,7 @@ namespace GameBrowser.Providers.GamesDb
                     try
                     {
                         game.PrimaryImagePath = await _providerManager.DownloadAndSaveImage(game, TgdbUrls.BaseImagePath + folderUrl,
-                        "folder" + Path.GetExtension(folderUrl), false, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
+                        "folder" + Path.GetExtension(folderUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
                     }
                     catch (HttpException)
                     {
@@ -375,7 +375,7 @@ namespace GameBrowser.Providers.GamesDb
                         try
                         {
                             game.BackdropImagePaths.Add(await _providerManager.DownloadAndSaveImage(game, TgdbUrls.BaseImagePath + backdropUrl, backdropName + Path.GetExtension(backdropUrl),
-                            false, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                            false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
                         }
                         catch (HttpException)
                         {
@@ -455,7 +455,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             string url = string.IsNullOrEmpty(platform) ? string.Format(TgdbUrls.GetGames, UrlEncode(name)) : string.Format(TgdbUrls.GetGamesByPlatform, UrlEncode(name), platform);
 
-            var stream = await _httpClient.Get(url, Plugin.TgdbSemiphore, CancellationToken.None);
+            var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, CancellationToken.None);
 
             var doc = new XmlDocument();
 

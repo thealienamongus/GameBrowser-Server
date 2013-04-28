@@ -235,7 +235,7 @@ namespace GameBrowser.Providers.GamesDb
 
             try
             {
-                using (var stream = await _httpClient.Get(url, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
+                using (var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
                 {
                     var doc = new XmlDocument();
                     doc.Load(stream);
@@ -305,7 +305,7 @@ namespace GameBrowser.Providers.GamesDb
                     try
                     {
                         console.SetImage(ImageType.Banner, await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
-                            "banner" + Path.GetExtension(bannerUrl), false, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                            "banner" + Path.GetExtension(bannerUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
                     }
                     catch (HttpException)
                     {
@@ -327,7 +327,7 @@ namespace GameBrowser.Providers.GamesDb
                     try
                     {
                         console.PrimaryImagePath = await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + folderUrl,
-                            "folder" + Path.GetExtension(folderUrl), false, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
+                            "folder" + Path.GetExtension(folderUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
                     }
                     catch (HttpException)
                     {
@@ -369,7 +369,7 @@ namespace GameBrowser.Providers.GamesDb
                         try
                         {
                             console.BackdropImagePaths.Add(await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
-                                backdropName + Path.GetExtension(backdropUrl), false, Plugin.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                                backdropName + Path.GetExtension(backdropUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
                         }
                         catch (HttpException)
                         {
