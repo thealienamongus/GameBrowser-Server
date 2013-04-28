@@ -8,6 +8,7 @@ using GameBrowser.Entities;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Extensions;
+using MediaBrowser.Controller.IO;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Logging;
 
@@ -46,12 +47,10 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         protected override DateTime CompareDate(BaseItem item)
         {
-            var xml = item.ResolveArgs.GetMetaFileByPath(Path.Combine(item.MetaLocation, "platform.xml"));
+            var xml = item.ResolveArgs.GetMetaFileByPath(Path.Combine(item.MetaLocation, "platform.xml")) ??
+                      item.ResolveArgs.GetMetaFileByPath(Path.Combine(item.MetaLocation, "console.xml"));
 
-            if (xml == null)
-                xml = item.ResolveArgs.GetMetaFileByPath(Path.Combine(item.MetaLocation, "console.xml"));
-
-            return xml != null ? xml.Value.LastWriteTimeUtc : DateTime.MinValue;
+            return xml != null ? FileSystem.GetLastWriteTimeUtc(xml, Logger) : DateTime.MinValue;
         }
 
         /// <summary>

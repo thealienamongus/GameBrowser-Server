@@ -385,6 +385,8 @@ namespace GameBrowser.Providers
         {
             reader.MoveToContent();
 
+            item.People.Clear();
+            
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element)
@@ -393,7 +395,10 @@ namespace GameBrowser.Providers
                     {
                         case "Person":
                             {
-                                item.AddPeople(GetPersonsFromXmlNode(reader.ReadSubtree()));
+                                foreach (var person in GetPersonsFromXmlNode(reader.ReadSubtree()))
+                                {
+                                    item.AddPerson(person);
+                                }
                                 break;
                             }
 

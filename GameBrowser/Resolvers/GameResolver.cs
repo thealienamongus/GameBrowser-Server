@@ -45,7 +45,7 @@ namespace GameBrowser.Resolvers
 
             var gameFiles = args.FileSystemChildren.Where(f =>
             {
-                var fileExtension = Path.GetExtension(f.Path) ?? string.Empty;
+                var fileExtension = Path.GetExtension(f.FullName) ?? string.Empty;
 
                 return validExtensions.Contains(fileExtension, StringComparer.OrdinalIgnoreCase);
 
@@ -58,8 +58,8 @@ namespace GameBrowser.Resolvers
 
             var game = GetNewGame(consoleType);
 
-            game.Path = gameFiles[0].Path;
-            game.Files = gameFiles.Select(i => i.Path).ToList();
+            game.Path = gameFiles[0].FullName;
+            game.Files = gameFiles.Select(i => i.FullName).ToList();
 
             return game;
         }

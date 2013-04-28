@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GameBrowser.Entities;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Controller.Entities;
+using MediaBrowser.Controller.IO;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Logging;
 
@@ -40,7 +41,7 @@ namespace GameBrowser.Providers
         protected override DateTime CompareDate(BaseItem item)
         {
             var xml = item.ResolveArgs.GetMetaFileByPath(Path.Combine(item.MetaLocation, "game.xml"));
-            return xml != null ? xml.Value.LastWriteTimeUtc : DateTime.MinValue;
+            return xml != null ? FileSystem.GetLastWriteTimeUtc(xml, Logger) : DateTime.MinValue;
         }
 
         /// <summary>
