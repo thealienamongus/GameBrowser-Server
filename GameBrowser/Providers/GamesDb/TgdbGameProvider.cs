@@ -119,11 +119,6 @@ namespace GameBrowser.Providers.GamesDb
                 return true;
             }
 
-            if (DateTime.Today.Subtract(item.DateCreated).TotalDays > 180 && downloadDate != DateTime.MinValue)
-            {
-                return false;
-            }
-
             if (DateTime.Today.Subtract(downloadDate).TotalDays < ConfigurationManager.Configuration.MetadataRefreshDays)
             {
                 return false;
