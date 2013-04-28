@@ -193,7 +193,7 @@ namespace GameBrowser.Providers.GamesDb
             
             if (xml != null)
             {
-                ProcessGameXml(game, gameId, xml, cancellationToken);
+                await ProcessGameXml(game, gameId, xml, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -236,7 +236,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="xmlDocument"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async void ProcessGameXml(Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
+        private async Task ProcessGameXml(Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
             game.SetProviderId("Tgdb", id);
 
