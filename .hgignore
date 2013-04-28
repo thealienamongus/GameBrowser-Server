@@ -1,0 +1,5 @@
+glob:GameBrowser/obj/*
+glob:GameBrowser/bin/*
+glob:_ReSharper.GameBrowser/*
+glob:WipImages/*
+
