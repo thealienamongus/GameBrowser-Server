@@ -37,6 +37,10 @@ namespace GameBrowser.Providers
             {
                 reader.MoveToContent();
 
+                item.Genres.Clear();
+                item.People.Clear();
+                item.Studios.Clear();
+                
                 // Loop through each element
                 while (reader.Read())
                 {
@@ -385,8 +389,6 @@ namespace GameBrowser.Providers
         {
             reader.MoveToContent();
 
-            item.People.Clear();
-            
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element)
