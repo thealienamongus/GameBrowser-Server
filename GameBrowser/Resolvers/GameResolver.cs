@@ -138,8 +138,9 @@ namespace GameBrowser.Resolvers
                 case GamePlatformType.NintendoSuperNES:
                     return new[] { ".smc", ".zip", ".fam", ".rom" };
 
+                    // Dolphin is super particular about what it can open.
                 case GamePlatformType.NintendoWii:
-                    return new[] { ".iso", ".bin", ".img", ".dol" };
+                    return new[] { ".iso", ".dol", ".ciso" };
 
                 case GamePlatformType.Dos:
                     return new[] {".exe"};
