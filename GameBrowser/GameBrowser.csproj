@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -119,6 +120,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Providers\BaseGameXmlParser.cs" />
+    <Compile Include="Providers\EmuMovies\EmuMoviesGameProvider.cs" />
+    <Compile Include="Providers\EmuMovies\EmuMoviesMediaTypes.cs" />
+    <Compile Include="Providers\EmuMovies\EmuMoviesUrls.cs" />
     <Compile Include="Providers\GamePlatformProviderFromXml.cs" />
     <Compile Include="Providers\GameProviderFromXml.cs" />
     <Compile Include="Providers\GamesDb\TgdbGamePlatformProvider.cs" />
@@ -148,12 +152,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Configuration\metaConfig.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Providers\EmuMovies\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)\..\MediaBrowser\ProgramData-Server\Plugins\" /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\ProgramData\MediaBrowser-Server\plugins" /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

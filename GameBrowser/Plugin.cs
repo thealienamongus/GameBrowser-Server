@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using GameBrowser.Configuration;
+using GameBrowser.Providers.EmuMovies;
 using MediaBrowser.Common.Configuration;
+using MediaBrowser.Common.Net;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Model.Logging;
@@ -19,9 +22,12 @@ namespace GameBrowser
     public class Plugin : BasePlugin<PluginConfiguration>
     {
         public readonly SemaphoreSlim TgdbSemiphore = new SemaphoreSlim(5, 5);
+        public readonly SemaphoreSlim EmuMoviesSemiphore = new SemaphoreSlim(5, 5);
+
+        private const string EmuMoviesApiKey = @"4D8621EE919A13EB6E89B7EDCA6424FC33D6";
 
         private readonly ILogger _logger;
-
+        private readonly IHttpClient _httpClient;
         private static ILibraryManager _libraryManager;
 
         /// <summary>
@@ -64,12 +70,13 @@ namespace GameBrowser
         /// <summary>
         /// Initializes a new instance of the <see cref="Plugin" /> class.
         /// </summary>
-        public Plugin(IApplicationPaths appPaths, IXmlSerializer xmlSerializer, ILibraryManager libraryManager, ILogManager logManager)
+        public Plugin(IApplicationPaths appPaths, IXmlSerializer xmlSerializer, ILibraryManager libraryManager, ILogManager logManager, IHttpClient httpClient)
             : base(appPaths, xmlSerializer)
         {
             Instance = this;
             _libraryManager = libraryManager;
             _logger = logManager.GetLogger("GameBrowser");
+            _httpClient = httpClient;
         }
 
         /// <summary>
@@ -87,57 +94,57 @@ namespace GameBrowser
         }
 
         private DateTime _keyDate;
-        private string _emuDbToken;
-        private readonly SemaphoreSlim _emuDbApiKeySemaphore = new SemaphoreSlim(1, 1);
+        private string _emuMoviesToken;
+        private readonly SemaphoreSlim _emuMoviesApiKeySemaphore = new SemaphoreSlim(1, 1);
         private const double TokenExpirationMinutes = 9.5;
 
         private bool IsTokenValid
         {
             get
             {
-                return !string.IsNullOrEmpty(_emuDbToken) &&
+                return !String.IsNullOrEmpty(_emuMoviesToken) &&
                        (DateTime.Now - _keyDate).TotalMinutes < TokenExpirationMinutes;
             }
         }
 
         /// <summary>
-        /// Gets the emu db token.
+        /// Gets the EmuMovies token.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Task{System.String}.</returns>
-        public async Task<string> GetEmuDbToken(CancellationToken cancellationToken)
+        public async Task<string> GetEmuMoviesToken(CancellationToken cancellationToken)
         {
             if (!IsTokenValid)
             {
-                await _emuDbApiKeySemaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
+                await _emuMoviesApiKeySemaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
 
                 // Check if it was set by another thread while waiting
                 if (IsTokenValid)
                 {
-                    _emuDbApiKeySemaphore.Release();
-                    return _emuDbToken;
+                    _emuMoviesApiKeySemaphore.Release();
+                    return _emuMoviesToken;
                 }
 
                 try
                 {
-                    _emuDbToken = await GetEmuDbTokenInternal(cancellationToken).ConfigureAwait(false);
+                    _emuMoviesToken = await GetEmuMoviesTokenInternal(cancellationToken).ConfigureAwait(false);
 
                     _keyDate = DateTime.Now;
                 }
                 catch (Exception ex)
                 {
                     // Log & throw
-                    _logger.ErrorException("Error getting token from emu db", ex);
+                    _logger.ErrorException("Error getting token from EmuMovies", ex);
 
                     throw;
                 }
                 finally
                 {
-                    _emuDbApiKeySemaphore.Release();
+                    _emuMoviesApiKeySemaphore.Release();
                 }
             }
 
-            return _emuDbToken;
+            return _emuMoviesToken;
         }
 
         /// <summary>
@@ -145,10 +152,38 @@ namespace GameBrowser
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Task{System.String}.</returns>
-        private async Task<string> GetEmuDbTokenInternal(CancellationToken cancellationToken)
+        private async Task<string> GetEmuMoviesTokenInternal(CancellationToken cancellationToken)
         {
-            // Replace this dummy with whatever actually does the work
-            return await Task.Run(() => "123").ConfigureAwait(false);
+            
+            var url = String.Format(EmuMoviesUrls.Login, Instance.Configuration.EmuMoviesUsername, Instance.Configuration.EmuMoviesPassword, EmuMoviesApiKey);
+
+            try
+            {
+                using (var stream = await _httpClient.Get(url, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false))
+                {
+                    var doc = new XmlDocument();
+                    doc.Load(stream);
+
+                    if (doc.HasChildNodes)
+                    {
+                        var resultNode = doc.SelectSingleNode("Results/Result");
+
+                        if (resultNode != null && resultNode.Attributes != null)
+                        {
+                            var sessionId = resultNode.Attributes["Session"].Value;
+
+                            if (sessionId != null)
+                                return sessionId;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.ErrorException("Error retrieving EmuMovies token", e);
+            }
+
+            return "";
         }
     }
 }

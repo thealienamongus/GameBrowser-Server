@@ -13,6 +13,11 @@ namespace GameBrowser.Entities
             get { return DisplayMediaType; }
         }
 
+        public override string EmuMoviesPlatformString
+        {
+            get { return "Sega_Saturn"; }
+        }
+
         public override string DisplayMediaType
         {
             get { return "Sega Saturn"; }

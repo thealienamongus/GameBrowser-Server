@@ -13,6 +13,11 @@ namespace GameBrowser.Entities
             get { return DisplayMediaType; }
         }
 
+        public override string EmuMoviesPlatformString
+        {
+            get { return "Nintendo_GameCube"; }
+        }
+
         public override string DisplayMediaType
         {
             get { return "Nintendo GameCube"; }

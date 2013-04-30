@@ -34,6 +34,14 @@ namespace GameBrowser.Entities
         {
             get { return "all"; }
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string EmuMoviesPlatformString
+        {
+            get { return ""; }
+        }
 
         /// <summary>
         /// 

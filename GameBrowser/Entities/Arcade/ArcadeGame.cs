@@ -7,6 +7,11 @@
             get { return DisplayMediaType; }
         }
 
+        public override string EmuMoviesPlatformString
+        {
+            get { return "MAME"; }
+        }
+
         public override string DisplayMediaType
         {
             get { return "Arcade"; }

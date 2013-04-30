@@ -13,6 +13,11 @@ namespace GameBrowser.Entities
             get { return DisplayMediaType; }
         }
 
+        public override string EmuMoviesPlatformString
+        {
+            get { return "Sony_PSP"; }
+        }
+
         public override string DisplayMediaType
         {
             get { return "Sony PSP"; }

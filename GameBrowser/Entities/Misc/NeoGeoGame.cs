@@ -7,6 +7,11 @@
             get { return DisplayMediaType; }
         }
 
+        public override string EmuMoviesPlatformString
+        {
+            get { return "SNK_Neo_Geo_AES"; }
+        }
+
         public override string DisplayMediaType
         {
             get { return "NeoGeo"; }

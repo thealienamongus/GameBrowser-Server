@@ -13,6 +13,11 @@ namespace GameBrowser.Entities
             get { return DisplayMediaType; }
         }
 
+        public override string EmuMoviesPlatformString
+        {
+            get { return "Sega_Master_System"; }
+        }
+
         public override string DisplayMediaType
         {
             get { return "Sega Master System"; }

@@ -246,7 +246,6 @@
 
                         ApiClient.updatePluginConfiguration(GameBrowserConfigurationPage.pluginUniqueId, config).done(Dashboard.processPluginConfigurationUpdateResult);
 
-                        // For some reason this isn't refreshing the page.
                         GameBrowserConfigurationPage.loadConsoleFolders(config);
                         
                         return true;
