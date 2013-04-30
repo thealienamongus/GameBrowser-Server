@@ -245,7 +245,10 @@ namespace GameBrowser.Providers.GamesDb
                 if (gameReleaseDate.Length == 4)
                     game.ProductionYear = Int32.Parse(gameReleaseDate);
                 else if (gameReleaseDate.Length > 4)
-                    game.PremiereDate = Convert.ToDateTime(gameReleaseDate);
+                {
+                    game.PremiereDate = Convert.ToDateTime(gameReleaseDate).ToUniversalTime();
+                    game.ProductionYear = game.PremiereDate.Value.Year;
+                }
             }
 
             var gameOverview = xmlDocument.SafeGetString("//Game/Overview");
