@@ -360,6 +360,29 @@ namespace GameBrowser.Providers.GamesDb
                 }
             }
 
+            nodes = xmlDocument.SelectNodes("//Game/Images/boxart[@side='back']");
+
+            if (nodes != null && nodes.Count > 0)
+            {
+                if (!game.HasLocalImage("BoxRear"))
+                {
+                    var boxRearUrl = nodes[0].InnerText;
+                    try
+                    {
+                        game.SetImage(ImageType.BoxRear, await _providerManager.DownloadAndSaveImage(game,
+                            TgdbUrls.BaseImagePath + boxRearUrl, "BoxRear" + Path.GetExtension(boxRearUrl), false,
+                            Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                    }
+                    catch (HttpException)
+                    {
+                    }
+                    catch (IOException)
+                    {
+                    }
+
+                }
+            }
+
             nodes = xmlDocument.SelectNodes("//Game/Images/fanart/original");
 
             if (nodes != null && nodes.Count > 0)
