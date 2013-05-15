@@ -115,7 +115,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".zip", ".iso" };
 
                 case GamePlatformType.Nintendo64:
-                    return new[] { ".z64", ".v64" };
+                    return new[] { ".z64", ".v64", ".usa", ".jap", ".pal", ".rom" };
 
                 case GamePlatformType.NintendoDS:
                     return new[] { ".nds" };
@@ -133,14 +133,14 @@ namespace GameBrowser.Resolvers
                     return new[] { ".gbc" };
 
                 case GamePlatformType.NintendoGameCube:
-                    return new[] { ".iso", ".bin", ".img" };
+                    return new[] { ".iso", ".bin", ".img", ".gcm" };
 
                 case GamePlatformType.NintendoSuperNES:
                     return new[] { ".smc", ".zip", ".fam", ".rom" };
 
                     // Dolphin is super particular about what it can open.
                 case GamePlatformType.NintendoWii:
-                    return new[] { ".iso", ".dol", ".ciso" };
+                    return new[] { ".iso", ".dol", ".ciso", ".wbfs" };
 
                 case GamePlatformType.Dos:
                     return new[] {".exe"};
