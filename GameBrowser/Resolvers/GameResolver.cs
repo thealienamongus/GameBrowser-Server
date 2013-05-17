@@ -149,7 +149,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".exe", ".url", ".lnk" };
 
                 case GamePlatformType.Sega32X: // Need to verfiy
-                    return new[] { ".iso", ".bin", ".img" };
+                    return new[] { ".iso", ".bin", ".img", ".zip" };
 
                 case GamePlatformType.SegaCD:
                     return new[] { ".iso", ".bin", ".img" };
@@ -158,16 +158,16 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso", ".bin", ".img", ".cdi" };
 
                 case GamePlatformType.SegaGameGear:
-                    return new[] { ".gg" };
+                    return new[] { ".gg", ".zip" };
 
                 case GamePlatformType.SegaGenesis:
-                    return new[] { ".smd", ".bin", ".gen" };
+                    return new[] { ".smd", ".bin", ".gen", ".zip" };
 
                 case GamePlatformType.SegaMasterSystem:
-                    return new[] { ".sms", ".sg", ".sc" };
+                    return new[] { ".sms", ".sg", ".sc", ".zip" };
 
                 case GamePlatformType.SegaMegaDrive:
-                    return new[] { ".smd" };
+                    return new[] { ".smd", ".zip" };
 
                 case GamePlatformType.SegaSaturn:
                     return new[] { ".iso", ".bin", ".img" };
@@ -176,7 +176,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso", ".bin", ".img", ".ps1" };
 
                 case GamePlatformType.SonyPlaystation2:
-                    return new[] { ".iso" };
+                    return new[] { ".iso", ".bin" };
 
                 case GamePlatformType.SonyPSP:
                     return new[] { ".iso" };
