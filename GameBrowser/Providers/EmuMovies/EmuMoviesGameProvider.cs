@@ -71,6 +71,21 @@ namespace GameBrowser.Providers.EmuMovies
             get { return true; }
         }
 
+        protected override bool RefreshOnFileSystemStampChange
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        protected override bool RefreshOnVersionChange
+        {
+            get
+            {
+                return true;
+            }
+        }
 
 
         /// <summary>
@@ -83,36 +98,10 @@ namespace GameBrowser.Providers.EmuMovies
         {
             if (item.DontFetchMeta) return false;
 
-            if (providerInfo.LastRefreshStatus == ProviderRefreshStatus.CompletedWithErrors)
-            {
-                return true;
-            }
-
-            // Item wasn't last checked by this provider
-            if (ProviderVersion != providerInfo.ProviderVersion)
-            {
-                return true;
-            }
-
-
-            var downloadDate = providerInfo.LastRefreshed;
-
-            if (ConfigurationManager.Configuration.MetadataRefreshDays == -1 && downloadDate != DateTime.MinValue)
-            {
-                return true;
-            }
-
-            if (DateTime.Today.Subtract(downloadDate).TotalDays < ConfigurationManager.Configuration.MetadataRefreshDays)
-            {
-                return false;
-            }
-
             if (HasAltMeta(item)) return false;
 
-            return true;
+            return base.NeedsRefreshInternal(item, providerInfo);
         }
-
-
 
         /// <summary>
         /// 
@@ -123,19 +112,18 @@ namespace GameBrowser.Providers.EmuMovies
         /// <returns></returns>
         public override async Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            var game = item as Game;
+            var game = (Game)item;
 
             var tCabinetArt = FetchCabinetArt(game, cancellationToken);
             var tDiscArt = FetchDiscArt(game, cancellationToken);
             var tSnaps = FetchSnap(game, cancellationToken);
             var tTitleArt = FetchTitleArt(game, cancellationToken);
 
-            Task.WaitAll(tCabinetArt, tDiscArt, tSnaps, tTitleArt);
+            await Task.WhenAll(tCabinetArt, tDiscArt, tSnaps, tTitleArt).ConfigureAwait(false);
 
+            SetLastRefreshed(item, DateTime.UtcNow);
             return true;
         }
-
-
 
         /// <summary>
         /// 
@@ -144,8 +132,6 @@ namespace GameBrowser.Providers.EmuMovies
         {
             get { return MetadataProviderPriority.Second; }
         }
-
-
 
         /// <summary>
         /// 
@@ -296,30 +282,23 @@ namespace GameBrowser.Providers.EmuMovies
 
             var url = string.Format(EmuMoviesUrls.Search, HttpUtility.UrlEncode(game.Name), game.EmuMoviesPlatformString, mediaType, sessionId);
 
-            try
+            using (var stream = await _httpClient.Get(url, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false))
             {
-                using (var stream = await _httpClient.Get(url, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false))
+                var doc = new XmlDocument();
+                doc.Load(stream);
+
+                if (doc.HasChildNodes)
                 {
-                    var doc = new XmlDocument();
-                    doc.Load(stream);
+                    var resultNode = doc.SelectSingleNode("Results/Result");
 
-                    if (doc.HasChildNodes)
+                    if (resultNode != null && resultNode.Attributes != null)
                     {
-                        var resultNode = doc.SelectSingleNode("Results/Result");
+                        var urlAttribute = resultNode.Attributes["URL"];
 
-                        if (resultNode != null && resultNode.Attributes != null)
-                        {
-                            var urlAttribute = resultNode.Attributes["URL"];
-
-                            if (urlAttribute != null)
-                                return urlAttribute.Value;
-                        }
+                        if (urlAttribute != null)
+                            return urlAttribute.Value;
                     }
                 }
-            }
-            catch (Exception)
-            {
-                return null;
             }
 
             return null;
