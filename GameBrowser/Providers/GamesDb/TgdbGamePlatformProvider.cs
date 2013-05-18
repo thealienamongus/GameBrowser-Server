@@ -199,7 +199,7 @@ namespace GameBrowser.Providers.GamesDb
                 if (xml != null)
                 {
                     _logger.Info("Tgdb provider xml stream exists");
-                    ProcessConsoleXml(console, xml, cancellationToken);
+                    await ProcessConsoleXml(console, xml, cancellationToken);
                 }
                 else
                 {
@@ -251,7 +251,7 @@ namespace GameBrowser.Providers.GamesDb
 
 
 
-        private async void ProcessConsoleXml(GamePlatform console, XmlDocument xmlDocument, CancellationToken cancellationToken)
+        private async Task ProcessConsoleXml(GamePlatform console, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
             string platformName = xmlDocument.SafeGetString("//Platform/Platform");
             if (!string.IsNullOrEmpty(platformName))
