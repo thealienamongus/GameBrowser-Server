@@ -66,7 +66,21 @@ namespace GameBrowser.Providers.GamesDb
             }
         }
 
+        protected override bool RefreshOnFileSystemStampChange
+        {
+            get
+            {
+                return true;
+            }
+        }
 
+        protected override bool RefreshOnVersionChange
+        {
+            get
+            {
+                return true;
+            }
+        }
 
         /// <summary>
         /// 
@@ -78,41 +92,10 @@ namespace GameBrowser.Providers.GamesDb
         {
             if (item.DontFetchMeta) return false;
 
-            if (ConfigurationManager.Configuration.SaveLocalMeta && HasFileSystemStampChanged(item, providerInfo))
-            {
-                item.SetProviderId("Tgdb", null);
-                return true;
-            }
-
-            if (providerInfo.LastRefreshStatus == ProviderRefreshStatus.CompletedWithErrors)
-            {
-                return true;
-            }
-
-            // Item wasn't last checked by this provider
-            if (ProviderVersion != providerInfo.ProviderVersion)
-            {
-                return true;
-            }
-
-            var downloadDate = providerInfo.LastRefreshed;
-
-            if (ConfigurationManager.Configuration.MetadataRefreshDays == -1 && downloadDate != DateTime.MinValue)
-            {
-                return true;
-            }
-
-            if (DateTime.Today.Subtract(downloadDate).TotalDays < ConfigurationManager.Configuration.MetadataRefreshDays)
-            {
-                return false;
-            }
-
             if (HasAltMeta(item) || HasLegacyMeta(item)) return false;
 
-            return true;
+            return base.NeedsRefreshInternal(item, providerInfo);
         }
-
-
 
         /// <summary>
         /// 
@@ -233,23 +216,14 @@ namespace GameBrowser.Providers.GamesDb
         {
             var url = string.Format(TgdbUrls.GetPlatform, id);
 
-            try
+            using (var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
             {
-                using (var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
-                {
-                    var doc = new XmlDocument();
-                    doc.Load(stream);
+                var doc = new XmlDocument();
+                doc.Load(stream);
 
-                    return doc;
-                }
-            }
-            catch (Exception)
-            {
-                return null;
+                return doc;
             }
         }
-
-
 
         private async Task ProcessConsoleXml(GamePlatform console, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
@@ -302,18 +276,8 @@ namespace GameBrowser.Providers.GamesDb
             {
                 if (!console.HasLocalImage("banner"))
                 {
-                    try
-                    {
-                        console.SetImage(ImageType.Banner, await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
-                            "banner" + Path.GetExtension(bannerUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
-                    }
-                    catch (HttpException)
-                    {
-                    }
-                    catch (IOException)
-                    {
-                    }
-                   
+                    console.SetImage(ImageType.Banner, await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
+                        "banner" + Path.GetExtension(bannerUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
                 }
             }
 
@@ -324,17 +288,8 @@ namespace GameBrowser.Providers.GamesDb
                 if (nodes != null)
                 {
                     var folderUrl = nodes[0].InnerText;
-                    try
-                    {
-                        console.PrimaryImagePath = await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + folderUrl,
-                            "folder" + Path.GetExtension(folderUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
-                    }
-                    catch (HttpException)
-                    {
-                    }
-                    catch (IOException)
-                    {
-                    }
+                    console.PrimaryImagePath = await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + folderUrl,
+                        "folder" + Path.GetExtension(folderUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
                 }
             }
 
@@ -366,17 +321,8 @@ namespace GameBrowser.Providers.GamesDb
                     {
                         var backdropUrl = bNodes[i].InnerText;
 
-                        try
-                        {
-                            console.BackdropImagePaths.Add(await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
-                                backdropName + Path.GetExtension(backdropUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
-                        }
-                        catch (HttpException)
-                        {
-                        }
-                        catch (IOException)
-                        {
-                        }
+                        console.BackdropImagePaths.Add(await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
+                            backdropName + Path.GetExtension(backdropUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
                     }
                 }
             }
