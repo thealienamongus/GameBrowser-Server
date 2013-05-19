@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameBrowser.Entities;
+using GameBrowser.Library.Utils;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Resolvers;
 using System;
@@ -35,9 +36,14 @@ namespace GameBrowser.Resolvers
                 {
                     if (args.Path.EndsWith(".zip") || args.Path.EndsWith(".7z"))
                     {
-                        // TODO will need to filter out zips that are bios roms.
-                        var game = new ArcadeGame {Files = new List<string> {args.Path}, Path = args.Path};
+                        // ignore zips that are bios roms.
+                        if (MameUtils.IsBiosRom(args.Path)) return null;
+                        
+                        var game = new ArcadeGame { Name = MameUtils.GetFullNameFromPath(args.Path),
+                                                    Files = new List<string> {args.Path},
+                                                    Path = args.Path };
                         return game;
+                        
                     }
                 }
                 
@@ -293,7 +299,7 @@ namespace GameBrowser.Resolvers
                     return new GenesisGame();
 
                 case GamePlatformType.SegaCD:
-                    return new GenesisGame();;
+                    return new GenesisGame();
 
                 case GamePlatformType.SegaDreamcast:
                     return new DreamcastGame();

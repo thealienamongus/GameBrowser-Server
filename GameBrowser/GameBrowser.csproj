@@ -103,6 +103,7 @@
     <Compile Include="Entities\Sega\SaturnGame.cs" />
     <Compile Include="Entities\Nintendo\SnesGame.cs" />
     <Compile Include="Entities\Nintendo\WiiGame.cs" />
+    <Compile Include="Library\Utils\MameUtils.cs" />
     <Compile Include="PlatformType.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfiguration.cs" />
@@ -152,7 +153,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Configuration\metaConfig.html" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\mame_game_list.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "%25AppData%25\MediaBrowser-Server\plugins" /y</PostBuildEvent>
