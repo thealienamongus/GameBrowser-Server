@@ -35,6 +35,7 @@ namespace GameBrowser.Resolvers
                 {
                     if (args.Path.EndsWith(".zip") || args.Path.EndsWith(".7z"))
                     {
+                        // TODO will need to filter out zips that are bios roms.
                         var game = new ArcadeGame {Files = new List<string> {args.Path}};
                         return game;
                     }
