@@ -20,16 +20,27 @@ namespace GameBrowser.Resolvers
         /// <returns>Game.</returns>
         protected override Game Resolve(ItemResolveArgs args)
         {
-            if (args.IsDirectory)
-            {
-                var consoleFolder = args.Parent as GamePlatform;
+            var consoleFolder = args.Parent as GamePlatform;
 
-                if (consoleFolder != null)
+            if (consoleFolder != null)
+            {
+                if (args.IsDirectory)
                 {
                     return GetGame(args, consoleFolder.PlatformType);
+                
                 }
-            }
 
+                // For MAME we will allow all games in the same dir
+                if (consoleFolder.PlatformType == GamePlatformType.Arcade)
+                {
+                    if (args.Path.EndsWith(".zip") || args.Path.EndsWith(".7z"))
+                    {
+                        var game = new ArcadeGame {Files = new List<string> {args.Path}};
+                        return game;
+                    }
+                }
+                
+            }
             return null;
         }
 
