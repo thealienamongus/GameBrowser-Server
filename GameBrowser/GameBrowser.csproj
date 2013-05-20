@@ -104,7 +104,6 @@
     <Compile Include="Entities\Nintendo\SnesGame.cs" />
     <Compile Include="Entities\Nintendo\WiiGame.cs" />
     <Compile Include="Library\Utils\MameUtils.cs" />
-    <Compile Include="Library\Utils\PlatformUtils.cs" />
     <Compile Include="PlatformType.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfiguration.cs" />
