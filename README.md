@@ -1,2 +1,2 @@
-gamebrowser-mb3
+GameBrowser for MediaBrowser Server
 ===============
