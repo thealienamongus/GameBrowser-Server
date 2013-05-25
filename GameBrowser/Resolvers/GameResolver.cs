@@ -15,6 +15,17 @@ namespace GameBrowser.Resolvers
     public class GameResolver : ItemResolver<Game>
     {
         /// <summary>
+        /// Run before any core resolvers
+        /// </summary>
+        public override ResolverPriority Priority
+        {
+            get
+            {
+                return ResolverPriority.First;
+            }
+        }
+
+        /// <summary>
         /// Resolves the specified args.
         /// </summary>
         /// <param name="args">The args.</param>
