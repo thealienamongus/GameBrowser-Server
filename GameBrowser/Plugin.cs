@@ -103,7 +103,7 @@ namespace GameBrowser
             get
             {
                 return !String.IsNullOrEmpty(_emuMoviesToken) &&
-                       (DateTime.Now - _keyDate).TotalMinutes < TokenExpirationMinutes;
+                       (DateTime.Now - _keyDate).TotalMinutes <= TokenExpirationMinutes;
             }
         }
 
@@ -127,9 +127,14 @@ namespace GameBrowser
 
                 try
                 {
-                    _emuMoviesToken = await GetEmuMoviesTokenInternal(cancellationToken).ConfigureAwait(false);
+                    var token = await GetEmuMoviesTokenInternal(cancellationToken).ConfigureAwait(false);
 
-                    _keyDate = DateTime.Now;
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        _keyDate = DateTime.Now;
+                    }
+
+                    _emuMoviesToken = token;
                 }
                 catch (Exception ex)
                 {

@@ -98,6 +98,11 @@ namespace GameBrowser.Providers.GamesDb
             }
         }
 
+        protected override DateTime CompareDate(BaseItem item)
+        {
+            return item.DateModified;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -106,8 +111,6 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         protected override bool NeedsRefreshInternal(BaseItem item, BaseProviderInfo providerInfo)
         {
-            if (item.DontFetchMeta) return false;
-
             if (HasAltMeta(item)) return false;
 
             return base.NeedsRefreshInternal(item, providerInfo);
@@ -126,11 +129,6 @@ namespace GameBrowser.Providers.GamesDb
             {
                 SetLastRefreshed(item, DateTime.UtcNow);
                 return true;
-            }
-
-            if (item.DontFetchMeta)
-            {
-                return false;
             }
 
             cancellationToken.ThrowIfCancellationRequested();

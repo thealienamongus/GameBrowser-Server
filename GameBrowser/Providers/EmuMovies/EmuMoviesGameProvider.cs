@@ -19,12 +19,6 @@ namespace GameBrowser.Providers.EmuMovies
         private readonly IHttpClient _httpClient;
         private readonly IProviderManager _providerManager;
 
-        private bool _hasBoxImage;
-        private bool _hasTitleImage;
-        private bool _hasScreenshot;
-        private bool _hasDiscImage;
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -58,10 +52,8 @@ namespace GameBrowser.Providers.EmuMovies
         /// </summary>
         protected override string ProviderVersion
         {
-            get { return "EmuMovies Provider 1.0"; }
+            get { return "3"; }
         }
-
-
 
         /// <summary>
         /// 
@@ -87,19 +79,18 @@ namespace GameBrowser.Providers.EmuMovies
             }
         }
 
+        protected override DateTime CompareDate(BaseItem item)
+        {
+            return item.DateModified;
+        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="providerInfo"></param>
-        /// <returns></returns>
         protected override bool NeedsRefreshInternal(BaseItem item, BaseProviderInfo providerInfo)
         {
-            if (item.DontFetchMeta) return false;
-
-            if (HasAltMeta(item)) return false;
-
+            if (string.IsNullOrEmpty(Plugin.Instance.Configuration.EmuMoviesUsername)
+                || string.IsNullOrEmpty(Plugin.Instance.Configuration.EmuMoviesPassword))
+            {
+                return false;
+            }
             return base.NeedsRefreshInternal(item, providerInfo);
         }
 
@@ -139,21 +130,17 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<bool> FetchCabinetArt(Game game, CancellationToken cancellationToken)
+        private async Task FetchCabinetArt(Game game, CancellationToken cancellationToken)
         {
-            if (_hasBoxImage)
+            if (!game.HasImage(ImageType.Box))
             {
                 var url = await FetchMediaUrl(game, EmuMoviesMediaTypes.Cabinet, cancellationToken);
 
-                if (url == null) return false;
+                if (url == null) return;
 
                 game.SetImage(ImageType.Box, await _providerManager.DownloadAndSaveImage(game, url, "box" + Path.GetExtension(url),
                     false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
-
-                return true;
             }
-
-            return false;
         }
 
 
@@ -164,21 +151,17 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<bool> FetchDiscArt(Game game, CancellationToken cancellationToken)
+        private async Task FetchDiscArt(Game game, CancellationToken cancellationToken)
         {
-            if (_hasDiscImage)
+            if (!game.HasImage(ImageType.Disc))
             {
                 var url = await FetchMediaUrl(game, EmuMoviesMediaTypes.Cart, cancellationToken);
 
-                if (url == null) return false;
+                if (url == null) return;
 
                 game.SetImage(ImageType.Disc, await _providerManager.DownloadAndSaveImage(game, url, "disc" + Path.GetExtension(url),
                     false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
-
-                return true;
             }
-
-            return false;
         }
 
 
@@ -189,21 +172,17 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<bool> FetchSnap(Game game, CancellationToken cancellationToken)
+        private async Task FetchSnap(Game game, CancellationToken cancellationToken)
         {
-            if (_hasScreenshot)
+            if (game.ScreenshotImagePaths.Count == 0)
             {
                 var url = await FetchMediaUrl(game, EmuMoviesMediaTypes.Snap, cancellationToken);
 
-                if (url == null) return false;
+                if (url == null) return;
 
-                game.SetImage(ImageType.Screenshot, await _providerManager.DownloadAndSaveImage(game, url, "screenshot" + Path.GetExtension(url),
+                game.ScreenshotImagePaths.Add(await _providerManager.DownloadAndSaveImage(game, url, "screenshot" + Path.GetExtension(url),
                     false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
-
-                return true;
             }
-
-            return false;
         }
 
 
@@ -214,58 +193,18 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<bool> FetchTitleArt(Game game, CancellationToken cancellationToken)
+        private async Task FetchTitleArt(Game game, CancellationToken cancellationToken)
         {
-            if (_hasTitleImage)
+            if (!game.HasImage(ImageType.Menu))
             {
                 var url = await FetchMediaUrl(game, EmuMoviesMediaTypes.Title, cancellationToken);
 
-                if (url == null) return false;
+                if (url == null) return;
 
                 game.SetImage(ImageType.Menu, await _providerManager.DownloadAndSaveImage(game, url, "menu" + Path.GetExtension(url),
                     false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
-
-                return true;
             }
-
-            return false;
         }
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        private bool HasAltMeta(BaseItem item)
-        {
-            bool hasAltMeta = true;
-
-            if (item.HasLocalImage("disc"))
-                _hasDiscImage = true;
-            else
-                hasAltMeta = false;
-
-            if (item.HasLocalImage("box"))
-                _hasBoxImage = true;
-            else
-                hasAltMeta = false;
-
-            if (item.HasLocalImage("menu"))
-                _hasTitleImage = true;
-            else
-                hasAltMeta = false;
-
-            if (item.HasLocalImage("screenshot"))
-                _hasScreenshot = true;
-            else
-                hasAltMeta = false;
-
-            return hasAltMeta;
-        }
-
-
 
         /// <summary>
         /// 
