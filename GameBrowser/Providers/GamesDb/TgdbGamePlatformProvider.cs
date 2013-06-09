@@ -6,15 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using GameBrowser.Entities;
+using GameBrowser.Extensions;
 using GameBrowser.Resolvers;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Controller.Entities;
-using MediaBrowser.Controller.Extensions;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
-using MediaBrowser.Model.Net;
 
 namespace GameBrowser.Providers.GamesDb
 {

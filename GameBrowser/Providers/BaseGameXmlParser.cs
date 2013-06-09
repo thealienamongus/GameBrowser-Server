@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Xml;
 using GameBrowser.Entities;
-using MediaBrowser.Common.Extensions;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Model.Entities;
 

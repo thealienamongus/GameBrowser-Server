@@ -110,6 +110,7 @@
     <Compile Include="Entities\Sega\SaturnGame.cs" />
     <Compile Include="Entities\Nintendo\SnesGame.cs" />
     <Compile Include="Entities\Nintendo\WiiGame.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="Library\Utils\MameUtils.cs" />
     <Compile Include="PlatformType.cs" />
     <Compile Include="Plugin.cs" />
