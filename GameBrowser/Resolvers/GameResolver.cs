@@ -226,121 +226,351 @@ namespace GameBrowser.Resolvers
         /// <returns>One of the many sub-classes of Game</returns>
         private Game GetNewGame(GamePlatformType platform)
         {
+            Game game;
+
             switch (platform)
             {
                 case GamePlatformType.Panasonic3DO:
-                    return new Panasonic3doGame();
+                    game = new Panasonic3doGame
+                                   {
+                                       DisplayMediaType = "3DO",
+                                       TgdbPlatformString = "3DO",
+                                       EmuMoviesPlatformString = "Panasonic_3DO"
+                                   };
+                    return game;
 
                 case GamePlatformType.Amiga:
-                    return new AmigaGame();
+                    game = new AmigaGame
+                                   {
+                                       DisplayMediaType = "Amiga",
+                                       TgdbPlatformString = "Amiga",
+                                       EmuMoviesPlatformString = ""
+                                   };
+                    return game;
 
                 case GamePlatformType.Arcade:
-                    return new ArcadeGame();
+                    game = new ArcadeGame
+                                   {
+                                       DisplayMediaType = "Arcade",
+                                       TgdbPlatformString = "Arcade",
+                                       EmuMoviesPlatformString = "MAME"
+                                   };
+                    return game;
 
                 case GamePlatformType.Atari2600:
-                    return new Atari2600Game();
+                    game = new Atari2600Game
+                                   {
+                                       DisplayMediaType = "Atari 2600",
+                                       TgdbPlatformString = "Atari 2600",
+                                       EmuMoviesPlatformString = "Atari_2600"
+                                   };
+                    return game;
 
                 case GamePlatformType.Atari5200:
-                    return new Atari5200Game();
+                    game = new Atari5200Game
+                                   {
+                                       DisplayMediaType = "Atari 5200",
+                                       TgdbPlatformString = "Atari 5200",
+                                       EmuMoviesPlatformString = "Atari_5200"
+                                   };
+                    return game;
 
                 case GamePlatformType.Atari7800:
-                    return new Atari7800Game();
+                    game = new Atari7800Game
+                                   {
+                                       DisplayMediaType = "Atari 7800",
+                                       TgdbPlatformString = "Atari 7800",
+                                       EmuMoviesPlatformString = "Atari_7800"
+                                   };
+                    return game;
 
                 case GamePlatformType.AtariXE:
-                    return new AtariXeGame();
+                    game = new AtariXeGame
+                                   {
+                                       DisplayMediaType = "Atari XE",
+                                       TgdbPlatformString = "Atari XE",
+                                       EmuMoviesPlatformString = "Atari_8_bit"
+                                   };
+                    return game;
 
                 case GamePlatformType.AtariJaguar:
-                    return new JaguarGame();
+                    game = new JaguarGame
+                                   {
+                                       DisplayMediaType = "Atari Jaguar",
+                                       TgdbPlatformString = "Atari Jaguar",
+                                       EmuMoviesPlatformString = "Atari_Jaguar"
+                                   };
+                    return game;
 
                 case GamePlatformType.AtariJaguarCD:
-                    return new JaguarGame();
+                    game = new JaguarGame
+                                   {
+                                       DisplayMediaType = "Atari Jaguar",
+                                       TgdbPlatformString = "Atari Jaguar",
+                                       EmuMoviesPlatformString = "Atari_Jaguar"
+                                   };
+                    return game;
 
                 case GamePlatformType.Colecovision:
-                    return new ColecovisionGame();
+                    game = new ColecovisionGame
+                                   {
+                                       DisplayMediaType = "Colecovision",
+                                       TgdbPlatformString = "Colecovision",
+                                       EmuMoviesPlatformString = "Coleco_Vision"
+                                   };
+                    return game;
 
                 case GamePlatformType.Commodore64:
-                    return new C64Game();
+                    game = new C64Game
+                                   {
+                                       DisplayMediaType = "Commodore 64",
+                                       TgdbPlatformString = "Commodore 64",
+                                       EmuMoviesPlatformString = "Commodore_64"
+                                   };
+                    return game;
 
                 case GamePlatformType.CommodoreVic20:
-                    return new Vic20Game();
+                    game = new Vic20Game
+                                   {
+                                       DisplayMediaType = "Commodore Vic-20",
+                                       TgdbPlatformString = "",
+                                       EmuMoviesPlatformString = ""
+                                   };
+                    return game;
 
                 case GamePlatformType.Intellivision:
-                    return new IntellivisionGame();
+                    game = new IntellivisionGame
+                                   {
+                                       DisplayMediaType = "Intellivision",
+                                       TgdbPlatformString = "Intellivision",
+                                       EmuMoviesPlatformString = "Mattel_Intellivision"
+                                   };
+                    return game;
 
                 case GamePlatformType.MicrosoftXBox:
-                    return new XboxGame();
+                    game = new XboxGame
+                                   {
+                                       DisplayMediaType = "Microsoft Xbox",
+                                       TgdbPlatformString = "Microsoft Xbox",
+                                       EmuMoviesPlatformString = "Microsoft_Xbox"
+                                   };
+                    return game;
 
                 case GamePlatformType.NeoGeo:
-                    return new NeoGeoGame();
+                    game = new NeoGeoGame
+                                   {
+                                       DisplayMediaType = "NeoGeo",
+                                       TgdbPlatformString = "NeoGeo",
+                                       EmuMoviesPlatformString = "SNK_Neo_Geo_AES"
+                                   };
+                    return game;
 
                 case GamePlatformType.Nintendo64:
-                    return new N64Game();
+                    game = new N64Game
+                                   {
+                                       DisplayMediaType = "Nintendo 64",
+                                       TgdbPlatformString = "Nintendo 64",
+                                       EmuMoviesPlatformString = "Nintendo_N64"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoDS:
-                    return new DsGame();
+                    game = new DsGame
+                                   {
+                                       DisplayMediaType = "Nintendo DS",
+                                       TgdbPlatformString = "Nintendo DS",
+                                       EmuMoviesPlatformString = "Nintendo_DS"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoEntertainmentSystem:
-                    return new NesGame();
+                    game = new NesGame
+                                   {
+                                       DisplayMediaType = "Nintendo Entertainment System (NES)",
+                                       TgdbPlatformString = "Nintendo Entertainment System (NES)",
+                                       EmuMoviesPlatformString = "Nintendo_NES"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoGameBoy:
-                    return new GameBoyGame();
+                    game = new GameBoyGame
+                                   {
+                                       DisplayMediaType = "Nintendo Game Boy",
+                                       TgdbPlatformString = "Nintendo Game Boy",
+                                       EmuMoviesPlatformString = "Nintendo_Game_Boy"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoGameBoyAdvance:
-                    return new GameBoyAdvanceGame();
+                    game = new GameBoyAdvanceGame
+                                   {
+                                       DisplayMediaType = "Nintendo Game Boy Advance",
+                                       TgdbPlatformString = "Nintendo Game Boy Advance",
+                                       EmuMoviesPlatformString = "Nintendo_Game_Boy_Advance"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoGameBoyColor:
-                    return new GameBoyColorGame();
+                    game = new GameBoyColorGame
+                                   {
+                                       DisplayMediaType = "Nintendo Game Boy Color",
+                                       TgdbPlatformString = "Nintendo Game Boy Color",
+                                       EmuMoviesPlatformString = "Nintendo_Game_Boy_Color"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoGameCube:
-                    return new GameCubeGame();
+                    game = new GameCubeGame
+                                   {
+                                       DisplayMediaType = "Nintendo GameCube",
+                                       TgdbPlatformString = "Nintendo GameCube",
+                                       EmuMoviesPlatformString = "Nintendo_GameCube"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoSuperNES:
-                    return new SnesGame();
+                    game = new SnesGame
+                                   {
+                                       DisplayMediaType = "Super Nintendo (SNES)",
+                                       TgdbPlatformString = "Super Nintendo (SNES)",
+                                       EmuMoviesPlatformString = "Nintendo_SNES"
+                                   };
+                    return game;
 
                 case GamePlatformType.NintendoWii:
-                    return new WiiGame();
+                    game = new WiiGame
+                                   {
+                                       DisplayMediaType = "Nintendo Wii",
+                                       TgdbPlatformString = "Nintendo Wii",
+                                       EmuMoviesPlatformString = ""
+                                   };
+                    return game;
 
                 case GamePlatformType.Dos:
-                    return new DosGame();
+                    game = new DosGame
+                                   {
+                                       DisplayMediaType = "PC",
+                                       TgdbPlatformString = "PC",
+                                       EmuMoviesPlatformString = ""
+                                   };
+                    return game;
 
                 case GamePlatformType.Windows:
-                    return new WindowsGame();
+                    game = new WindowsGame
+                                   {
+                                       DisplayMediaType = "PC",
+                                       TgdbPlatformString = "PC",
+                                       EmuMoviesPlatformString = ""
+                                   };
+                    return game;
 
                 case GamePlatformType.Sega32X:
-                    return new GenesisGame();
+                    game = new GenesisGame
+                                   {
+                                       DisplayMediaType = "Sega Genesis",
+                                       TgdbPlatformString = "Sega Genesis",
+                                       EmuMoviesPlatformString = "Sega_Genesis"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaCD:
-                    return new GenesisGame();
+                    game = new GenesisGame
+                                   {
+                                       DisplayMediaType = "Sega Genesis",
+                                       TgdbPlatformString = "Sega Genesis",
+                                       EmuMoviesPlatformString = "Sega_Genesis"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaDreamcast:
-                    return new DreamcastGame();
+                    game = new DreamcastGame
+                                   {
+                                       DisplayMediaType = "Sega Dreamcast",
+                                       TgdbPlatformString = "Sega Dreamcast",
+                                       EmuMoviesPlatformString = "Sega_Dreamcast"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaGameGear:
-                    return new GameGearGame();
+                    game = new GameGearGame
+                                   {
+                                       DisplayMediaType = "Sega Game Gear",
+                                       TgdbPlatformString = "Sega Game Gear",
+                                       EmuMoviesPlatformString = "Sega_Game_Gear"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaGenesis:
-                    return new GenesisGame();
+                    game = new GenesisGame
+                                   {
+                                       DisplayMediaType = "Sega Genesis",
+                                       TgdbPlatformString = "Sega Genesis",
+                                       EmuMoviesPlatformString = "Sega_Genesis"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaMasterSystem:
-                    return new MasterSystemGame();
+                    game = new MasterSystemGame
+                                   {
+                                       DisplayMediaType = "Sega Master System",
+                                       TgdbPlatformString = "Sega Master System",
+                                       EmuMoviesPlatformString = "Sega_Master_System"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaMegaDrive:
-                    return new MasterSystemGame();
+                    game = new GenesisGame
+                                   {
+                                       DisplayMediaType = "Sega Genesis",
+                                       TgdbPlatformString = "Sega Genesis",
+                                       EmuMoviesPlatformString = "Sega_Genesis"
+                                   };
+                    return game;
 
                 case GamePlatformType.SegaSaturn:
-                    return new SaturnGame();
+                    game = new SaturnGame
+                                   {
+                                       DisplayMediaType = "Sega Saturn",
+                                       TgdbPlatformString = "Sega Saturn",
+                                       EmuMoviesPlatformString = "Sega_Saturn"
+                                   };
+                    return game;
 
                 case GamePlatformType.SonyPlaystation:
-                    return new PsOneGame();
+                    game = new PsOneGame
+                                   {
+                                       DisplayMediaType = "Sony Playstation",
+                                       TgdbPlatformString = "Sony Playstation",
+                                       EmuMoviesPlatformString = "Sony_Playstation"
+                                   };
+                    return game;
 
                 case GamePlatformType.SonyPlaystation2:
-                    return new Ps2Game();
+                    game = new Ps2Game
+                                   {
+                                       DisplayMediaType = "Sony Playstation 2",
+                                       TgdbPlatformString = "Sony Playstation 2",
+                                       EmuMoviesPlatformString = "Sony_Playstation_2"
+                                   };
+                    return game;
 
                 case GamePlatformType.SonyPSP:
-                    return new PlayStationPortableGame();
+                    game = new PlayStationPortableGame
+                                   {
+                                       DisplayMediaType = "Sony PSP",
+                                       TgdbPlatformString = "Sony PSP",
+                                       EmuMoviesPlatformString = "Sony_PSP"
+                                   };
+                    return game;
 
                 case GamePlatformType.TurboGrafx16:
-                    return new TurboGrafx16Game();
+                    game = new TurboGrafx16Game
+                                   {
+                                       DisplayMediaType = "TurboGrafx 16",
+                                       TgdbPlatformString = "TurboGrafx 16",
+                                       EmuMoviesPlatformString = "NEC_TurboGrafx_16"
+                                   };
+                    return game;
 
                 default:
                     return null;

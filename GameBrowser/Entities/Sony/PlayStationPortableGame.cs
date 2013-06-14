@@ -8,19 +8,6 @@ namespace GameBrowser.Entities
 {
     class PlayStationPortableGame : Game
     {
-        public override string TgdbPlatformString
-        {
-            get { return DisplayMediaType; }
-        }
 
-        public override string EmuMoviesPlatformString
-        {
-            get { return "Sony_PSP"; }
-        }
-
-        public override string DisplayMediaType
-        {
-            get { return "Sony PSP"; }
-        }
     }
 }

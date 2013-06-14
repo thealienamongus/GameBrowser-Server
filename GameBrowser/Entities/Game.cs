@@ -30,18 +30,12 @@ namespace GameBrowser.Entities
         /// To be overridden by every sub-class.
         /// </summary>
         /// <returns></returns>
-        public virtual string TgdbPlatformString
-        {
-            get { return "all"; }
-        }
+        public string TgdbPlatformString { get; set; }
         
         /// <summary>
         /// 
         /// </summary>
-        public virtual string EmuMoviesPlatformString
-        {
-            get { return ""; }
-        }
+        public string EmuMoviesPlatformString { get; set; }
 
         /// <summary>
         /// 
