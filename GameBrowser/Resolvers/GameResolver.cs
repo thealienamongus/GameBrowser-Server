@@ -208,7 +208,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso", ".bin" };
 
                 case GamePlatformType.SonyPSP:
-                    return new[] { ".iso" };
+                    return new[] { ".iso", ".cso" };
 
                 case GamePlatformType.TurboGrafx16:
                     return new[] { ".pce" };
