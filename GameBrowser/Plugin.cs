@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using GameBrowser.Api;
 using GameBrowser.Configuration;
 using GameBrowser.Providers.EmuMovies;
 using MediaBrowser.Common.Configuration;
@@ -29,6 +30,7 @@ namespace GameBrowser
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
         private static ILibraryManager _libraryManager;
+        private readonly GameBrowserUriService _gameBrowserUriService;
 
         /// <summary>
         /// Gets the name of the plugin
@@ -77,6 +79,8 @@ namespace GameBrowser
             _libraryManager = libraryManager;
             _logger = logManager.GetLogger("GameBrowser");
             _httpClient = httpClient;
+
+            _gameBrowserUriService = new GameBrowserUriService(_logger);
         }
 
         /// <summary>
