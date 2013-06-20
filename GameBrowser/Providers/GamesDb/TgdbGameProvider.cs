@@ -81,14 +81,6 @@ namespace GameBrowser.Providers.GamesDb
             }
         }
 
-        protected override bool RefreshOnFileSystemStampChange
-        {
-            get
-            {
-                return true;
-            }
-        }
-
         protected override bool RefreshOnVersionChange
         {
             get
