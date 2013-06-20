@@ -59,6 +59,16 @@ namespace GameBrowser.Resolvers
                 }
                 
             }
+            else // User may have a GamePlatform as an entrypoint
+            {
+                if (args.IsDirectory)
+                {
+                    var platform = AttemptGetGamePlatformTypeFromPath(args.Path);
+
+                    if (platform != null)
+                        return GetGame(args, (GamePlatformType)platform);
+                }
+            }
             return null;
         }
 
@@ -576,6 +586,18 @@ namespace GameBrowser.Resolvers
                     return null;
             }
             
+        }
+
+        private GamePlatformType? AttemptGetGamePlatformTypeFromPath(string path)
+        {
+            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => path.StartsWith(s.Path + "\\"));
+
+            if (system != null)
+            {
+                return system.ConsoleType;
+            }
+
+            return null;
         }
 
     }
