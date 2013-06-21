@@ -24,6 +24,7 @@
         NintendoGameBoyColor,
         NintendoGameCube,
         NintendoSuperNES,
+        NintendoVirtualBoy,
         NintendoWii,
         NintendoWiiU,
         Panasonic3DO,
@@ -40,6 +41,7 @@
         SonyPlaystation,
         SonyPlaystation2,
         SonyPSP,
-        TurboGrafx16
+        TurboGrafx16,
+        TurboGrafxCD
     }
 }

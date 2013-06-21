@@ -95,9 +95,11 @@
     <Compile Include="Entities\GamePlatform.cs" />
     <Compile Include="Entities\Misc\AmigaGame.cs" />
     <Compile Include="Entities\Misc\ColecovisionGame.cs" />
+    <Compile Include="Entities\Misc\TurboGrafxCdGame.cs" />
     <Compile Include="Entities\Misc\IntellivisionGame.cs" />
     <Compile Include="Entities\Misc\NeoGeoGame.cs" />
     <Compile Include="Entities\Misc\Panasonic3doGame.cs" />
+    <Compile Include="Entities\Nintendo\VirtualBoyGame.cs" />
     <Compile Include="Entities\PC\DosGame.cs" />
     <Compile Include="Entities\Misc\TurboGrafx16Game.cs" />
     <Compile Include="Entities\Misc\XboxGame.cs" />
