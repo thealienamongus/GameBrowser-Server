@@ -269,13 +269,13 @@ namespace GameBrowser.Providers.GamesDb
             var gamePublisher = xmlDocument.SafeGetString("//Game/Publisher");
             if (!string.IsNullOrEmpty(gamePublisher))
             {
-                game.AddPublisher(gamePublisher);
+                game.AddStudio(gamePublisher);
             }
 
-            string gameDeveloper = xmlDocument.SafeGetString("//Game/Developer");
+            var gameDeveloper = xmlDocument.SafeGetString("//Game/Developer");
             if (!string.IsNullOrEmpty(gameDeveloper))
             {
-                game.AddDeveloper(gameDeveloper);
+                game.AddStudio(gameDeveloper);
             }
 
             var bannerUrl = xmlDocument.SafeGetString("//Game/Images/banner");

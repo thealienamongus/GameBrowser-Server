@@ -332,7 +332,7 @@ namespace GameBrowser.Providers
 
                                 if (!string.IsNullOrWhiteSpace(developer))
                                 {
-                                    item.AddDeveloper(developer);
+                                    item.AddStudio(developer);
                                 }
                                 break;
                             }
@@ -366,7 +366,7 @@ namespace GameBrowser.Providers
 
                                 if (!string.IsNullOrWhiteSpace(publisher))
                                 {
-                                    item.AddPublisher(publisher);
+                                    item.AddStudio(publisher);
                                 }
                                 break;
                             }
