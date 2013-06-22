@@ -84,44 +84,8 @@
     <Compile Include="Configuration\GameFolderConfigurationPage.cs" />
     <Compile Include="Configuration\MetaConfigurationPage.cs" />
     <Compile Include="Configuration\GameBrowserConfigurationPage.cs" />
-    <Compile Include="Entities\Arcade\ArcadeGame.cs" />
-    <Compile Include="Entities\Atari\Atari2600Game.cs" />
-    <Compile Include="Entities\Atari\Atari5200Game.cs" />
-    <Compile Include="Entities\Atari\Atari7800Game.cs" />
-    <Compile Include="Entities\Atari\JaguarGame.cs" />
-    <Compile Include="Entities\Atari\XeGame.cs" />
-    <Compile Include="Entities\Commodore\C64Game.cs" />
-    <Compile Include="Entities\Commodore\Vic20Game.cs" />
     <Compile Include="Entities\GamePlatform.cs" />
-    <Compile Include="Entities\Misc\AmigaGame.cs" />
-    <Compile Include="Entities\Misc\ColecovisionGame.cs" />
-    <Compile Include="Entities\Misc\TurboGrafxCdGame.cs" />
-    <Compile Include="Entities\Misc\IntellivisionGame.cs" />
-    <Compile Include="Entities\Misc\NeoGeoGame.cs" />
-    <Compile Include="Entities\Misc\Panasonic3doGame.cs" />
-    <Compile Include="Entities\Nintendo\VirtualBoyGame.cs" />
-    <Compile Include="Entities\PC\DosGame.cs" />
-    <Compile Include="Entities\Misc\TurboGrafx16Game.cs" />
-    <Compile Include="Entities\Misc\XboxGame.cs" />
-    <Compile Include="Entities\Nintendo\GameBoy\DsGame.cs" />
-    <Compile Include="Entities\Nintendo\GameBoy\GameBoyAdvanceGame.cs" />
-    <Compile Include="Entities\Nintendo\GameBoy\GameBoyColorGame.cs" />
-    <Compile Include="Entities\Nintendo\GameBoy\GameBoyGame.cs" />
-    <Compile Include="Entities\PC\WindowsGame.cs" />
-    <Compile Include="Entities\Sega\DreamcastGame.cs" />
     <Compile Include="Entities\Game.cs" />
-    <Compile Include="Entities\Nintendo\GameCubeGame.cs" />
-    <Compile Include="Entities\Sega\GameGearGame.cs" />
-    <Compile Include="Entities\Sega\GenesisGame.cs" />
-    <Compile Include="Entities\Sega\MasterSystemGame.cs" />
-    <Compile Include="Entities\Nintendo\N64Game.cs" />
-    <Compile Include="Entities\Nintendo\NesGame.cs" />
-    <Compile Include="Entities\Sony\PlayStationPortableGame.cs" />
-    <Compile Include="Entities\Sony\Ps2Game.cs" />
-    <Compile Include="Entities\Sony\PsOneGame.cs" />
-    <Compile Include="Entities\Sega\SaturnGame.cs" />
-    <Compile Include="Entities\Nintendo\SnesGame.cs" />
-    <Compile Include="Entities\Nintendo\WiiGame.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="Library\Utils\MameUtils.cs" />
     <Compile Include="PlatformType.cs" />
@@ -156,7 +120,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
