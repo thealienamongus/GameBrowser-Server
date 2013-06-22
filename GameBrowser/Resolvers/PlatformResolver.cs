@@ -1,7 +1,6 @@
 ﻿using GameBrowser.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Resolvers;
-using MediaBrowser.Model.Entities;
 using System;
 using System.Linq;
 
@@ -42,7 +41,7 @@ namespace GameBrowser.Resolvers
 
                     if (system != null)
                     {
-                        return new GamePlatform {PlatformType = system.ConsoleType};
+                        return new GamePlatform();
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -189,12 +190,21 @@ namespace GameBrowser.Providers.GamesDb
 
         private string FindPlatformId(GamePlatform console)
         {
-            var id = ResolverHelper.GetTgdbIdFromConsoleType(console.PlatformType);
+            var platformSettings = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(gs => console.Path.Equals(gs.Path));
 
-            if (id != null)
-                console.SetProviderId("Tgdb", id.ToString());
+            if (platformSettings != null)
+            {
+                var id = ResolverHelper.GetTgdbId(platformSettings.ConsoleType);
 
-            return id.ToString();
+                if (id != null)
+                {
+                    console.SetProviderId("Tgdb", id.ToString());
+
+                    return id.ToString();
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -225,43 +235,7 @@ namespace GameBrowser.Providers.GamesDb
             console.Overview = xmlDocument.SafeGetString("//Platform/Overview");
             if (console.Overview != null)
                 console.Overview = console.Overview.Replace("\n\n", "\n");
-
-            string cpu = xmlDocument.SafeGetString("//Platform/cpu");
-
-            if (!string.IsNullOrEmpty(cpu))
-                console.Cpu = cpu;
-
-            string memory = xmlDocument.SafeGetString("//Platform/memory");
-
-            if (!string.IsNullOrEmpty(memory))
-                console.Memory = memory;
-
-            string gpu = xmlDocument.SafeGetString("//Platform/graphics");
-
-            if (!string.IsNullOrEmpty(gpu))
-                console.Gpu = gpu;
-
-            string sound = xmlDocument.SafeGetString("//Platform/sound");
-
-            if (!string.IsNullOrEmpty(sound))
-                console.Audio = sound;
-
-            string display = xmlDocument.SafeGetString("//Platform/display");
-
-            if (!string.IsNullOrEmpty(display))
-                console.Display = display;
-
-            string media = xmlDocument.SafeGetString("//Platform/media");
-
-            if (!string.IsNullOrEmpty(media))
-            {
-                console.MediaTypes = new List<string> {media};
-            }
-
-            console.Manufacturer = xmlDocument.SafeGetString("//Platform/manufacturer");
-
-            console.PlayersSupported = xmlDocument.SafeGetInt32("//Platform/maxcontrollers");
-
+            
             var bannerUrl = xmlDocument.SafeGetString("//Platform/Images/banner");
             if (!string.IsNullOrEmpty(bannerUrl))
             {

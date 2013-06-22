@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -102,55 +101,7 @@ namespace GameBrowser.Providers
                     if (y > 1900)
                         console.ProductionYear = y;
                 }
-
-                string manufacturer = doc.SafeGetString("Console/Manufacturer");
-                if (!String.IsNullOrEmpty(manufacturer))
-                {
-                    console.Manufacturer = manufacturer;
-                }
-
-                var nodes = doc.SelectNodes("Console/MediaTypes/Media");
-                if (nodes != null)
-                {
-                    foreach (XmlNode node in nodes)
-                    {
-                        try
-                        {
-                            if (console.MediaTypes == null)
-                                console.MediaTypes = new List<string>();
-                            console.MediaTypes.Add(node.InnerText);
-                        }
-                        catch
-                        {
-                        }
-                    }
-                }
-
-                console.Cpu = doc.SafeGetString("Console/ProcessorBits/CPU");
-
-                console.Gpu = doc.SafeGetString("Console/ProcessorBits/GPU");
-
-                nodes = doc.SelectNodes("Console/ControllersSupported/Controller");
-                if (nodes != null)
-                {
-                    foreach (XmlNode node in nodes)
-                    {
-                        try
-                        {
-                            if (console.ControllersSupported == null)
-                                console.ControllersSupported = new List<string>();
-                            console.ControllersSupported.Add(node.InnerText);
-                        }
-                        catch
-                        {
-
-                        }
-                    }
-                }
-
-                console.PlayersSupported = doc.SafeGetInt32("Console/PlayersSupported", 1);
-
-                console.GamesDbName = doc.SafeGetString("Console/GamesDbName");
+                
             }
 
             SetLastRefreshed(console, DateTime.UtcNow);

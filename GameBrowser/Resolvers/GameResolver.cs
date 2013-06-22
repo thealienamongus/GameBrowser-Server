@@ -32,42 +32,34 @@ namespace GameBrowser.Resolvers
         /// <returns>Game.</returns>
         protected override Game Resolve(ItemResolveArgs args)
         {
-            var consoleFolder = args.Parent as GamePlatform;
+            var platform = AttemptGetGamePlatformTypeFromPath(args.Path);
 
-            if (consoleFolder != null)
+            if (platform != null)
             {
                 if (args.IsDirectory)
                 {
-                    return GetGame(args, consoleFolder.PlatformType);
+                    return GetGame(args, (GamePlatformType)platform);
                 }
 
                 // For MAME we will allow all games in the same dir
-                if (consoleFolder.PlatformType == GamePlatformType.Arcade)
+                if ((GamePlatformType) platform == GamePlatformType.Arcade)
                 {
                     if (args.Path.EndsWith(".zip") || args.Path.EndsWith(".7z"))
                     {
                         // ignore zips that are bios roms.
                         if (MameUtils.IsBiosRom(args.Path)) return null;
-                        
-                        var game = new ArcadeGame { Name = MameUtils.GetFullNameFromPath(args.Path),
-                                                    Files = new List<string> {args.Path},
-                                                    Path = args.Path };
+
+                        var game = new ArcadeGame
+                        {
+                            Name = MameUtils.GetFullNameFromPath(args.Path),
+                            Files = new List<string> { args.Path },
+                            Path = args.Path
+                        };
                         return game;
-                        
                     }
                 }
-                
             }
-            else // User may have a GamePlatform as an entrypoint
-            {
-                if (args.IsDirectory)
-                {
-                    var platform = AttemptGetGamePlatformTypeFromPath(args.Path);
-
-                    if (platform != null)
-                        return GetGame(args, (GamePlatformType)platform);
-                }
-            }
+            
             return null;
         }
 

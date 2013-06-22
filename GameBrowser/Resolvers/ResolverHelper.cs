@@ -1,63 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameBrowser.Resolvers
 {
     class ResolverHelper
     {
-        public List<GamePlatformType> CartridgePlatforms = new List<GamePlatformType>
-                                                            {
-                                                                GamePlatformType.Amiga,
-                                                                GamePlatformType.Arcade,
-                                                                GamePlatformType.Atari2600,
-                                                                GamePlatformType.Atari5200,
-                                                                GamePlatformType.Atari7800,
-                                                                GamePlatformType.AtariJaguar,
-                                                                GamePlatformType.AtariXE,
-                                                                GamePlatformType.Colecovision,
-                                                                GamePlatformType.Commodore64,
-                                                                GamePlatformType.CommodoreVic20,
-                                                                GamePlatformType.Intellivision,
-                                                                GamePlatformType.Nintendo64,
-                                                                GamePlatformType.NintendoDS,
-                                                                GamePlatformType.NintendoEntertainmentSystem,
-                                                                GamePlatformType.NintendoGameBoy,
-                                                                GamePlatformType.NintendoGameBoyAdvance,
-                                                                GamePlatformType.NintendoGameBoyColor,
-                                                                GamePlatformType.NintendoSuperNES,
-                                                                GamePlatformType.Sega32X,
-                                                                GamePlatformType.SegaGameGear,
-                                                                GamePlatformType.SegaGenesis,
-                                                                GamePlatformType.SegaMasterSystem,
-                                                                GamePlatformType.SegaMegaDrive,
-                                                                GamePlatformType.TurboGrafx16
-                                                            }; 
-
-        public List<GamePlatformType> CdPlatforms = new List<GamePlatformType>
-                                                     {
-                                                         GamePlatformType.Panasonic3DO,
-                                                         GamePlatformType.AtariJaguarCD,
-                                                         GamePlatformType.MicrosoftXBox,
-                                                         GamePlatformType.NeoGeo,
-                                                         GamePlatformType.SegaCD,
-                                                         GamePlatformType.SegaDreamcast, //Dreamcast max disc size is 1.2GB
-                                                         GamePlatformType.SegaSaturn,
-                                                         GamePlatformType.SonyPlaystation
-                                                     }; 
-
-        public List<GamePlatformType> DvdPlatforms = new List<GamePlatformType>
-                                                      {
-                                                          GamePlatformType.NintendoGameCube,
-                                                          GamePlatformType.NintendoWii,
-                                                          GamePlatformType.SegaDreamcast, //Dreamcast max disc size is 1.2GB
-                                                          GamePlatformType.SonyPlaystation2,
-                                                          GamePlatformType.SonyPSP
-                                                      };
-
-        public static int? GetTgdbIdFromConsoleType(GamePlatformType consoleType)
+        public static int? GetTgdbId(GamePlatformType consoleType)
         {
             return TgdbId.ContainsKey(consoleType.ToString()) ? TgdbId[consoleType.ToString()] : 0;
         }
