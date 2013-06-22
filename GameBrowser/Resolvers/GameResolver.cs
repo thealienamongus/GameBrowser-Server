@@ -241,273 +241,273 @@ namespace GameBrowser.Resolvers
             switch (platform)
             {
                 case GamePlatformType.Panasonic3DO:
-                    game.DisplayMediaType = "3DO";
+                    game.DisplayMediaType = "3DO Game";
                     game.TgdbPlatformString = "3DO";
                     game.EmuMoviesPlatformString = "Panasonic_3DO";
 
                     break;
 
                 case GamePlatformType.Amiga:
-                    game.DisplayMediaType = "Amiga";
+                    game.DisplayMediaType = "Amiga Game";
                     game.TgdbPlatformString = "Amiga";
                     game.EmuMoviesPlatformString = "";
                     
                     break;
 
                 case GamePlatformType.Arcade:
-                    game.DisplayMediaType = "Arcade";
+                    game.DisplayMediaType = "Arcade Game";
                     game.TgdbPlatformString = "Arcade";
                     game.EmuMoviesPlatformString = "MAME";
 
                     break;
 
                 case GamePlatformType.Atari2600:
-                    game.DisplayMediaType = "Atari 2600";
+                    game.DisplayMediaType = "Atari 2600 Game";
                     game.TgdbPlatformString = "Atari 2600";
                     game.EmuMoviesPlatformString = "Atari_2600";
 
                     break;
 
                 case GamePlatformType.Atari5200:
-                    game.DisplayMediaType = "Atari 5200";
+                    game.DisplayMediaType = "Atari 5200 Game";
                     game.TgdbPlatformString = "Atari 5200";
                     game.EmuMoviesPlatformString = "Atari_5200";
 
                     break;
 
                 case GamePlatformType.Atari7800:
-                    game.DisplayMediaType = "Atari 7800";
+                    game.DisplayMediaType = "Atari 7800 Game";
                     game.TgdbPlatformString = "Atari 7800";
                     game.EmuMoviesPlatformString = "Atari_7800";
             
                     break;
 
                 case GamePlatformType.AtariXE:
-                    game.DisplayMediaType = "Atari XE";
+                    game.DisplayMediaType = "Atari XE Game";
                     game.TgdbPlatformString = "Atari XE";
                     game.EmuMoviesPlatformString = "Atari_8_bit";
 
                     break;
 
                 case GamePlatformType.AtariJaguar:
-                    game.DisplayMediaType = "Atari Jaguar";
+                    game.DisplayMediaType = "Atari Jaguar Game";
                     game.TgdbPlatformString = "Atari Jaguar";
                     game.EmuMoviesPlatformString = "Atari_Jaguar";
 
                     break;
 
                 case GamePlatformType.AtariJaguarCD:
-                    game.DisplayMediaType = "Atari Jaguar";
+                    game.DisplayMediaType = "Atari Jaguar Game";
                     game.TgdbPlatformString = "Atari Jaguar";
                     game.EmuMoviesPlatformString = "Atari_Jaguar";
 
                     break;
 
                 case GamePlatformType.Colecovision:
-                    game.DisplayMediaType = "Colecovision";
+                    game.DisplayMediaType = "Colecovision Game";
                     game.TgdbPlatformString = "Colecovision";
                     game.EmuMoviesPlatformString = "Coleco_Vision";
 
                     break;
 
                 case GamePlatformType.Commodore64:
-                    game.DisplayMediaType = "Commodore 64";
+                    game.DisplayMediaType = "Commodore 64 Game";
                     game.TgdbPlatformString = "Commodore 64";
                     game.EmuMoviesPlatformString = "Commodore_64";
 
                     break;
 
                 case GamePlatformType.CommodoreVic20:
-                    game.DisplayMediaType = "Commodore Vic-20";
+                    game.DisplayMediaType = "Commodore Vic-20 Game";
                     game.TgdbPlatformString = "";
                     game.EmuMoviesPlatformString = "";
 
                     break;
 
                 case GamePlatformType.Intellivision:
-                    game.DisplayMediaType = "Intellivision";
+                    game.DisplayMediaType = "Intellivision Game";
                     game.TgdbPlatformString = "Intellivision";
                     game.EmuMoviesPlatformString = "Mattel_Intellivision";
 
                     break;
 
                 case GamePlatformType.MicrosoftXBox:
-                    game.DisplayMediaType = "Microsoft Xbox";
+                    game.DisplayMediaType = "Microsoft Xbox Game";
                     game.TgdbPlatformString = "Microsoft Xbox";
                     game.EmuMoviesPlatformString = "Microsoft_Xbox";
 
                     break;
 
                 case GamePlatformType.NeoGeo:
-                    game.DisplayMediaType = "NeoGeo";
+                    game.DisplayMediaType = "NeoGeo Game";
                     game.TgdbPlatformString = "NeoGeo";
                     game.EmuMoviesPlatformString = "SNK_Neo_Geo_AES";
 
                     break;
 
                 case GamePlatformType.Nintendo64:
-                    game.DisplayMediaType = "Nintendo 64";
+                    game.DisplayMediaType = "Nintendo 64 Game";
                     game.TgdbPlatformString = "Nintendo 64";
                     game.EmuMoviesPlatformString = "Nintendo_N64";
 
                     break;
 
                 case GamePlatformType.NintendoDS:
-                    game.DisplayMediaType = "Nintendo DS";
+                    game.DisplayMediaType = "Nintendo DS Game";
                     game.TgdbPlatformString = "Nintendo DS";
                     game.EmuMoviesPlatformString = "Nintendo_DS";
 
                     break;
 
                 case GamePlatformType.NintendoEntertainmentSystem:
-                    game.DisplayMediaType = "Nintendo Entertainment System (NES)";
+                    game.DisplayMediaType = "NES Game";
                     game.TgdbPlatformString = "Nintendo Entertainment System (NES)";
                     game.EmuMoviesPlatformString = "Nintendo_NES";
                     
                     break;
 
                 case GamePlatformType.NintendoGameBoy:
-                    game.DisplayMediaType = "Nintendo Game Boy";
+                    game.DisplayMediaType = "Nintendo Game Boy Game";
                     game.TgdbPlatformString = "Nintendo Game Boy";
                     game.EmuMoviesPlatformString = "Nintendo_Game_Boy";
 
                     break;
 
                 case GamePlatformType.NintendoGameBoyAdvance:
-                    game.DisplayMediaType = "Nintendo Game Boy Advance";
+                    game.DisplayMediaType = "Nintendo Game Boy Advance Game";
                     game.TgdbPlatformString = "Nintendo Game Boy Advance";
                     game.EmuMoviesPlatformString = "Nintendo_Game_Boy_Advance";
 
                     break;
 
                 case GamePlatformType.NintendoGameBoyColor:
-                    game.DisplayMediaType = "Nintendo Game Boy Color";
+                    game.DisplayMediaType = "Nintendo Game Boy Color Game";
                     game.TgdbPlatformString = "Nintendo Game Boy Color";
                     game.EmuMoviesPlatformString = "Nintendo_Game_Boy_Color";
 
                     break;
 
                 case GamePlatformType.NintendoGameCube:
-                    game.DisplayMediaType = "Nintendo GameCube";
+                    game.DisplayMediaType = "Nintendo GameCube Game";
                     game.TgdbPlatformString = "Nintendo GameCube";
                     game.EmuMoviesPlatformString = "Nintendo_GameCube";
 
                     break;
 
                 case GamePlatformType.NintendoSuperNES:
-                    game.DisplayMediaType = "Super Nintendo (SNES)";
+                    game.DisplayMediaType = "Super Nintendo Game";
                     game.TgdbPlatformString = "Super Nintendo (SNES)";
                     game.EmuMoviesPlatformString = "Nintendo_SNES";
 
                     break;
 
                 case GamePlatformType.NintendoVirtualBoy:
-                    game.DisplayMediaType = "Nintendo Virtual Boy";
+                    game.DisplayMediaType = "Nintendo Virtual Boy Game";
                     game.TgdbPlatformString = "Nintendo Virtual Boy";
                     game.EmuMoviesPlatformString = "";
 
                     break;
 
                 case GamePlatformType.NintendoWii:
-                    game.DisplayMediaType = "Nintendo Wii";
+                    game.DisplayMediaType = "Nintendo Wii Game";
                     game.TgdbPlatformString = "Nintendo Wii";
                     game.EmuMoviesPlatformString = "";
 
                     break;
 
                 case GamePlatformType.Dos:
-                    game.DisplayMediaType = "PC";
+                    game.DisplayMediaType = "DOS Game";
                     game.TgdbPlatformString = "PC";
                     game.EmuMoviesPlatformString = "";
 
                     break;
 
                 case GamePlatformType.Windows:
-                    game.DisplayMediaType = "PC";
+                    game.DisplayMediaType = "Windows Game";
                     game.TgdbPlatformString = "PC";
                     game.EmuMoviesPlatformString = "";
 
                     break;
 
                 case GamePlatformType.Sega32X:
-                    game.DisplayMediaType = "Sega Genesis";
+                    game.DisplayMediaType = "Sega 32x Game";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
                     break;
 
                 case GamePlatformType.SegaCD:
-                    game.DisplayMediaType = "Sega Genesis";
+                    game.DisplayMediaType = "Sega CD Game";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
                     break;
 
                 case GamePlatformType.SegaDreamcast:
-                    game.DisplayMediaType = "Sega Dreamcast";
+                    game.DisplayMediaType = "Sega Dreamcast Game";
                     game.TgdbPlatformString = "Sega Dreamcast";
                     game.EmuMoviesPlatformString = "Sega_Dreamcast";
 
                     break;
 
                 case GamePlatformType.SegaGameGear:
-                    game.DisplayMediaType = "Sega Game Gear";
+                    game.DisplayMediaType = "Sega Game Gear Game";
                     game.TgdbPlatformString = "Sega Game Gear";
                     game.EmuMoviesPlatformString = "Sega_Game_Gear";
 
                     break;
 
                 case GamePlatformType.SegaGenesis:
-                    game.DisplayMediaType = "Sega Genesis";
+                    game.DisplayMediaType = "Sega Genesis Game";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
                     break;
 
                 case GamePlatformType.SegaMasterSystem:
-                    game.DisplayMediaType = "Sega Master System";
+                    game.DisplayMediaType = "Sega Master System Game";
                     game.TgdbPlatformString = "Sega Master System";
                     game.EmuMoviesPlatformString = "Sega_Master_System";
 
                     break;
 
                 case GamePlatformType.SegaMegaDrive:
-                    game.DisplayMediaType = "Sega Genesis";
+                    game.DisplayMediaType = "Sega MegaDrive Game";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
                     break;
 
                 case GamePlatformType.SegaSaturn:
-                    game.DisplayMediaType = "Sega Saturn";
+                    game.DisplayMediaType = "Sega Saturn Game";
                     game.TgdbPlatformString = "Sega Saturn";
                     game.EmuMoviesPlatformString = "Sega_Saturn";
 
                     break;
 
                 case GamePlatformType.SonyPlaystation:
-                    game.DisplayMediaType = "Sony Playstation";
+                    game.DisplayMediaType = "Sony Playstation Game";
                     game.TgdbPlatformString = "Sony Playstation";
                     game.EmuMoviesPlatformString = "Sony_Playstation";
 
                     break;
 
                 case GamePlatformType.SonyPlaystation2:
-                    game.DisplayMediaType = "Sony Playstation 2";
+                    game.DisplayMediaType = "Sony Playstation 2 Game";
                     game.TgdbPlatformString = "Sony Playstation 2";
                     game.EmuMoviesPlatformString = "Sony_Playstation_2";
 
                     break;
 
                 case GamePlatformType.SonyPSP:
-                    game.DisplayMediaType = "Sony PSP";
+                    game.DisplayMediaType = "Sony PSP Game";
                     game.TgdbPlatformString = "Sony PSP";
                     game.EmuMoviesPlatformString = "Sony_PSP";
 
                     break;
 
                 case GamePlatformType.TurboGrafx16:
-                    game.DisplayMediaType = "TurboGrafx 16";
+                    game.DisplayMediaType = "TurboGrafx 16 Game";
                     game.TgdbPlatformString = "TurboGrafx 16";
                     game.EmuMoviesPlatformString = "NEC_TurboGrafx_16";
 
@@ -515,7 +515,7 @@ namespace GameBrowser.Resolvers
 
                 case GamePlatformType.TurboGrafxCD:
 
-                    game.DisplayMediaType = "TurboGrafx CD";
+                    game.DisplayMediaType = "TurboGrafx CD Game";
                     game.TgdbPlatformString = "TurboGrafx 16";
                     game.EmuMoviesPlatformString = "NEC_TurboGrafx_16";
                     break;
