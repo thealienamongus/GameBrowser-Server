@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Xml;
-using GameBrowser.Entities;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Model.Entities;
 
 namespace GameBrowser.Providers
 {
     public class BaseGameXmlParser<T>
-        where T : Game, new()
+        where T : Entities.Game, new()
     {
         /// <summary>
         /// Fetches metadata for an item from one xml file

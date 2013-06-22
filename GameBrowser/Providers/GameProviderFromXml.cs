@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using GameBrowser.Entities;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.IO;
@@ -33,7 +32,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is Game;
+            return item is Entities.Game;
         }
 
 
@@ -53,7 +52,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            return Task.Run(() => Fetch((Game)item, cancellationToken));
+            return Task.Run(() => Fetch((Entities.Game)item, cancellationToken));
         }
 
 
@@ -64,7 +63,7 @@ namespace GameBrowser.Providers
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private bool Fetch(Game game, CancellationToken cancellationToken)
+        private bool Fetch(Entities.Game game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -72,7 +71,7 @@ namespace GameBrowser.Providers
 
             if (File.Exists(metaFile))
             {
-                new BaseGameXmlParser<Game>().Fetch(game, metaFile, cancellationToken);
+                new BaseGameXmlParser<Entities.Game>().Fetch(game, metaFile, cancellationToken);
             }
 
             SetLastRefreshed(game, DateTime.UtcNow);

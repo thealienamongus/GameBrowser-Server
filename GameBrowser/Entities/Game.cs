@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using MediaBrowser.Controller.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GameBrowser.Entities
 {
     /// <summary>
     /// Class Game
     /// </summary>
-    public class Game : BaseGame
+    public class Game : MediaBrowser.Controller.Entities.Game
     {
         /// <summary>
         /// Gets or sets the files.

@@ -39,6 +39,6 @@ namespace GameBrowser.Configuration
     {
         public string Path { get; set; }
 
-        public GamePlatformType ConsoleType { get; set; }
+        public string ConsoleType { get; set; }
     }
 }

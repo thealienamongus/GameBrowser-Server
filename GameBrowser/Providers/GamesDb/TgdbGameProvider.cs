@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using GameBrowser.Entities;
 using GameBrowser.Extensions;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Configuration;
@@ -55,7 +54,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is Game;
+            return item is Entities.Game;
         }
 
 
@@ -124,7 +123,7 @@ namespace GameBrowser.Providers.GamesDb
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            await FetchGameData((Game) item, cancellationToken).ConfigureAwait(false);
+            await FetchGameData((Entities.Game)item, cancellationToken).ConfigureAwait(false);
 
             SetLastRefreshed(item, DateTime.UtcNow);
             return true;
@@ -151,7 +150,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchGameData(Game game, CancellationToken cancellationToken)
+        private async Task FetchGameData(Entities.Game game, CancellationToken cancellationToken)
         {
             var gameId = game.GetProviderId("Tgdb") ??  await FindGameId(game, cancellationToken).ConfigureAwait(false);
 
@@ -192,7 +191,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="xmlDocument"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task ProcessGameXml(Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
+        private async Task ProcessGameXml(Entities.Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
             game.SetProviderId("Tgdb", id);
 
@@ -345,7 +344,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<string> FindGameId(Game game, CancellationToken cancellationToken)
+        private async Task<string> FindGameId(Entities.Game game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

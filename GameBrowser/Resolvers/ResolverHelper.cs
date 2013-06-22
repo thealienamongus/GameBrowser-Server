@@ -5,9 +5,9 @@ namespace GameBrowser.Resolvers
 {
     class ResolverHelper
     {
-        public static int? GetTgdbId(GamePlatformType consoleType)
+        public static int? GetTgdbId(string consoleType)
         {
-            return TgdbId.ContainsKey(consoleType.ToString()) ? TgdbId[consoleType.ToString()] : 0;
+            return TgdbId.ContainsKey(consoleType) ? TgdbId[consoleType] : 0;
         }
 
         public static Dictionary<String, int> TgdbId = new Dictionary<string, int>
