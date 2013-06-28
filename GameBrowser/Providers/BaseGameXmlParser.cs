@@ -9,7 +9,7 @@ using MediaBrowser.Model.Entities;
 namespace GameBrowser.Providers
 {
     public class BaseGameXmlParser<T>
-        where T : Entities.Game, new()
+        where T : Entities.GbGame, new()
     {
         /// <summary>
         /// Fetches metadata for an item from one xml file
@@ -181,7 +181,7 @@ namespace GameBrowser.Providers
 
                         if (!string.IsNullOrWhiteSpace(val))
                         {
-                            item.AddTrailerUrl(val);
+                            item.AddTrailerUrl(val, true);
                         }
                         break;
                     }

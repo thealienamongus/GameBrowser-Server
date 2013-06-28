@@ -12,7 +12,7 @@ namespace GameBrowser.Resolvers
     /// <summary>
     /// Class GameResolver
     /// </summary>
-    public class GameResolver : ItemResolver<Game>
+    public class GameResolver : ItemResolver<GbGame>
     {
         /// <summary>
         /// Run before any core resolvers
@@ -30,7 +30,7 @@ namespace GameBrowser.Resolvers
         /// </summary>
         /// <param name="args">The args.</param>
         /// <returns>Game.</returns>
-        protected override Game Resolve(ItemResolveArgs args)
+        protected override GbGame Resolve(ItemResolveArgs args)
         {
             var platform = AttemptGetGamePlatformTypeFromPath(args.Path);
 
@@ -49,7 +49,7 @@ namespace GameBrowser.Resolvers
                         // ignore zips that are bios roms.
                         if (MameUtils.IsBiosRom(args.Path)) return null;
 
-                        var game = new Game
+                        var game = new GbGame
                         {
                             Name = MameUtils.GetFullNameFromPath(args.Path),
                             Files = new List<string> { args.Path },
@@ -73,7 +73,7 @@ namespace GameBrowser.Resolvers
         /// <param name="args">The args.</param>
         /// <param name="consoleType">The type of gamesystem this game belongs too</param>
         /// <returns>A Game</returns>
-        private Game GetGame(ItemResolveArgs args, string consoleType)
+        private GbGame GetGame(ItemResolveArgs args, string consoleType)
         {
             var validExtensions = GetExtensions(consoleType);
 
@@ -234,15 +234,15 @@ namespace GameBrowser.Resolvers
         /// </summary>
         /// <param name="platform">The platform that we want a game object for</param>
         /// <returns>One of the many sub-classes of Game</returns>
-        private Game GetNewGame(string platform)
+        private GbGame GetNewGame(string platform)
         {
-            var game = new Game();
+            var game = new GbGame();
 
             switch (platform)
             {
                 case "Panasonic3DO":
-                    game.GameSystem = "3DO";
-                    game.DisplayMediaType = "3DO Game";
+                    game.GameSystem = "Panasonic3DO";
+                    game.DisplayMediaType = "3DO";
                     game.TgdbPlatformString = "3DO";
                     game.EmuMoviesPlatformString = "Panasonic_3DO";
 
@@ -250,7 +250,7 @@ namespace GameBrowser.Resolvers
 
                 case "Amiga":
                     game.GameSystem = "Amiga";
-                    game.DisplayMediaType = "Amiga Game";
+                    game.DisplayMediaType = "Amiga";
                     game.TgdbPlatformString = "Amiga";
                     game.EmuMoviesPlatformString = "";
                     
@@ -258,7 +258,7 @@ namespace GameBrowser.Resolvers
 
                 case "Arcade":
                     game.GameSystem = "Arcade";
-                    game.DisplayMediaType = "Arcade Game";
+                    game.DisplayMediaType = "Arcade";
                     game.TgdbPlatformString = "Arcade";
                     game.EmuMoviesPlatformString = "MAME";
 
@@ -266,7 +266,7 @@ namespace GameBrowser.Resolvers
 
                 case "Atari2600":
                     game.GameSystem = "Atari2600";
-                    game.DisplayMediaType = "Atari 2600 Game";
+                    game.DisplayMediaType = "Atari 2600";
                     game.TgdbPlatformString = "Atari 2600";
                     game.EmuMoviesPlatformString = "Atari_2600";
 
@@ -505,7 +505,7 @@ namespace GameBrowser.Resolvers
                     break;
 
                 case "SegaMegaDrive":
-                    game.GameSystem = "SegaGenesis";
+                    game.GameSystem = "SegaMegaDrive";
                     game.DisplayMediaType = "Sega MegaDrive Game";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using MediaBrowser.Controller.Entities;
 
 namespace GameBrowser.Entities
 {
     /// <summary>
     /// Class Game
     /// </summary>
-    public class Game : MediaBrowser.Controller.Entities.Game
+    public class GbGame : Game
     {
         /// <summary>
         /// Gets or sets the files.
@@ -14,13 +15,13 @@ namespace GameBrowser.Entities
         public List<string> Files { get; set; }
 
         /// <summary>
-        /// To be overridden by every sub-class.
+        /// The value used by TheGamesDB.
         /// </summary>
         /// <returns></returns>
         public string TgdbPlatformString { get; set; }
         
         /// <summary>
-        /// 
+        /// The value used by EmuMovies
         /// </summary>
         public string EmuMoviesPlatformString { get; set; }
 

@@ -54,7 +54,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is Entities.Game;
+            return item is Entities.GbGame;
         }
 
 
@@ -123,7 +123,7 @@ namespace GameBrowser.Providers.GamesDb
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            await FetchGameData((Entities.Game)item, cancellationToken).ConfigureAwait(false);
+            await FetchGameData((Entities.GbGame)item, cancellationToken).ConfigureAwait(false);
 
             SetLastRefreshed(item, DateTime.UtcNow);
             return true;
@@ -150,7 +150,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchGameData(Entities.Game game, CancellationToken cancellationToken)
+        private async Task FetchGameData(Entities.GbGame game, CancellationToken cancellationToken)
         {
             var gameId = game.GetProviderId("Tgdb") ??  await FindGameId(game, cancellationToken).ConfigureAwait(false);
 
@@ -191,7 +191,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="xmlDocument"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task ProcessGameXml(Entities.Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
+        private async Task ProcessGameXml(Entities.GbGame game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
             game.SetProviderId("Tgdb", id);
 
@@ -344,7 +344,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<string> FindGameId(Entities.Game game, CancellationToken cancellationToken)
+        private async Task<string> FindGameId(Entities.GbGame game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

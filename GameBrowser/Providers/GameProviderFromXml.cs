@@ -32,7 +32,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is Entities.Game;
+            return item is Entities.GbGame;
         }
 
 
@@ -52,7 +52,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            return Task.Run(() => Fetch((Entities.Game)item, cancellationToken));
+            return Task.Run(() => Fetch((Entities.GbGame)item, cancellationToken));
         }
 
 
@@ -63,7 +63,7 @@ namespace GameBrowser.Providers
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private bool Fetch(Entities.Game game, CancellationToken cancellationToken)
+        private bool Fetch(Entities.GbGame game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -71,7 +71,7 @@ namespace GameBrowser.Providers
 
             if (File.Exists(metaFile))
             {
-                new BaseGameXmlParser<Entities.Game>().Fetch(game, metaFile, cancellationToken);
+                new BaseGameXmlParser<Entities.GbGame>().Fetch(game, metaFile, cancellationToken);
             }
 
             SetLastRefreshed(game, DateTime.UtcNow);
