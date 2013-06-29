@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -241,8 +240,10 @@ namespace GameBrowser.Providers.GamesDb
             {
                 if (!console.HasLocalImage("banner"))
                 {
-                    console.SetImage(ImageType.Banner, await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
-                        "banner" + Path.GetExtension(bannerUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                    await
+                        _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
+                                                   Plugin.Instance.TgdbSemiphore, ImageType.Banner, null,
+                                                   cancellationToken).ConfigureAwait(false);
                 }
             }
 
@@ -253,8 +254,10 @@ namespace GameBrowser.Providers.GamesDb
                 if (nodes != null)
                 {
                     var folderUrl = nodes[0].InnerText;
-                    console.PrimaryImagePath = await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + folderUrl,
-                        "folder" + Path.GetExtension(folderUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
+                    await
+                        _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + folderUrl,
+                                                   Plugin.Instance.TgdbSemiphore, ImageType.Primary, null,
+                                                   cancellationToken).ConfigureAwait(false);
                 }
             }
 
@@ -286,8 +289,10 @@ namespace GameBrowser.Providers.GamesDb
                     {
                         var backdropUrl = bNodes[i].InnerText;
 
-                        console.BackdropImagePaths.Add(await _providerManager.DownloadAndSaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
-                            backdropName + Path.GetExtension(backdropUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                        await
+                            _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
+                                                       Plugin.Instance.TgdbSemiphore, ImageType.Backdrop, i,
+                                                       cancellationToken).ConfigureAwait(false);
                     }
                 }
             }

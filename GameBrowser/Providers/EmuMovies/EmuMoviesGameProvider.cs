@@ -129,8 +129,9 @@ namespace GameBrowser.Providers.EmuMovies
 
                 if (url == null) return;
 
-                game.SetImage(ImageType.Box, await _providerManager.DownloadAndSaveImage(game, url, "box" + Path.GetExtension(url),
-                    false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
+                await
+                    _providerManager.SaveImage(game, url, Plugin.Instance.EmuMoviesSemiphore, ImageType.Box, null,
+                                               cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -150,8 +151,9 @@ namespace GameBrowser.Providers.EmuMovies
 
                 if (url == null) return;
 
-                game.SetImage(ImageType.Disc, await _providerManager.DownloadAndSaveImage(game, url, "disc" + Path.GetExtension(url),
-                    false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
+                await
+                    _providerManager.SaveImage(game, url, Plugin.Instance.EmuMoviesSemiphore, ImageType.Disc, null,
+                                               cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -171,8 +173,9 @@ namespace GameBrowser.Providers.EmuMovies
 
                 if (url == null) return;
 
-                game.ScreenshotImagePaths.Add(await _providerManager.DownloadAndSaveImage(game, url, "screenshot" + Path.GetExtension(url),
-                    false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
+                await
+                    _providerManager.SaveImage(game, url, Plugin.Instance.EmuMoviesSemiphore, ImageType.Screenshot, null,
+                                               cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -192,8 +195,9 @@ namespace GameBrowser.Providers.EmuMovies
 
                 if (url == null) return;
 
-                game.SetImage(ImageType.Menu, await _providerManager.DownloadAndSaveImage(game, url, "menu" + Path.GetExtension(url),
-                    false, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false));
+                await
+                    _providerManager.SaveImage(game, url, Plugin.Instance.EmuMoviesSemiphore, ImageType.Menu, null,
+                                               cancellationToken).ConfigureAwait(false);
             }
         }
 

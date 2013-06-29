@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -282,9 +281,10 @@ namespace GameBrowser.Providers.GamesDb
             {
                 if (!game.HasLocalImage("banner"))
                 {
-                    game.SetImage(ImageType.Banner, await _providerManager.DownloadAndSaveImage(game,
-                        TgdbUrls.BaseImagePath + bannerUrl, "banner" + Path.GetExtension(bannerUrl), false,
-                        Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+                    await
+                        _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + bannerUrl,
+                                                   Plugin.Instance.TgdbSemiphore, ImageType.Banner, null,
+                                                   cancellationToken).ConfigureAwait(false);
                 }
 
             }
@@ -297,8 +297,10 @@ namespace GameBrowser.Providers.GamesDb
                 {
                     var folderUrl = nodes[0].InnerText;
 
-                    game.PrimaryImagePath = await _providerManager.DownloadAndSaveImage(game, TgdbUrls.BaseImagePath + folderUrl,
-                    "folder" + Path.GetExtension(folderUrl), false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false);
+                    await
+                        _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + folderUrl,
+                                                   Plugin.Instance.TgdbSemiphore, ImageType.Primary, null,
+                                                   cancellationToken).ConfigureAwait(false);
                 }
             }
 
@@ -309,9 +311,11 @@ namespace GameBrowser.Providers.GamesDb
                 if (!game.HasLocalImage("BoxRear"))
                 {
                     var boxRearUrl = nodes[0].InnerText;
-                    game.SetImage(ImageType.BoxRear, await _providerManager.DownloadAndSaveImage(game,
-                        TgdbUrls.BaseImagePath + boxRearUrl, "BoxRear" + Path.GetExtension(boxRearUrl), false,
-                        Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+
+                    await
+                        _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + boxRearUrl,
+                                                   Plugin.Instance.TgdbSemiphore, ImageType.BoxRear, null,
+                                                   cancellationToken).ConfigureAwait(false);
                 }
             }
 
@@ -330,8 +334,11 @@ namespace GameBrowser.Providers.GamesDb
                     if (ConfigurationManager.Configuration.RefreshItemImages || !game.HasLocalImage(backdropName))
                     {
                         var backdropUrl = nodes[i].InnerText;
-                        game.BackdropImagePaths.Add(await _providerManager.DownloadAndSaveImage(game, TgdbUrls.BaseImagePath + backdropUrl, backdropName + Path.GetExtension(backdropUrl),
-                        false, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false));
+
+                        await
+                            _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + backdropUrl,
+                                                       Plugin.Instance.TgdbSemiphore, ImageType.Backdrop, i,
+                                                       cancellationToken).ConfigureAwait(false);
                     }
                 }
             }
