@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -174,7 +173,7 @@ namespace GameBrowser.Providers.EmuMovies
                 if (url == null) return;
 
                 await
-                    _providerManager.SaveImage(game, url, Plugin.Instance.EmuMoviesSemiphore, ImageType.Screenshot, null,
+                    _providerManager.SaveImage(game, url, Plugin.Instance.EmuMoviesSemiphore, ImageType.Screenshot, 0,
                                                cancellationToken).ConfigureAwait(false);
             }
         }
