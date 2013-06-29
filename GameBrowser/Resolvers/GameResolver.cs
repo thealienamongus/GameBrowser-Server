@@ -223,6 +223,9 @@ namespace GameBrowser.Resolvers
                 case "TurboGrafxCD":
                     return new[] {".bin", ".iso"};
 
+                case "ZXSpectrum":
+                    return new[] {".z80", ".tap", ".tzx"};
+
                 default:
                     return new string[] { };
             }
@@ -274,7 +277,7 @@ namespace GameBrowser.Resolvers
 
                 case "Atari5200":
                     game.GameSystem = "Atari5200";
-                    game.DisplayMediaType = "Atari 5200 Game";
+                    game.DisplayMediaType = "Atari 5200";
                     game.TgdbPlatformString = "Atari 5200";
                     game.EmuMoviesPlatformString = "Atari_5200";
 
@@ -282,7 +285,7 @@ namespace GameBrowser.Resolvers
 
                 case "Atari7800":
                     game.GameSystem = "Atari7800";
-                    game.DisplayMediaType = "Atari 7800 Game";
+                    game.DisplayMediaType = "Atari 7800";
                     game.TgdbPlatformString = "Atari 7800";
                     game.EmuMoviesPlatformString = "Atari_7800";
             
@@ -290,7 +293,7 @@ namespace GameBrowser.Resolvers
 
                 case "AtariXE":
                     game.GameSystem = "AtariXE";
-                    game.DisplayMediaType = "Atari XE Game";
+                    game.DisplayMediaType = "Atari XE";
                     game.TgdbPlatformString = "Atari XE";
                     game.EmuMoviesPlatformString = "Atari_8_bit";
 
@@ -298,7 +301,7 @@ namespace GameBrowser.Resolvers
 
                 case "AtariJaguar":
                     game.GameSystem = "AtariJaguar";
-                    game.DisplayMediaType = "Atari Jaguar Game";
+                    game.DisplayMediaType = "Atari Jaguar";
                     game.TgdbPlatformString = "Atari Jaguar";
                     game.EmuMoviesPlatformString = "Atari_Jaguar";
 
@@ -306,7 +309,7 @@ namespace GameBrowser.Resolvers
 
                 case "AtariJaguarCD":
                     game.GameSystem = "AtariJaguarCD";
-                    game.DisplayMediaType = "Atari Jaguar CD Game";
+                    game.DisplayMediaType = "Atari Jaguar CD";
                     game.TgdbPlatformString = "Atari Jaguar";
                     game.EmuMoviesPlatformString = "Atari_Jaguar";
 
@@ -314,7 +317,7 @@ namespace GameBrowser.Resolvers
 
                 case "Colecovision":
                     game.GameSystem = "Colecovision";
-                    game.DisplayMediaType = "Colecovision Game";
+                    game.DisplayMediaType = "Colecovision";
                     game.TgdbPlatformString = "Colecovision";
                     game.EmuMoviesPlatformString = "Coleco_Vision";
 
@@ -322,7 +325,7 @@ namespace GameBrowser.Resolvers
 
                 case "Commodore64":
                     game.GameSystem = "Commodore64";
-                    game.DisplayMediaType = "Commodore 64 Game";
+                    game.DisplayMediaType = "Commodore 64";
                     game.TgdbPlatformString = "Commodore 64";
                     game.EmuMoviesPlatformString = "Commodore_64";
 
@@ -330,7 +333,7 @@ namespace GameBrowser.Resolvers
 
                 case "CommodoreVic20":
                     game.GameSystem = "CommodoreVic20";
-                    game.DisplayMediaType = "Commodore Vic-20 Game";
+                    game.DisplayMediaType = "Commodore Vic-20";
                     game.TgdbPlatformString = "";
                     game.EmuMoviesPlatformString = "";
 
@@ -338,7 +341,7 @@ namespace GameBrowser.Resolvers
 
                 case "Intellivision":
                     game.GameSystem = "Intellivision";
-                    game.DisplayMediaType = "Intellivision Game";
+                    game.DisplayMediaType = "Intellivision";
                     game.TgdbPlatformString = "Intellivision";
                     game.EmuMoviesPlatformString = "Mattel_Intellivision";
 
@@ -346,7 +349,7 @@ namespace GameBrowser.Resolvers
 
                 case "MicrosoftXBox":
                     game.GameSystem = "MicrosoftXBox";
-                    game.DisplayMediaType = "Microsoft Xbox Game";
+                    game.DisplayMediaType = "Microsoft Xbox";
                     game.TgdbPlatformString = "Microsoft Xbox";
                     game.EmuMoviesPlatformString = "Microsoft_Xbox";
 
@@ -354,7 +357,7 @@ namespace GameBrowser.Resolvers
 
                 case "NeoGeo":
                     game.GameSystem = "NeoGeo";
-                    game.DisplayMediaType = "NeoGeo Game";
+                    game.DisplayMediaType = "NeoGeo";
                     game.TgdbPlatformString = "NeoGeo";
                     game.EmuMoviesPlatformString = "SNK_Neo_Geo_AES";
 
@@ -362,7 +365,7 @@ namespace GameBrowser.Resolvers
 
                 case "Nintendo64":
                     game.GameSystem = "Nintendo64";
-                    game.DisplayMediaType = "Nintendo 64 Game";
+                    game.DisplayMediaType = "Nintendo 64";
                     game.TgdbPlatformString = "Nintendo 64";
                     game.EmuMoviesPlatformString = "Nintendo_N64";
 
@@ -370,7 +373,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoDS":
                     game.GameSystem = "NintendoDS";
-                    game.DisplayMediaType = "Nintendo DS Game";
+                    game.DisplayMediaType = "Nintendo DS";
                     game.TgdbPlatformString = "Nintendo DS";
                     game.EmuMoviesPlatformString = "Nintendo_DS";
 
@@ -378,7 +381,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoEntertainmentSystem":
                     game.GameSystem = "NintendoEntertainmentSystem";
-                    game.DisplayMediaType = "Nintendo NES Game";
+                    game.DisplayMediaType = "Nintendo NES";
                     game.TgdbPlatformString = "Nintendo Entertainment System (NES)";
                     game.EmuMoviesPlatformString = "Nintendo_NES";
                     
@@ -386,7 +389,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoGameBoy":
                     game.GameSystem = "NintendoGameBoy";
-                    game.DisplayMediaType = "Nintendo Game Boy Game";
+                    game.DisplayMediaType = "Nintendo Game Boy";
                     game.TgdbPlatformString = "Nintendo Game Boy";
                     game.EmuMoviesPlatformString = "Nintendo_Game_Boy";
 
@@ -394,7 +397,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoGameBoyAdvance":
                     game.GameSystem = "NintendoGameBoyAdvance";
-                    game.DisplayMediaType = "Nintendo Game Boy Advance Game";
+                    game.DisplayMediaType = "Nintendo Game Boy Advance";
                     game.TgdbPlatformString = "Nintendo Game Boy Advance";
                     game.EmuMoviesPlatformString = "Nintendo_Game_Boy_Advance";
 
@@ -402,7 +405,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoGameBoyColor":
                     game.GameSystem = "NintendoGameBoyColor";
-                    game.DisplayMediaType = "Nintendo Game Boy Color Game";
+                    game.DisplayMediaType = "Nintendo Game Boy Color";
                     game.TgdbPlatformString = "Nintendo Game Boy Color";
                     game.EmuMoviesPlatformString = "Nintendo_Game_Boy_Color";
 
@@ -410,7 +413,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoGameCube":
                     game.GameSystem = "NintendoGameCube";
-                    game.DisplayMediaType = "Nintendo GameCube Game";
+                    game.DisplayMediaType = "Nintendo GameCube";
                     game.TgdbPlatformString = "Nintendo GameCube";
                     game.EmuMoviesPlatformString = "Nintendo_GameCube";
 
@@ -418,7 +421,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoSuperNES":
                     game.GameSystem = "NintendoSuperNES";
-                    game.DisplayMediaType = "Nintendo SNES Game";
+                    game.DisplayMediaType = "Nintendo SNES";
                     game.TgdbPlatformString = "Super Nintendo (SNES)";
                     game.EmuMoviesPlatformString = "Nintendo_SNES";
 
@@ -426,7 +429,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoVirtualBoy":
                     game.GameSystem = "NintendoVirtualBoy";
-                    game.DisplayMediaType = "Nintendo Virtual Boy Game";
+                    game.DisplayMediaType = "Nintendo Virtual Boy";
                     game.TgdbPlatformString = "Nintendo Virtual Boy";
                     game.EmuMoviesPlatformString = "";
 
@@ -434,7 +437,7 @@ namespace GameBrowser.Resolvers
 
                 case "NintendoWii":
                     game.GameSystem = "NintendoWii";
-                    game.DisplayMediaType = "Nintendo Wii Game";
+                    game.DisplayMediaType = "Nintendo Wii";
                     game.TgdbPlatformString = "Nintendo Wii";
                     game.EmuMoviesPlatformString = "";
 
@@ -442,7 +445,7 @@ namespace GameBrowser.Resolvers
 
                 case "Dos":
                     game.GameSystem = "Dos";
-                    game.DisplayMediaType = "DOS Game";
+                    game.DisplayMediaType = "DOS";
                     game.TgdbPlatformString = "PC";
                     game.EmuMoviesPlatformString = "";
 
@@ -450,7 +453,7 @@ namespace GameBrowser.Resolvers
 
                 case "Windows":
                     game.GameSystem = "Windows";
-                    game.DisplayMediaType = "Windows Game";
+                    game.DisplayMediaType = "Windows";
                     game.TgdbPlatformString = "PC";
                     game.EmuMoviesPlatformString = "";
 
@@ -458,7 +461,7 @@ namespace GameBrowser.Resolvers
 
                 case "Sega32X":
                     game.GameSystem = "Sega32X";
-                    game.DisplayMediaType = "Sega 32x Game";
+                    game.DisplayMediaType = "Sega 32x";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
@@ -466,7 +469,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaCD":
                     game.GameSystem = "SegaCD";
-                    game.DisplayMediaType = "Sega CD Game";
+                    game.DisplayMediaType = "Sega CD";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
@@ -474,7 +477,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaDreamcast":
                     game.GameSystem = "SegaDreamcast";
-                    game.DisplayMediaType = "Sega Dreamcast Game";
+                    game.DisplayMediaType = "Sega Dreamcast";
                     game.TgdbPlatformString = "Sega Dreamcast";
                     game.EmuMoviesPlatformString = "Sega_Dreamcast";
 
@@ -482,7 +485,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaGameGear":
                     game.GameSystem = "SegaGameGear";
-                    game.DisplayMediaType = "Sega Game Gear Game";
+                    game.DisplayMediaType = "Sega Game Gear";
                     game.TgdbPlatformString = "Sega Game Gear";
                     game.EmuMoviesPlatformString = "Sega_Game_Gear";
 
@@ -490,7 +493,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaGenesis":
                     game.GameSystem = "SegaGenesis";
-                    game.DisplayMediaType = "Sega Genesis Game";
+                    game.DisplayMediaType = "Sega Genesis";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
@@ -498,7 +501,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaMasterSystem":
                     game.GameSystem = "SegaMasterSystem";
-                    game.DisplayMediaType = "Sega Master System Game";
+                    game.DisplayMediaType = "Sega Master System";
                     game.TgdbPlatformString = "Sega Master System";
                     game.EmuMoviesPlatformString = "Sega_Master_System";
 
@@ -506,7 +509,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaMegaDrive":
                     game.GameSystem = "SegaMegaDrive";
-                    game.DisplayMediaType = "Sega MegaDrive Game";
+                    game.DisplayMediaType = "Sega MegaDrive";
                     game.TgdbPlatformString = "Sega Genesis";
                     game.EmuMoviesPlatformString = "Sega_Genesis";
 
@@ -514,7 +517,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaSaturn":
                     game.GameSystem = "SegaSaturn";
-                    game.DisplayMediaType = "Sega Saturn Game";
+                    game.DisplayMediaType = "Sega Saturn";
                     game.TgdbPlatformString = "Sega Saturn";
                     game.EmuMoviesPlatformString = "Sega_Saturn";
 
@@ -522,7 +525,7 @@ namespace GameBrowser.Resolvers
 
                 case "SonyPlaystation":
                     game.GameSystem = "SonyPlaystation";
-                    game.DisplayMediaType = "Sony Playstation Game";
+                    game.DisplayMediaType = "Sony Playstation";
                     game.TgdbPlatformString = "Sony Playstation";
                     game.EmuMoviesPlatformString = "Sony_Playstation";
 
@@ -530,7 +533,7 @@ namespace GameBrowser.Resolvers
 
                 case "SonyPlaystation2":
                     game.GameSystem = "SonyPlaystation2";
-                    game.DisplayMediaType = "Sony Playstation 2 Game";
+                    game.DisplayMediaType = "Sony Playstation 2";
                     game.TgdbPlatformString = "Sony Playstation 2";
                     game.EmuMoviesPlatformString = "Sony_Playstation_2";
 
@@ -538,7 +541,7 @@ namespace GameBrowser.Resolvers
 
                 case "SonyPSP":
                     game.GameSystem = "SonyPSP";
-                    game.DisplayMediaType = "Sony PSP Game";
+                    game.DisplayMediaType = "Sony PSP";
                     game.TgdbPlatformString = "Sony PSP";
                     game.EmuMoviesPlatformString = "Sony_PSP";
 
@@ -546,7 +549,7 @@ namespace GameBrowser.Resolvers
 
                 case "TurboGrafx16":
                     game.GameSystem = "TurboGrafx16";
-                    game.DisplayMediaType = "TurboGrafx 16 Game";
+                    game.DisplayMediaType = "TurboGrafx 16";
                     game.TgdbPlatformString = "TurboGrafx 16";
                     game.EmuMoviesPlatformString = "NEC_TurboGrafx_16";
 
@@ -554,9 +557,16 @@ namespace GameBrowser.Resolvers
 
                 case "TurboGrafxCD":
                     game.GameSystem = "TurboGrafxCD";
-                    game.DisplayMediaType = "TurboGrafx CD Game";
+                    game.DisplayMediaType = "TurboGrafx CD";
                     game.TgdbPlatformString = "TurboGrafx 16";
                     game.EmuMoviesPlatformString = "NEC_TurboGrafx_16";
+                    break;
+
+                case "ZxSpectrum":
+                    game.GameSystem = "ZXSpectrum";
+                    game.DisplayMediaType = "ZX Spectrum";
+                    game.TgdbPlatformString = "";
+                    game.EmuMoviesPlatformString = "";
                     break;
 
                 default:
