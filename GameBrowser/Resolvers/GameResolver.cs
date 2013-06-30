@@ -578,7 +578,7 @@ namespace GameBrowser.Resolvers
 
         private string AttemptGetGamePlatformTypeFromPath(string path)
         {
-            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => path.StartsWith(s.Path + "\\"));
+            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => path.ToLower().StartsWith(s.Path.ToLower() + "\\"));
 
             return system != null ? system.ConsoleType : null;
         }
