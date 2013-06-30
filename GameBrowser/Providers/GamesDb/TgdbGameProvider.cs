@@ -153,6 +153,8 @@ namespace GameBrowser.Providers.GamesDb
         {
             var gameId = game.GetProviderId("Tgdb") ??  await FindGameId(game, cancellationToken).ConfigureAwait(false);
 
+            if (string.IsNullOrEmpty(gameId)) return;
+
             var xml = await FetchGameXml(gameId, cancellationToken).ConfigureAwait(false);
             
             if (xml != null)
