@@ -592,24 +592,24 @@ namespace GameBrowser.Providers.GamesDb
         {
             var ret = new Dictionary<string, string>
                           {
-                              {"Action", "Action Game"},
-                              {"Adventure", "Adventure Game"},
-                              {"Construction and Management Simulation", "Environment Building Game"},
-                              {"Fighting", "Fighting Game"},
-                              {"Flight Simulator", "Flight Simulator Game"},
-                              {"Horror", "Horror Game"},
-                              {"Life Simulation", "Life Simulation Game"},
-                              {"MMO", "MMO Game"},
-                              {"Music", "Music Game"},
-                              {"Platform", "Platform Game"},
-                              {"Puzzle", "Puzzle Game"},
-                              {"Racing", "Racing Game"},
-                              {"Role-Playing", "Role-Playing Game"},
-                              {"Sandbox", "Sandbox Game"},
-                              {"Shooter", "Shooter Game"},
-                              {"Sports", "Sports Game"},
-                              {"Stealth", "Stealth Game"},
-                              {"Strategy", "Strategy Game"}
+                              {"Action", "Action"},
+                              {"Adventure", "Adventure"},
+                              {"Construction and Management Simulation", "Environment Building"},
+                              {"Fighting", "Fighting"},
+                              {"Flight Simulator", "Flight Simulator"},
+                              {"Horror", "Horror"},
+                              {"Life Simulation", "Life Simulation"},
+                              {"MMO", "MMO"},
+                              {"Music", "Music"},
+                              {"Platform", "Platform"},
+                              {"Puzzle", "Puzzle"},
+                              {"Racing", "Racing"},
+                              {"Role-Playing", "Role-Playing"},
+                              {"Sandbox", "Sandbox"},
+                              {"Shooter", "Shooter"},
+                              {"Sports", "Sports"},
+                              {"Stealth", "Stealth"},
+                              {"Strategy", "Strategy"}
                           };
 
             return ret;
