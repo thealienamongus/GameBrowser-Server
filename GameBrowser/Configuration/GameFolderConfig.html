@@ -189,7 +189,8 @@
 
                         selectDirectory: function () {
 
-                            Dashboard.selectDirectory({
+                            var page = $.mobile.activePage;
+                            new DirectoryBrowser(page).show({
                                 callback: function (path) {
 
                                     if (path) {

@@ -203,12 +203,19 @@ namespace GameBrowser.Providers.GamesDb
             var gameReleaseDate = xmlDocument.SafeGetString("//Game/ReleaseDate");
             if (!string.IsNullOrEmpty(gameReleaseDate))
             {
-                if (gameReleaseDate.Length == 4)
-                    game.ProductionYear = Int32.Parse(gameReleaseDate);
-                else if (gameReleaseDate.Length > 4)
+                try
                 {
-                    game.PremiereDate = Convert.ToDateTime(gameReleaseDate).ToUniversalTime();
-                    game.ProductionYear = game.PremiereDate.Value.Year;
+                    if (gameReleaseDate.Length == 4)
+                        game.ProductionYear = Int32.Parse(gameReleaseDate);
+                    else if (gameReleaseDate.Length > 4)
+                    {
+                        game.PremiereDate = Convert.ToDateTime(gameReleaseDate).ToUniversalTime();
+                        game.ProductionYear = game.PremiereDate.Value.Year;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
                 }
             }
 
