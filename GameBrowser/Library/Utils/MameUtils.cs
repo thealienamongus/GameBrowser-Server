@@ -7,7 +7,7 @@ namespace GameBrowser.Library.Utils
 {
     public static class MameUtils
     {
-        private static Dictionary<string, string> _romNamesDictionary;
+        private static volatile Dictionary<string, string> _romNamesDictionary;
 
         private static readonly object LockObject = new object();
 
@@ -18,27 +18,30 @@ namespace GameBrowser.Library.Utils
         /// <returns>The games full name</returns>
         public static string GetFullNameFromPath(string path)
         {
-            lock (LockObject)
+            if (_romNamesDictionary == null)
             {
-                // Build the dictionary if it's not already populated
-                if (_romNamesDictionary == null)
+                lock (LockObject)
                 {
-                    BuildRomNamesDictionary();
+                    // Build the dictionary if it's not already populated
+                    if (_romNamesDictionary == null)
+                    {
+                        _romNamesDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                        
+                        BuildRomNamesDictionary();
+                    }
                 }
             }
 
-            if (_romNamesDictionary != null)
-            try
-            {
-                var shortName = Path.GetFileNameWithoutExtension(path);
+            var shortName = Path.GetFileNameWithoutExtension(path);
 
-                if (shortName != null)
-                {
-                    return _romNamesDictionary[shortName];
-                }
-            }
-            catch (KeyNotFoundException)
+            if (shortName != null)
             {
+                string value;
+
+                if (_romNamesDictionary.TryGetValue(shortName, out value))
+                {
+                    return value;
+                }
             }
 
             return null;
@@ -57,7 +60,6 @@ namespace GameBrowser.Library.Utils
 
         private static void BuildRomNamesDictionary()
         {
-            _romNamesDictionary = new Dictionary<string, string>();
 
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("GameBrowser.Resources.mame_game_list.txt"))
             {
@@ -65,29 +67,18 @@ namespace GameBrowser.Library.Utils
                 
                 using (var reader = new StreamReader(stream))
                 {
-                    try
+                    while (reader.Peek() >= 0)
                     {
-                        while (reader.Peek() >= 0)
+                        var line = reader.ReadLine();
+                        if (line != null)
                         {
-                            var line = reader.ReadLine();
-                            if (line != null)
-                            {
-                                var key = line.Substring(0, line.IndexOf(" ", StringComparison.Ordinal));
-                                var value = line.Substring(line.IndexOf(" ", StringComparison.Ordinal)).Trim();
-                                value = value.Substring(1, value.Length - 2); // Trim quotes
+                            var key = line.Substring(0, line.IndexOf(" ", StringComparison.Ordinal));
+                            var value = line.Substring(line.IndexOf(" ", StringComparison.Ordinal)).Trim();
+                            value = value.Substring(1, value.Length - 2); // Trim quotes
 
-                                _romNamesDictionary.Add(key, value);
-                            }
+                            _romNamesDictionary.Add(key, value);
                         }
                     }
-                    catch (OutOfMemoryException)
-                    {}
-                    catch (IOException)
-                    {}
-                    catch (ArgumentNullException)
-                    {}
-                    catch (ArgumentException)
-                    {}
                 }
             }
         }
