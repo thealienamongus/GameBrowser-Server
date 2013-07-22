@@ -70,13 +70,20 @@ namespace GameBrowser.Library.Utils
                     while (reader.Peek() >= 0)
                     {
                         var line = reader.ReadLine();
+
                         if (line != null)
                         {
-                            var key = line.Substring(0, line.IndexOf(" ", StringComparison.Ordinal));
-                            var value = line.Substring(line.IndexOf(" ", StringComparison.Ordinal)).Trim();
-                            value = value.Substring(1, value.Length - 2); // Trim quotes
+                            var index = line.IndexOf(" ", StringComparison.Ordinal);
 
-                            _romNamesDictionary.Add(key, value);
+                            if (index != -1)
+                            {
+                                var key = line.Substring(0, index);
+
+                                // Trim whitespace, quotes, then whitespace again
+                                var value = line.Substring(index).Trim().Trim('"').Trim();
+
+                                _romNamesDictionary.Add(key, value);
+                            }
                         }
                     }
                 }
