@@ -34,7 +34,7 @@ namespace GameBrowser.Resolvers
         {
             var platform = AttemptGetGamePlatformTypeFromPath(args.Path);
 
-            if (platform != null)
+            if (!string.IsNullOrEmpty(platform))
             {
                 if (args.IsDirectory)
                 {
@@ -42,9 +42,11 @@ namespace GameBrowser.Resolvers
                 }
 
                 // For MAME we will allow all games in the same dir
-                if ( platform == "Arcade")
+                if ( string.Equals(platform, "Arcade"))
                 {
-                    if (args.Path.EndsWith(".zip") || args.Path.EndsWith(".7z"))
+                    var extension = Path.GetExtension(args.Path);
+
+                    if (string.Equals(extension, ".zip", StringComparison.OrdinalIgnoreCase) || string.Equals(extension, ".7z", StringComparison.OrdinalIgnoreCase))
                     {
                         // ignore zips that are bios roms.
                         if (MameUtils.IsBiosRom(args.Path)) return null;
@@ -578,7 +580,7 @@ namespace GameBrowser.Resolvers
 
         private string AttemptGetGamePlatformTypeFromPath(string path)
         {
-            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => path.ToLower().StartsWith(s.Path.ToLower() + "\\"));
+            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => path.StartsWith(s.Path + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));
 
             return system != null ? system.ConsoleType : null;
         }
