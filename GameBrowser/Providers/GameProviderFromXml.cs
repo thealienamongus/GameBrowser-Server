@@ -43,6 +43,8 @@ namespace GameBrowser.Providers
             return xml != null ? FileSystem.GetLastWriteTimeUtc(xml, Logger) : DateTime.MinValue;
         }
 
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -52,7 +54,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            return Task.Run(() => Fetch((Entities.GbGame)item, cancellationToken));
+            return Fetch((Entities.GbGame)item, cancellationToken);
         }
 
 
@@ -63,7 +65,7 @@ namespace GameBrowser.Providers
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private bool Fetch(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task<bool> Fetch(Entities.GbGame game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -71,7 +73,17 @@ namespace GameBrowser.Providers
 
             if (File.Exists(metaFile))
             {
-                new BaseGameXmlParser<Entities.GbGame>().Fetch(game, metaFile, cancellationToken);
+                await XmlParsingResourcePool.WaitAsync(cancellationToken).ConfigureAwait(false);
+
+                try
+                {
+                    new BaseGameXmlParser<Entities.GbGame>().Fetch(game, metaFile, cancellationToken);
+                }
+                finally
+                {
+                    XmlParsingResourcePool.Release();
+                }
+                
             }
 
             SetLastRefreshed(game, DateTime.UtcNow);
