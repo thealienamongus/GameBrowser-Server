@@ -197,7 +197,7 @@ namespace GameBrowser.Providers.GamesDb
             game.SetProviderId("Tgdb", id);
 
             var gameName = xmlDocument.SafeGetString("//Game/GameTitle");
-            if (!string.IsNullOrEmpty(gameName))
+            if (!string.IsNullOrEmpty(gameName) && !game.LockedFields.Contains(MetadataFields.Name))
                 game.Name = gameName;
 
             var gameReleaseDate = xmlDocument.SafeGetString("//Game/ReleaseDate");
@@ -220,7 +220,7 @@ namespace GameBrowser.Providers.GamesDb
             }
 
             var gameOverview = xmlDocument.SafeGetString("//Game/Overview");
-            if (!string.IsNullOrEmpty(gameOverview))
+            if (!string.IsNullOrEmpty(gameOverview) && !game.LockedFields.Contains(MetadataFields.Overview))
             {
                 gameOverview = gameOverview.Replace("\n\n", "\n"); // Trim double returns
                 game.Overview = gameOverview;
@@ -258,7 +258,7 @@ namespace GameBrowser.Providers.GamesDb
             }
             
             var nodes = xmlDocument.SelectNodes("//Game/Genres/genre");
-            if (nodes != null)
+            if (nodes != null && !game.LockedFields.Contains(MetadataFields.Genres))
             {
                 var gameGenres = new List<string>();
 
@@ -273,18 +273,21 @@ namespace GameBrowser.Providers.GamesDb
                     game.Genres = gameGenres;
             }
 
-            var gamePublisher = xmlDocument.SafeGetString("//Game/Publisher");
-            if (!string.IsNullOrEmpty(gamePublisher))
+            if (!game.LockedFields.Contains(MetadataFields.Studios))
             {
-                game.AddStudio(gamePublisher);
-            }
+                var gamePublisher = xmlDocument.SafeGetString("//Game/Publisher");
+                if (!string.IsNullOrEmpty(gamePublisher))
+                {
+                    game.AddStudio(gamePublisher);
+                }
 
-            var gameDeveloper = xmlDocument.SafeGetString("//Game/Developer");
-            if (!string.IsNullOrEmpty(gameDeveloper))
-            {
-                game.AddStudio(gameDeveloper);
+                var gameDeveloper = xmlDocument.SafeGetString("//Game/Developer");
+                if (!string.IsNullOrEmpty(gameDeveloper))
+                {
+                    game.AddStudio(gameDeveloper);
+                }
             }
-
+            
             var bannerUrl = xmlDocument.SafeGetString("//Game/Images/banner");
             if (!string.IsNullOrEmpty(bannerUrl))
             {
