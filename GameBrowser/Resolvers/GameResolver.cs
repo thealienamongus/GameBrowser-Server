@@ -6,6 +6,7 @@ using MediaBrowser.Controller.Resolvers;
 using System;
 using System.IO;
 using System.Linq;
+using MediaBrowser.Model.Logging;
 
 namespace GameBrowser.Resolvers
 {
@@ -14,6 +15,12 @@ namespace GameBrowser.Resolvers
     /// </summary>
     public class GameResolver : ItemResolver<GbGame>
     {
+        private readonly ILogger _logger;
+
+        public GameResolver(ILogger logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// Run before any core resolvers
         /// </summary>
@@ -53,13 +60,14 @@ namespace GameBrowser.Resolvers
 
                         var game = new GbGame
                         {
-                            Name = MameUtils.GetFullNameFromPath(args.Path),
+                            Name = MameUtils.GetFullNameFromPath(args.Path, _logger),
                             Files = new List<string> { args.Path },
                             Path = args.Path,
                             GameSystem = "Arcade",
                             DisplayMediaType = "Arcade",
                             TgdbPlatformString = "Arcade",
-                            EmuMoviesPlatformString = "MAME"
+                            EmuMoviesPlatformString = "MAME",
+                            IsInMixedFolder = true
                         };
                         return game;
                     }
