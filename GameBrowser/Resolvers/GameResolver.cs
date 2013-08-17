@@ -189,10 +189,10 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso", ".dol", ".ciso", ".wbfs", ".wad" };
 
                 case "Dos":
-                    return new[] {".exe"};
+                    return new[] {".gbdos"};
 
                 case "Windows":
-                    return new[] { ".exe", ".url", ".lnk" };
+                    return new[] { ".gbwin" };
 
                 case "Sega32X": // Need to verfiy
                     return new[] { ".iso", ".bin", ".img", ".zip" };

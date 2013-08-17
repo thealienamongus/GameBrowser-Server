@@ -29,6 +29,7 @@ namespace GameBrowser
 
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
+        private static IUserManager _userManager;
         private static ILibraryManager _libraryManager;
         private readonly GameBrowserUriService _gameBrowserUriService;
 
@@ -72,15 +73,16 @@ namespace GameBrowser
         /// <summary>
         /// Initializes a new instance of the <see cref="Plugin" /> class.
         /// </summary>
-        public Plugin(IApplicationPaths appPaths, IXmlSerializer xmlSerializer, ILibraryManager libraryManager, ILogManager logManager, IHttpClient httpClient)
+        public Plugin(IApplicationPaths appPaths, IXmlSerializer xmlSerializer, ILibraryManager libraryManager, IUserManager userManager, ILogManager logManager, IHttpClient httpClient)
             : base(appPaths, xmlSerializer)
         {
             Instance = this;
             _libraryManager = libraryManager;
+            _userManager = userManager;
             _logger = logManager.GetLogger("GameBrowser");
             _httpClient = httpClient;
 
-            _gameBrowserUriService = new GameBrowserUriService(_logger);
+            _gameBrowserUriService = new GameBrowserUriService(_logger, _userManager);
         }
 
         /// <summary>
@@ -168,7 +170,7 @@ namespace GameBrowser
 
             try
             {
-                using (var stream = await _httpClient.Get(url, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false))
+                using (var stream = await _httpClient.Get(url, Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false))
                 {
                     var doc = new XmlDocument();
                     doc.Load(stream);

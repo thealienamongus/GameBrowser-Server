@@ -23,6 +23,7 @@ namespace GameBrowser.Resolvers
                                                         {"AtariXE", 30},
                                                         {"Colecovision", 31},
                                                         {"Commodore64", 40},
+                                                        {"Dos", 1},
                                                         {"Intellivision", 32},
                                                         {"MicrosoftXBox", 14},
                                                         {"NeoGeo", 24},
@@ -47,7 +48,8 @@ namespace GameBrowser.Resolvers
                                                         {"SonyPlaystation", 10},
                                                         {"SonyPlaystation2", 11},
                                                         {"SonyPSP", 13},
-                                                        {"TurboGrafx16", 34}
+                                                        {"TurboGrafx16", 34},
+                                                        {"Windows", 1}
                                                     };
     }
 }
