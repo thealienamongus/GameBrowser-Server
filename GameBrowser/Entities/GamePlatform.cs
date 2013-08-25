@@ -7,5 +7,12 @@ namespace GameBrowser.Entities
     /// </summary>
     public class GamePlatform : Folder
     {
+        public override System.Guid DisplayPreferencesId
+        {
+            get
+            {
+                return Id;
+            }
+        }
     }
 }
