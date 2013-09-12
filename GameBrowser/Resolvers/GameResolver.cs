@@ -141,7 +141,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso" };
 
                 case "Colecovision":
-                    return new[] { ".col" };
+                    return new[] { ".col", ".rom" };
 
                 case "Commodore64":
                     return new[] { ".d64", ".g64" };
@@ -150,7 +150,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".prg" };
 
                 case "Intellivision":
-                    return new[] { ".int" };
+                    return new[] { ".int", ".rom" };
 
                 case "MicrosoftXBox":
                     return new[] { ".iso" };
