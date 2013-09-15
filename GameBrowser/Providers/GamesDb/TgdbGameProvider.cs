@@ -75,7 +75,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGameProvider 1.0";
+                return "TgdbGameProvider 1.01";
             }
         }
 
@@ -286,6 +286,12 @@ namespace GameBrowser.Providers.GamesDb
                 {
                     game.AddStudio(gameDeveloper);
                 }
+            }
+
+            var gamePlayers = xmlDocument.SafeGetString("//Game/Players");
+            if (!string.IsNullOrEmpty(gamePlayers))
+            {
+                game.PlayersSupported = Convert.ToInt32(gamePlayers);
             }
             
             var bannerUrl = xmlDocument.SafeGetString("//Game/Images/banner");
