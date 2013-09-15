@@ -114,7 +114,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         public override async Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            if (HasAltMeta(item))
+            if (HasAltMeta(item) && !force)
             {
                 SetLastRefreshed(item, DateTime.UtcNow);
                 return true;

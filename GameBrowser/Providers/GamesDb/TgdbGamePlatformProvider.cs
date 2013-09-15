@@ -81,8 +81,6 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         protected override bool NeedsRefreshInternal(BaseItem item, BaseProviderInfo providerInfo)
         {
-            if (item.DontFetchMeta) return false;
-
             if (HasAltMeta(item) || HasLegacyMeta(item)) return false;
 
             return base.NeedsRefreshInternal(item, providerInfo);
@@ -97,15 +95,10 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         public override async Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            if (HasAltMeta(item))
+            if (HasAltMeta(item) && !force)
             {
                 SetLastRefreshed(item, DateTime.UtcNow);
                 return true;
-            }
-
-            if (item.DontFetchMeta)
-            {
-                return false;
             }
 
             cancellationToken.ThrowIfCancellationRequested();
