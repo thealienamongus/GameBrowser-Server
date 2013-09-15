@@ -291,6 +291,9 @@ namespace GameBrowser.Providers.GamesDb
             var gamePlayers = xmlDocument.SafeGetString("//Game/Players");
             if (!string.IsNullOrEmpty(gamePlayers))
             {
+                if (gamePlayers.Equals("4+", StringComparison.OrdinalIgnoreCase))
+                    gamePlayers = "4";
+
                 game.PlayersSupported = Convert.ToInt32(gamePlayers);
             }
             
