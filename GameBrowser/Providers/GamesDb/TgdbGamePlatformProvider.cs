@@ -222,13 +222,13 @@ namespace GameBrowser.Providers.GamesDb
         {
             var platformName = xmlDocument.SafeGetString("//Platform/Platform");
 
-            if (!string.IsNullOrEmpty(platformName))
+            if (!string.IsNullOrEmpty(platformName) && !console.LockedFields.Contains(MetadataFields.Name))
             {
                 console.Name = platformName;
             }
 
             console.Overview = xmlDocument.SafeGetString("//Platform/overview");
-            if (console.Overview != null)
+            if (console.Overview != null && !console.LockedFields.Contains(MetadataFields.Overview))
             {
                 console.Overview = console.Overview.Replace("\n\n", "\n");
             }
