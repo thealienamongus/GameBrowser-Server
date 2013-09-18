@@ -165,7 +165,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".nds" };
 
                 case "NintendoEntertainmentSystem":
-                    return new[] { ".nes" };
+                    return new[] { ".nes", ".zip" };
 
                 case "NintendoGameBoy":
                     return new[] { ".gb" };
