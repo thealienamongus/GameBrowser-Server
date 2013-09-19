@@ -14,15 +14,5 @@ namespace GameBrowser.Entities
         /// <value>The files.</value>
         public List<string> Files { get; set; }
 
-        /// <summary>
-        /// The value used by TheGamesDB.
-        /// </summary>
-        /// <returns></returns>
-        public string TgdbPlatformString { get; set; }
-        
-        /// <summary>
-        /// The value used by EmuMovies
-        /// </summary>
-        public string EmuMoviesPlatformString { get; set; }
     }
 }

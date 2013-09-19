@@ -377,7 +377,7 @@ namespace GameBrowser.Providers.GamesDb
             cancellationToken.ThrowIfCancellationRequested();
 
             var name = game.Name;
-            var platform = game.TgdbPlatformString;
+            var platform = GetTgdbPlatformFromGameSystem(game.GameSystem);
             var year = string.Empty;
 
             foreach (var re in NameMatches)
@@ -651,6 +651,220 @@ namespace GameBrowser.Providers.GamesDb
         private static string UrlEncode(string name)
         {
             return WebUtility.UrlEncode(name);
+        }
+
+
+
+        private string GetTgdbPlatformFromGameSystem(string gameSystem)
+        {
+            string tgdbPlatformString = null;
+
+            switch (gameSystem)
+            {
+                case "Panasonic3DO":
+                    tgdbPlatformString = "3DO";
+
+                    break;
+
+                case "Amiga":
+                    tgdbPlatformString = "Amiga";
+
+                    break;
+
+                case "Arcade":
+                    tgdbPlatformString = "Arcade";
+
+                    break;
+
+                case "Atari2600":
+                    tgdbPlatformString = "Atari 2600";
+
+                    break;
+
+                case "Atari5200":
+                    tgdbPlatformString = "Atari 5200";
+
+                    break;
+
+                case "Atari7800":
+                    tgdbPlatformString = "Atari 7800";
+
+                    break;
+
+                case "AtariXE":
+                    tgdbPlatformString = "Atari XE";
+
+                    break;
+
+                case "AtariJaguar":
+                    tgdbPlatformString = "Atari Jaguar";
+
+                    break;
+
+                case "AtariJaguarCD":
+                    tgdbPlatformString = "Atari Jaguar";
+
+                    break;
+
+                case "Colecovision":
+                    tgdbPlatformString = "Colecovision";
+
+                    break;
+
+                case "Commodore64":
+                    tgdbPlatformString = "Commodore 64";
+
+                    break;
+
+                case "CommodoreVic20":
+                    tgdbPlatformString = "";
+
+                    break;
+
+                case "Intellivision":
+                    tgdbPlatformString = "Intellivision";
+
+                    break;
+
+                case "MicrosoftXBox":
+                    tgdbPlatformString = "Microsoft Xbox";
+
+                    break;
+
+                case "NeoGeo":
+                    tgdbPlatformString = "NeoGeo";
+
+                    break;
+
+                case "Nintendo64":
+                    tgdbPlatformString = "Nintendo 64";
+
+                    break;
+
+                case "NintendoDS":
+                    tgdbPlatformString = "Nintendo DS";
+
+                    break;
+
+                case "NintendoEntertainmentSystem":
+                    tgdbPlatformString = "Nintendo Entertainment System (NES)";
+
+                    break;
+
+                case "NintendoGameBoy":
+                    tgdbPlatformString = "Nintendo Game Boy";
+
+                    break;
+
+                case "NintendoGameBoyAdvance":
+                    tgdbPlatformString = "Nintendo Game Boy Advance";
+
+                    break;
+
+                case "NintendoGameBoyColor":
+                    tgdbPlatformString = "Nintendo Game Boy Color";
+
+                    break;
+
+                case "NintendoGameCube":
+                    tgdbPlatformString = "Nintendo GameCube";
+
+                    break;
+
+                case "NintendoSuperNES":
+                    tgdbPlatformString = "Super Nintendo (SNES)";
+
+                    break;
+
+                case "NintendoVirtualBoy":
+
+                    break;
+
+                case "NintendoWii":
+                    tgdbPlatformString = "Nintendo Wii";
+
+                    break;
+
+                case "Dos":
+                    tgdbPlatformString = "PC";
+
+                    break;
+
+                case "Windows":
+                    tgdbPlatformString = "PC";
+
+                    break;
+
+                case "Sega32X":
+                    tgdbPlatformString = "Sega Genesis";
+
+                    break;
+
+                case "SegaCD":
+                    tgdbPlatformString = "Sega Genesis";
+
+                    break;
+
+                case "SegaDreamcast":
+                    tgdbPlatformString = "Sega Dreamcast";
+
+                    break;
+
+                case "SegaGameGear":
+                    tgdbPlatformString = "Sega Game Gear";
+
+                    break;
+
+                case "SegaGenesis":
+                    tgdbPlatformString = "Sega Genesis";
+
+                    break;
+
+                case "SegaMasterSystem":
+                    tgdbPlatformString = "Sega Master System";
+
+                    break;
+
+                case "SegaMegaDrive":
+                    tgdbPlatformString = "Sega Genesis";
+
+                    break;
+
+                case "SegaSaturn":
+                    tgdbPlatformString = "Sega Saturn";
+
+                    break;
+
+                case "SonyPlaystation":
+                    tgdbPlatformString = "Sony Playstation";
+
+                    break;
+
+                case "SonyPlaystation2":
+                    tgdbPlatformString = "Sony Playstation 2";
+
+                    break;
+
+                case "SonyPSP":
+                    tgdbPlatformString = "Sony PSP";
+
+                    break;
+
+                case "TurboGrafx16":
+                    tgdbPlatformString = "TurboGrafx 16";
+
+                    break;
+
+                case "TurboGrafxCD":
+                    tgdbPlatformString = "TurboGrafx 16";
+                    break;
+
+                case "ZxSpectrum":
+                    tgdbPlatformString = "";
+                    break;
+            }
+
+            return tgdbPlatformString;
         }
     }
 }

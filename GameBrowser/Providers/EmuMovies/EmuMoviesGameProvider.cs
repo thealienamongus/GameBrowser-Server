@@ -213,7 +213,7 @@ namespace GameBrowser.Providers.EmuMovies
 
             if (sessionId == null) return null;
 
-            var url = string.Format(EmuMoviesUrls.Search, HttpUtility.UrlEncode(game.Name), game.EmuMoviesPlatformString, mediaType, sessionId);
+            var url = string.Format(EmuMoviesUrls.Search, HttpUtility.UrlEncode(game.Name), GetEmuMoviesPlatformFromGameSystem(game.GameSystem), mediaType, sessionId);
 
             using (var stream = await _httpClient.Get(url, Plugin.Instance.EmuMoviesSemiphore, cancellationToken).ConfigureAwait(false))
             {
@@ -235,6 +235,222 @@ namespace GameBrowser.Providers.EmuMovies
             }
 
             return null;
+        }
+
+
+
+        private string GetEmuMoviesPlatformFromGameSystem(string platform)
+        {
+            string emuMoviesPlatform = null;
+
+            switch (platform)
+            {
+                case "Panasonic3DO":
+                    emuMoviesPlatform = "Panasonic_3DO";
+
+                    break;
+
+                case "Amiga":
+                    emuMoviesPlatform = "";
+
+                    break;
+
+                case "Arcade":
+                    emuMoviesPlatform = "MAME";
+
+                    break;
+
+                case "Atari2600":
+                    emuMoviesPlatform = "Atari_2600";
+
+                    break;
+
+                case "Atari5200":
+                    emuMoviesPlatform = "Atari_5200";
+
+                    break;
+
+                case "Atari7800":
+                    emuMoviesPlatform = "Atari_7800";
+
+                    break;
+
+                case "AtariXE":
+                    emuMoviesPlatform = "Atari_8_bit";
+
+                    break;
+
+                case "AtariJaguar":
+                    emuMoviesPlatform = "Atari_Jaguar";
+
+                    break;
+
+                case "AtariJaguarCD":
+                    emuMoviesPlatform = "Atari_Jaguar";
+
+                    break;
+
+                case "Colecovision":
+                    emuMoviesPlatform = "Coleco_Vision";
+
+                    break;
+
+                case "Commodore64":
+                    emuMoviesPlatform = "Commodore_64";
+
+                    break;
+
+                case "CommodoreVic20":
+                    emuMoviesPlatform = "";
+
+                    break;
+
+                case "Intellivision":
+                    emuMoviesPlatform = "Mattel_Intellivision";
+
+                    break;
+
+                case "MicrosoftXBox":
+                    emuMoviesPlatform = "Microsoft_Xbox";
+
+                    break;
+
+                case "NeoGeo":
+                    emuMoviesPlatform = "SNK_Neo_Geo_AES";
+
+                    break;
+
+                case "Nintendo64":
+                    emuMoviesPlatform = "Nintendo_N64";
+
+                    break;
+
+                case "NintendoDS":
+                    emuMoviesPlatform = "Nintendo_DS";
+
+                    break;
+
+                case "NintendoEntertainmentSystem":
+                    emuMoviesPlatform = "Nintendo_NES";
+
+                    break;
+
+                case "NintendoGameBoy":
+                    emuMoviesPlatform = "Nintendo_Game_Boy";
+
+                    break;
+
+                case "NintendoGameBoyAdvance":
+                    emuMoviesPlatform = "Nintendo_Game_Boy_Advance";
+
+                    break;
+
+                case "NintendoGameBoyColor":
+                    emuMoviesPlatform = "Nintendo_Game_Boy_Color";
+
+                    break;
+
+                case "NintendoGameCube":
+                    emuMoviesPlatform = "Nintendo_GameCube";
+
+                    break;
+
+                case "NintendoSuperNES":
+                    emuMoviesPlatform = "Nintendo_SNES";
+
+                    break;
+
+                case "NintendoVirtualBoy":
+                    emuMoviesPlatform = "";
+
+                    break;
+
+                case "NintendoWii":
+                    emuMoviesPlatform = "";
+
+                    break;
+
+                case "Dos":
+                    emuMoviesPlatform = "";
+
+                    break;
+
+                case "Windows":
+                    emuMoviesPlatform = "";
+
+                    break;
+
+                case "Sega32X":
+                    emuMoviesPlatform = "Sega_Genesis";
+
+                    break;
+
+                case "SegaCD":
+                    emuMoviesPlatform = "Sega_Genesis";
+
+                    break;
+
+                case "SegaDreamcast":
+                    emuMoviesPlatform = "Sega_Dreamcast";
+
+                    break;
+
+                case "SegaGameGear":
+                    emuMoviesPlatform = "Sega_Game_Gear";
+
+                    break;
+
+                case "SegaGenesis":
+                    emuMoviesPlatform = "Sega_Genesis";
+
+                    break;
+
+                case "SegaMasterSystem":
+                    emuMoviesPlatform = "Sega_Master_System";
+
+                    break;
+
+                case "SegaMegaDrive":
+                    emuMoviesPlatform = "Sega_Genesis";
+
+                    break;
+
+                case "SegaSaturn":
+                    emuMoviesPlatform = "Sega_Saturn";
+
+                    break;
+
+                case "SonyPlaystation":
+                    emuMoviesPlatform = "Sony_Playstation";
+
+                    break;
+
+                case "SonyPlaystation2":
+                    emuMoviesPlatform = "Sony_Playstation_2";
+
+                    break;
+
+                case "SonyPSP":
+                    emuMoviesPlatform = "Sony_PSP";
+
+                    break;
+
+                case "TurboGrafx16":
+                    emuMoviesPlatform = "NEC_TurboGrafx_16";
+
+                    break;
+
+                case "TurboGrafxCD":
+                    emuMoviesPlatform = "NEC_TurboGrafx_16";
+                    break;
+
+                case "ZxSpectrum":
+                    emuMoviesPlatform = "";
+                    break;
+            }
+
+            return emuMoviesPlatform;
+            
         }
 
     }
