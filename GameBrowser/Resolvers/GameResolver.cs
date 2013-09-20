@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using GameBrowser.Entities;
 using GameBrowser.Library.Utils;
+using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Resolvers;
 using System;
@@ -13,7 +13,7 @@ namespace GameBrowser.Resolvers
     /// <summary>
     /// Class GameResolver
     /// </summary>
-    public class GameResolver : ItemResolver<GbGame>
+    public class GameResolver : ItemResolver<Game>
     {
         private readonly ILogger _logger;
 
@@ -37,7 +37,7 @@ namespace GameBrowser.Resolvers
         /// </summary>
         /// <param name="args">The args.</param>
         /// <returns>Game.</returns>
-        protected override GbGame Resolve(ItemResolveArgs args)
+        protected override Game Resolve(ItemResolveArgs args)
         {
             var platform = AttemptGetGamePlatformTypeFromPath(args.Path);
 
@@ -58,10 +58,9 @@ namespace GameBrowser.Resolvers
                         // ignore zips that are bios roms.
                         if (MameUtils.IsBiosRom(args.Path)) return null;
 
-                        var game = new GbGame
+                        var game = new Game
                         {
                             Name = MameUtils.GetFullNameFromPath(args.Path, _logger),
-                            Files = new List<string> { args.Path },
                             Path = args.Path,
                             GameSystem = "Arcade",
                             DisplayMediaType = "Arcade",
@@ -81,7 +80,7 @@ namespace GameBrowser.Resolvers
         /// <param name="args">The args.</param>
         /// <param name="consoleType">The type of gamesystem this game belongs too</param>
         /// <returns>A Game</returns>
-        private GbGame GetGame(ItemResolveArgs args, string consoleType)
+        private Game GetGame(ItemResolveArgs args, string consoleType)
         {
             var validExtensions = GetExtensions(consoleType);
 
@@ -101,7 +100,13 @@ namespace GameBrowser.Resolvers
             var game = GetNewGame(consoleType);
 
             game.Path = gameFiles[0].FullName;
-            game.Files = gameFiles.Select(i => i.FullName).ToList();
+
+            if (gameFiles.Count > 1)
+            {
+                game.MultiPartGameFiles = gameFiles.Select(i => i.FullName).ToList();
+                game.IsMultiPart = true;
+            }
+
 
             return game;
         }
@@ -245,9 +250,9 @@ namespace GameBrowser.Resolvers
         /// </summary>
         /// <param name="platform">The platform that we want a game object for</param>
         /// <returns>One of the many sub-classes of Game</returns>
-        private GbGame GetNewGame(string platform)
+        private Game GetNewGame(string platform)
         {
-            var game = new GbGame();
+            var game = new Game();
 
             switch (platform)
             {

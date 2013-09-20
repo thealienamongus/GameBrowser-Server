@@ -53,7 +53,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is Entities.GbGame;
+            return item is Game;
         }
 
 
@@ -122,7 +122,7 @@ namespace GameBrowser.Providers.GamesDb
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            await FetchGameData((Entities.GbGame)item, cancellationToken).ConfigureAwait(false);
+            await FetchGameData((Game)item, cancellationToken).ConfigureAwait(false);
 
             SetLastRefreshed(item, DateTime.UtcNow);
             return true;
@@ -149,7 +149,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchGameData(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task FetchGameData(Game game, CancellationToken cancellationToken)
         {
             var gameId = game.GetProviderId("GamesDb") ??  await FindGameId(game, cancellationToken).ConfigureAwait(false);
 
@@ -192,7 +192,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="xmlDocument"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task ProcessGameXml(Entities.GbGame game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
+        private async Task ProcessGameXml(Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
             game.SetProviderId("GamesDb", id);
 
@@ -372,7 +372,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<string> FindGameId(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task<string> FindGameId(Game game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

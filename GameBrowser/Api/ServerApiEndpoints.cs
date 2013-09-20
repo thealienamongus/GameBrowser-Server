@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameBrowser.Api.Querying;
-using GameBrowser.Entities;
 using MediaBrowser.Common.Net;
+using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Model.Logging;
 using ServiceStack.ServiceHost;
@@ -74,7 +72,7 @@ namespace GameBrowser.Api
             var user = _userManager.Users.FirstOrDefault();
 
             var dosGames = user.RootFolder.GetRecursiveChildren(user)
-                .Where(i => i is GbGame && ((GbGame)i).GameSystem.Equals("Dos"))
+                .Where(i => i is Game && ((Game)i).GameSystem.Equals("Dos"))
                 .OrderBy(i => i.SortName)
                 .ToList();
 
@@ -102,7 +100,7 @@ namespace GameBrowser.Api
             var user = _userManager.Users.FirstOrDefault();
 
             var windowsGames = user.RootFolder.GetRecursiveChildren(user)
-                .Where(i => i is GbGame && ((GbGame)i).GameSystem.Equals("Windows"))
+                .Where(i => i is Game && ((Game)i).GameSystem.Equals("Windows"))
                 .OrderBy(i => i.SortName)
                 .ToList();
 

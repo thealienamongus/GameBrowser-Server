@@ -40,7 +40,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is Entities.GbGame;
+            return item is Game;
         }
 
 
@@ -93,7 +93,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <returns></returns>
         public override async Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            var game = (Entities.GbGame)item;
+            var game = (Game)item;
 
             var tCabinetArt = FetchCabinetArt(game, cancellationToken);
             var tDiscArt = FetchDiscArt(game, cancellationToken);
@@ -120,7 +120,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchCabinetArt(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task FetchCabinetArt(Game game, CancellationToken cancellationToken)
         {
             if (!game.HasImage(ImageType.Box))
             {
@@ -142,7 +142,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchDiscArt(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task FetchDiscArt(Game game, CancellationToken cancellationToken)
         {
             if (!game.HasImage(ImageType.Disc))
             {
@@ -164,7 +164,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchSnap(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task FetchSnap(Game game, CancellationToken cancellationToken)
         {
             if (game.ScreenshotImagePaths.Count == 0)
             {
@@ -186,7 +186,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchTitleArt(Entities.GbGame game, CancellationToken cancellationToken)
+        private async Task FetchTitleArt(Game game, CancellationToken cancellationToken)
         {
             if (!game.HasImage(ImageType.Menu))
             {
@@ -207,7 +207,7 @@ namespace GameBrowser.Providers.EmuMovies
         /// <param name="mediaType"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<string> FetchMediaUrl(Entities.GbGame game, EmuMoviesMediaTypes mediaType, CancellationToken cancellationToken)
+        private async Task<string> FetchMediaUrl(Game game, EmuMoviesMediaTypes mediaType, CancellationToken cancellationToken)
         {
             var sessionId = await Plugin.Instance.GetEmuMoviesToken(cancellationToken);
 
