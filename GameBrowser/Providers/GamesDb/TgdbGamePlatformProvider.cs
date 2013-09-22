@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using GameBrowser.Entities;
 using GameBrowser.Extensions;
 using GameBrowser.Resolvers;
 using MediaBrowser.Common.Net;
@@ -49,7 +48,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is GamePlatform;
+            return item is GameSystem;
         }
 
 
@@ -103,7 +102,7 @@ namespace GameBrowser.Providers.GamesDb
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            await FetchConsoleData((GamePlatform) item, cancellationToken).ConfigureAwait(false);
+            await FetchConsoleData((GameSystem) item, cancellationToken).ConfigureAwait(false);
 
             SetLastRefreshed(item, DateTime.UtcNow);
             return true;
@@ -154,7 +153,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="console"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task FetchConsoleData(GamePlatform console, CancellationToken cancellationToken)
+        private async Task FetchConsoleData(GameSystem console, CancellationToken cancellationToken)
         {
             var consoleId = console.GetProviderId("GamesDb") ?? FindPlatformId(console);
 
@@ -180,7 +179,7 @@ namespace GameBrowser.Providers.GamesDb
 
 
 
-        private string FindPlatformId(GamePlatform console)
+        private string FindPlatformId(GameSystem console)
         {
             var platformSettings = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(gs => console.Path.Equals(gs.Path));
 
@@ -218,7 +217,7 @@ namespace GameBrowser.Providers.GamesDb
             }
         }
 
-        private async Task ProcessConsoleXml(GamePlatform console, XmlDocument xmlDocument, CancellationToken cancellationToken)
+        private async Task ProcessConsoleXml(GameSystem console, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
             var platformName = xmlDocument.SafeGetString("//Platform/Platform");
 

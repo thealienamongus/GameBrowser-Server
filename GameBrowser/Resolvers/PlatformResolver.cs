@@ -1,4 +1,4 @@
-﻿using GameBrowser.Entities;
+﻿using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Resolvers;
 using System;
@@ -9,14 +9,14 @@ namespace GameBrowser.Resolvers
     /// <summary>
     /// Class ConsoleFolderResolver
     /// </summary>
-    public class PlatformResolver : ItemResolver<GamePlatform>
+    public class PlatformResolver : ItemResolver<GameSystem>
     {
         /// <summary>
         /// Resolves the specified args.
         /// </summary>
         /// <param name="args">The args.</param>
         /// <returns>ConsoleFolder.</returns>
-        protected override GamePlatform Resolve(ItemResolveArgs args)
+        protected override GameSystem Resolve(ItemResolveArgs args)
         {
             if (args.IsDirectory)
             {
@@ -41,7 +41,7 @@ namespace GameBrowser.Resolvers
 
                     if (system != null)
                     {
-                        return new GamePlatform();
+                        return new GameSystem();
                     }
                 }
             }

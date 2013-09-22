@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using GameBrowser.Entities;
 using GameBrowser.Extensions;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Controller.Entities;
@@ -34,7 +33,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override bool Supports(BaseItem item)
         {
-            return item is GamePlatform;
+            return item is GameSystem;
         }
 
 
@@ -61,7 +60,7 @@ namespace GameBrowser.Providers
         /// <returns></returns>
         public override Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
         {
-            return Task.Run(() => Fetch((GamePlatform) item, cancellationToken));
+            return Task.Run(() => Fetch((GameSystem) item, cancellationToken));
         }
 
 
@@ -72,7 +71,7 @@ namespace GameBrowser.Providers
         /// <param name="console"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private bool Fetch(GamePlatform console, CancellationToken cancellationToken)
+        private bool Fetch(GameSystem console, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
