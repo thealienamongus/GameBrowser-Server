@@ -409,12 +409,14 @@ namespace GameBrowser.Resolvers
                 case "Dos":
                     game.GameSystem = "Dos";
                     game.DisplayMediaType = "DOS";
+                    game.IsInstalledOnClient = true;
 
                     break;
 
                 case "Windows":
                     game.GameSystem = "Windows";
                     game.DisplayMediaType = "Windows";
+                    game.IsInstalledOnClient = true;
 
                     break;
 
