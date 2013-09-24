@@ -348,13 +348,13 @@ namespace GameBrowser.Resolvers
 
                 case "Nintendo64":
                     game.GameSystem = "Nintendo64";
-                    game.DisplayMediaType = "N64";
+                    game.DisplayMediaType = "Nintendo 64";
 
                     break;
 
                 case "NintendoDS":
                     game.GameSystem = "NintendoDS";
-                    game.DisplayMediaType = "DS";
+                    game.DisplayMediaType = "Nintendo DS";
 
                     break;
 
@@ -446,13 +446,13 @@ namespace GameBrowser.Resolvers
 
                 case "SegaGenesis":
                     game.GameSystem = "SegaGenesis";
-                    game.DisplayMediaType = "Genesis";
+                    game.DisplayMediaType = "Sega Genesis";
 
                     break;
 
                 case "SegaMasterSystem":
                     game.GameSystem = "SegaMasterSystem";
-                    game.DisplayMediaType = "Master System";
+                    game.DisplayMediaType = "Sega Master System";
 
                     break;
 
@@ -464,7 +464,7 @@ namespace GameBrowser.Resolvers
 
                 case "SegaSaturn":
                     game.GameSystem = "SegaSaturn";
-                    game.DisplayMediaType = "Saturn";
+                    game.DisplayMediaType = "Sega Saturn";
 
                     break;
 
