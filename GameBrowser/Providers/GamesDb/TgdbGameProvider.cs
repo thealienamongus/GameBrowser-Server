@@ -227,7 +227,7 @@ namespace GameBrowser.Providers.GamesDb
             }
 
             var gameEsrb = xmlDocument.SafeGetString("//Game/ESRB");
-            if (!string.IsNullOrEmpty(gameEsrb))
+            if (!string.IsNullOrEmpty(gameEsrb) && !game.LockedFields.Contains(MetadataFields.OfficialRating))
             {
                 switch (gameEsrb)
                 {
