@@ -300,13 +300,13 @@ namespace GameBrowser.Resolvers
 
                 case "AtariJaguar":
                     game.GameSystem = "AtariJaguar";
-                    game.DisplayMediaType = "Atari Jaguar";
+                    game.DisplayMediaType = "Jaguar";
 
                     break;
 
                 case "AtariJaguarCD":
                     game.GameSystem = "AtariJaguarCD";
-                    game.DisplayMediaType = "Atari Jaguar CD";
+                    game.DisplayMediaType = "Jaguar CD";
 
                     break;
 
@@ -318,13 +318,13 @@ namespace GameBrowser.Resolvers
 
                 case "Commodore64":
                     game.GameSystem = "Commodore64";
-                    game.DisplayMediaType = "Commodore 64";
+                    game.DisplayMediaType = "C-64";
 
                     break;
 
                 case "CommodoreVic20":
                     game.GameSystem = "CommodoreVic20";
-                    game.DisplayMediaType = "Commodore Vic-20";
+                    game.DisplayMediaType = "Vic-20";
 
                     break;
 
@@ -336,7 +336,7 @@ namespace GameBrowser.Resolvers
 
                 case "MicrosoftXBox":
                     game.GameSystem = "MicrosoftXBox";
-                    game.DisplayMediaType = "Microsoft Xbox";
+                    game.DisplayMediaType = "Xbox";
 
                     break;
 
@@ -348,61 +348,61 @@ namespace GameBrowser.Resolvers
 
                 case "Nintendo64":
                     game.GameSystem = "Nintendo64";
-                    game.DisplayMediaType = "Nintendo 64";
+                    game.DisplayMediaType = "N64";
 
                     break;
 
                 case "NintendoDS":
                     game.GameSystem = "NintendoDS";
-                    game.DisplayMediaType = "Nintendo DS";
+                    game.DisplayMediaType = "DS";
 
                     break;
 
                 case "NintendoEntertainmentSystem":
                     game.GameSystem = "NintendoEntertainmentSystem";
-                    game.DisplayMediaType = "Nintendo NES";
+                    game.DisplayMediaType = "Nintendo";
                     
                     break;
 
                 case "NintendoGameBoy":
                     game.GameSystem = "NintendoGameBoy";
-                    game.DisplayMediaType = "Nintendo Game Boy";
+                    game.DisplayMediaType = "Game Boy";
 
                     break;
 
                 case "NintendoGameBoyAdvance":
                     game.GameSystem = "NintendoGameBoyAdvance";
-                    game.DisplayMediaType = "Nintendo Game Boy Advance";
+                    game.DisplayMediaType = "Game Boy Advance";
 
                     break;
 
                 case "NintendoGameBoyColor":
                     game.GameSystem = "NintendoGameBoyColor";
-                    game.DisplayMediaType = "Nintendo Game Boy Color";
+                    game.DisplayMediaType = "Game Boy Color";
 
                     break;
 
                 case "NintendoGameCube":
                     game.GameSystem = "NintendoGameCube";
-                    game.DisplayMediaType = "Nintendo GameCube";
+                    game.DisplayMediaType = "GameCube";
 
                     break;
 
                 case "NintendoSuperNES":
                     game.GameSystem = "NintendoSuperNES";
-                    game.DisplayMediaType = "Nintendo SNES";
+                    game.DisplayMediaType = "Super Nintendo";
 
                     break;
 
                 case "NintendoVirtualBoy":
                     game.GameSystem = "NintendoVirtualBoy";
-                    game.DisplayMediaType = "Nintendo Virtual Boy";
+                    game.DisplayMediaType = "Virtual Boy";
 
                     break;
 
                 case "NintendoWii":
                     game.GameSystem = "NintendoWii";
-                    game.DisplayMediaType = "Nintendo Wii";
+                    game.DisplayMediaType = "Wii";
 
                     break;
 
@@ -434,55 +434,55 @@ namespace GameBrowser.Resolvers
 
                 case "SegaDreamcast":
                     game.GameSystem = "SegaDreamcast";
-                    game.DisplayMediaType = "Sega Dreamcast";
+                    game.DisplayMediaType = "Dreamcast";
 
                     break;
 
                 case "SegaGameGear":
                     game.GameSystem = "SegaGameGear";
-                    game.DisplayMediaType = "Sega Game Gear";
+                    game.DisplayMediaType = "Game Gear";
 
                     break;
 
                 case "SegaGenesis":
                     game.GameSystem = "SegaGenesis";
-                    game.DisplayMediaType = "Sega Genesis";
+                    game.DisplayMediaType = "Genesis";
 
                     break;
 
                 case "SegaMasterSystem":
                     game.GameSystem = "SegaMasterSystem";
-                    game.DisplayMediaType = "Sega Master System";
+                    game.DisplayMediaType = "Master System";
 
                     break;
 
                 case "SegaMegaDrive":
                     game.GameSystem = "SegaMegaDrive";
-                    game.DisplayMediaType = "Sega MegaDrive";
+                    game.DisplayMediaType = "MegaDrive";
 
                     break;
 
                 case "SegaSaturn":
                     game.GameSystem = "SegaSaturn";
-                    game.DisplayMediaType = "Sega Saturn";
+                    game.DisplayMediaType = "Saturn";
 
                     break;
 
                 case "SonyPlaystation":
                     game.GameSystem = "SonyPlaystation";
-                    game.DisplayMediaType = "Sony Playstation";
+                    game.DisplayMediaType = "PSOne";
 
                     break;
 
                 case "SonyPlaystation2":
                     game.GameSystem = "SonyPlaystation2";
-                    game.DisplayMediaType = "Sony Playstation 2";
+                    game.DisplayMediaType = "PS 2";
 
                     break;
 
                 case "SonyPSP":
                     game.GameSystem = "SonyPSP";
-                    game.DisplayMediaType = "Sony PSP";
+                    game.DisplayMediaType = "PSP";
 
                     break;
 
