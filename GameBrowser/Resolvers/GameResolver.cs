@@ -129,7 +129,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".bin", ".a26" };
 
                 case "Atari5200":
-                    return new[] { ".bin" };
+                    return new[] { ".bin", ".a52" };
 
                 case "Atari7800":
                     return new[] { ".a78" };
@@ -138,7 +138,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".rom" };
 
                 case "AtariJaguar":
-                    return new[] { ".j64" };
+                    return new[] { ".j64", ".zip" };
 
                 case "AtariJaguarCD": // still need to verify
                     return new[] { ".iso" };
@@ -162,22 +162,22 @@ namespace GameBrowser.Resolvers
                     return new[] { ".zip", ".iso" };
 
                 case "Nintendo64":
-                    return new[] { ".z64", ".v64", ".usa", ".jap", ".pal", ".rom", ".n64" };
+                    return new[] { ".z64", ".v64", ".usa", ".jap", ".pal", ".rom", ".n64", ".zip" };
 
                 case "NintendoDS":
-                    return new[] { ".nds" };
+                    return new[] { ".nds", ".zip" };
 
                 case "NintendoEntertainmentSystem":
                     return new[] { ".nes", ".zip" };
 
                 case "NintendoGameBoy":
-                    return new[] { ".gb" };
+                    return new[] { ".gb", ".zip" };
 
                 case "NintendoGameBoyAdvance":
-                    return new[] { ".gba" };
+                    return new[] { ".gba", ".zip" };
 
                 case "NintendoGameBoyColor":
-                    return new[] { ".gbc" };
+                    return new[] { ".gbc", ".zip" };
 
                 case "NintendoGameCube":
                     return new[] { ".iso", ".bin", ".img", ".gcm" };
@@ -197,8 +197,8 @@ namespace GameBrowser.Resolvers
                 case "Windows":
                     return new[] { ".gbwin" };
 
-                case "Sega32X": // Need to verfiy
-                    return new[] { ".iso", ".bin", ".img", ".zip" };
+                case "Sega32X":
+                    return new[] { ".iso", ".bin", ".img", ".zip", ".32x" };
 
                 case "SegaCD":
                     return new[] { ".iso", ".bin", ".img" };
@@ -231,7 +231,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso", ".cso" };
 
                 case "TurboGrafx16":
-                    return new[] { ".pce" };
+                    return new[] { ".pce", ".zip" };
 
                 case "TurboGrafxCD":
                     return new[] {".bin", ".iso"};
