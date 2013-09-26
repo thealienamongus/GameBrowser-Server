@@ -102,7 +102,6 @@
     <Compile Include="Providers\EmuMovies\EmuMoviesGameProvider.cs" />
     <Compile Include="Providers\EmuMovies\EmuMoviesMediaTypes.cs" />
     <Compile Include="Providers\EmuMovies\EmuMoviesUrls.cs" />
-    <Compile Include="Providers\GamePlatformProviderFromXml.cs" />
     <Compile Include="Providers\GamesDb\TgdbGamePlatformProvider.cs" />
     <Compile Include="Providers\GamesDb\TgdbGameProvider.cs" />
     <Compile Include="Providers\GamesDb\TgdbUrls.cs" />
