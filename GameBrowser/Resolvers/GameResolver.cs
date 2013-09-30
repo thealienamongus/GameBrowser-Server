@@ -210,13 +210,13 @@ namespace GameBrowser.Resolvers
                     return new[] { ".gg", ".zip" };
 
                 case "SegaGenesis":
-                    return new[] { ".smd", ".bin", ".gen", ".zip" };
+                    return new[] { ".smd", ".bin", ".gen", ".zip", ".md" };
 
                 case "SegaMasterSystem":
                     return new[] { ".sms", ".sg", ".sc", ".zip" };
 
                 case "SegaMegaDrive":
-                    return new[] { ".smd", ".zip" };
+                    return new[] { ".smd", ".zip", ".md" };
 
                 case "SegaSaturn":
                     return new[] { ".iso", ".bin", ".img" };
