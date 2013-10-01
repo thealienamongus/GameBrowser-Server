@@ -246,10 +246,10 @@ namespace GameBrowser.Resolvers
         }
         
         /// <summary>
-        /// Return a game sub-class object for the specified platform
+        /// Return a game object for the specified platform
         /// </summary>
         /// <param name="platform">The platform that we want a game object for</param>
-        /// <returns>One of the many sub-classes of Game</returns>
+        /// <returns>A Game entity</returns>
         private Game GetNewGame(string platform)
         {
             var game = new Game();
