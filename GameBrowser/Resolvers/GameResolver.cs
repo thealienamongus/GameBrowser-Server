@@ -257,249 +257,249 @@ namespace GameBrowser.Resolvers
             switch (platform)
             {
                 case "Panasonic3DO":
-                    game.GameSystem = "Panasonic3DO";
-                    game.DisplayMediaType = "3DO";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Panasonic3DO;
+                    game.DisplayMediaType = "Panasonic3doGame";
 
                     break;
 
                 case "Amiga":
-                    game.GameSystem = "Amiga";
-                    game.DisplayMediaType = "Amiga";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Amiga;
+                    game.DisplayMediaType = "AmigaGame";
                     
                     break;
 
                 case "Arcade":
-                    game.GameSystem = "Arcade";
-                    game.DisplayMediaType = "Arcade";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Arcade;
+                    game.DisplayMediaType = "ArcadeGame";
 
                     break;
 
                 case "Atari2600":
-                    game.GameSystem = "Atari2600";
-                    game.DisplayMediaType = "Atari 2600";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Atari2600;
+                    game.DisplayMediaType = "Atari2600Game";
 
                     break;
 
                 case "Atari5200":
-                    game.GameSystem = "Atari5200";
-                    game.DisplayMediaType = "Atari 5200";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Atari5200;
+                    game.DisplayMediaType = "Atari5200Game";
 
                     break;
 
                 case "Atari7800":
-                    game.GameSystem = "Atari7800";
-                    game.DisplayMediaType = "Atari 7800";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Atari7800;
+                    game.DisplayMediaType = "Atari7800Game";
             
                     break;
 
                 case "AtariXE":
-                    game.GameSystem = "AtariXE";
-                    game.DisplayMediaType = "Atari XE";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.AtariXE;
+                    game.DisplayMediaType = "AtariXeGame";
 
                     break;
 
                 case "AtariJaguar":
-                    game.GameSystem = "AtariJaguar";
-                    game.DisplayMediaType = "Jaguar";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.AtariJaguar;
+                    game.DisplayMediaType = "JaguarGame";
 
                     break;
 
                 case "AtariJaguarCD":
-                    game.GameSystem = "AtariJaguarCD";
-                    game.DisplayMediaType = "Jaguar CD";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.AtariJaguarCD;
+                    game.DisplayMediaType = "JaguarGame";
 
                     break;
 
                 case "Colecovision":
-                    game.GameSystem = "Colecovision";
-                    game.DisplayMediaType = "Colecovision";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Colecovision;
+                    game.DisplayMediaType = "ColecovisionGame";
 
                     break;
 
                 case "Commodore64":
-                    game.GameSystem = "Commodore64";
-                    game.DisplayMediaType = "C-64";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Commodore64;
+                    game.DisplayMediaType = "C64Game";
 
                     break;
 
                 case "CommodoreVic20":
-                    game.GameSystem = "CommodoreVic20";
-                    game.DisplayMediaType = "Vic-20";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.CommodoreVic20;
+                    game.DisplayMediaType = "Vic20Game";
 
                     break;
 
                 case "Intellivision":
-                    game.GameSystem = "Intellivision";
-                    game.DisplayMediaType = "Intellivision";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Intellivision;
+                    game.DisplayMediaType = "IntellivisionGame";
 
                     break;
 
                 case "MicrosoftXBox":
-                    game.GameSystem = "MicrosoftXBox";
-                    game.DisplayMediaType = "Xbox";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.MicrosoftXBox;
+                    game.DisplayMediaType = "XboxGame";
 
                     break;
 
                 case "NeoGeo":
-                    game.GameSystem = "NeoGeo";
-                    game.DisplayMediaType = "NeoGeo";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.NeoGeo;
+                    game.DisplayMediaType = "NeoGeoGame";
 
                     break;
 
                 case "Nintendo64":
-                    game.GameSystem = "Nintendo64";
-                    game.DisplayMediaType = "Nintendo 64";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Nintendo64;
+                    game.DisplayMediaType = "N64Game";
 
                     break;
 
                 case "NintendoDS":
-                    game.GameSystem = "NintendoDS";
-                    game.DisplayMediaType = "Nintendo DS";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoDS;
+                    game.DisplayMediaType = "NesGame";
 
                     break;
 
                 case "NintendoEntertainmentSystem":
-                    game.GameSystem = "NintendoEntertainmentSystem";
-                    game.DisplayMediaType = "Nintendo";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Nintendo;
+                    game.DisplayMediaType = "NesGame";
                     
                     break;
 
                 case "NintendoGameBoy":
-                    game.GameSystem = "NintendoGameBoy";
-                    game.DisplayMediaType = "Game Boy";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameBoy;
+                    game.DisplayMediaType = "GameBoyGame";
 
                     break;
 
                 case "NintendoGameBoyAdvance":
-                    game.GameSystem = "NintendoGameBoyAdvance";
-                    game.DisplayMediaType = "Game Boy Advance";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameBoyAdvance;
+                    game.DisplayMediaType = "GameBoyAdvanceGame";
 
                     break;
 
                 case "NintendoGameBoyColor":
-                    game.GameSystem = "NintendoGameBoyColor";
-                    game.DisplayMediaType = "Game Boy Color";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameBoyColor;
+                    game.DisplayMediaType = "GameBoyColorGame";
 
                     break;
 
                 case "NintendoGameCube":
-                    game.GameSystem = "NintendoGameCube";
-                    game.DisplayMediaType = "GameCube";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameCube;
+                    game.DisplayMediaType = "GameCubeGame";
 
                     break;
 
                 case "NintendoSuperNES":
-                    game.GameSystem = "NintendoSuperNES";
-                    game.DisplayMediaType = "Super Nintendo";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SuperNintendo;
+                    game.DisplayMediaType = "SnesGame";
 
                     break;
 
                 case "NintendoVirtualBoy":
-                    game.GameSystem = "NintendoVirtualBoy";
-                    game.DisplayMediaType = "Virtual Boy";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.VirtualBoy;
+                    game.DisplayMediaType = "NesGame";
 
                     break;
 
                 case "NintendoWii":
-                    game.GameSystem = "NintendoWii";
-                    game.DisplayMediaType = "Wii";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Wii;
+                    game.DisplayMediaType = "NesGame";
 
                     break;
 
                 case "Dos":
-                    game.GameSystem = "Dos";
-                    game.DisplayMediaType = "DOS";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.DOS;
+                    game.DisplayMediaType = "DosGame";
                     game.IsInstalledOnClient = true;
 
                     break;
 
                 case "Windows":
-                    game.GameSystem = "Windows";
-                    game.DisplayMediaType = "Windows";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Windows;
+                    game.DisplayMediaType = "WindowsGame";
                     game.IsInstalledOnClient = true;
 
                     break;
 
                 case "Sega32X":
-                    game.GameSystem = "Sega32X";
-                    game.DisplayMediaType = "Sega 32x";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.Sega32X;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaCD":
-                    game.GameSystem = "SegaCD";
-                    game.DisplayMediaType = "Sega CD";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaCD;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaDreamcast":
-                    game.GameSystem = "SegaDreamcast";
-                    game.DisplayMediaType = "Dreamcast";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaDreamcast;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaGameGear":
-                    game.GameSystem = "SegaGameGear";
-                    game.DisplayMediaType = "Game Gear";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaGameGear;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaGenesis":
-                    game.GameSystem = "SegaGenesis";
-                    game.DisplayMediaType = "Sega Genesis";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaGenesis;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaMasterSystem":
-                    game.GameSystem = "SegaMasterSystem";
-                    game.DisplayMediaType = "Sega Master System";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaMasterSystem;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaMegaDrive":
-                    game.GameSystem = "SegaMegaDrive";
-                    game.DisplayMediaType = "MegaDrive";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaMegaDrive;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SegaSaturn":
-                    game.GameSystem = "SegaSaturn";
-                    game.DisplayMediaType = "Sega Saturn";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaSaturn;
+                    game.DisplayMediaType = "GenesisGame";
 
                     break;
 
                 case "SonyPlaystation":
-                    game.GameSystem = "SonyPlaystation";
-                    game.DisplayMediaType = "PSOne";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SonyPlaystation;
+                    game.DisplayMediaType = "PsOneGame";
 
                     break;
 
                 case "SonyPlaystation2":
-                    game.GameSystem = "SonyPlaystation2";
-                    game.DisplayMediaType = "PS 2";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SonyPlaystation2;
+                    game.DisplayMediaType = "Ps2Game";
 
                     break;
 
                 case "SonyPSP":
-                    game.GameSystem = "SonyPSP";
-                    game.DisplayMediaType = "PSP";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.SonyPSP;
+                    game.DisplayMediaType = "PlayStationPortableGame";
 
                     break;
 
                 case "TurboGrafx16":
-                    game.GameSystem = "TurboGrafx16";
-                    game.DisplayMediaType = "TurboGrafx 16";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.TurboGrafx16;
+                    game.DisplayMediaType = "TurboGrafx16Game";
 
                     break;
 
                 case "TurboGrafxCD":
-                    game.GameSystem = "TurboGrafxCD";
-                    game.DisplayMediaType = "TurboGrafx CD";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.TurboGrafxCD;
+                    game.DisplayMediaType = "TurboGrafx16Game";
                     break;
 
                 case "ZxSpectrum":
-                    game.GameSystem = "ZXSpectrum";
-                    game.DisplayMediaType = "ZX Spectrum";
+                    game.GameSystem = MediaBrowser.Model.Games.GameSystem.ZxSpectrum;
+                    game.DisplayMediaType = "ZXSpectrumGame";
                     break;
 
                 default:
