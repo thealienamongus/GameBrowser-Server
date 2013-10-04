@@ -41,7 +41,7 @@ namespace GameBrowser.Providers.GamesDb
         #region BaseMetadataProvider overrides
         public override MetadataProviderPriority Priority
         {
-            get { return MetadataProviderPriority.Second; }
+            get { return MetadataProviderPriority.Third; }
         }
 
 

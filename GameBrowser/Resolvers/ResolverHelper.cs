@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace GameBrowser.Resolvers
 {
@@ -51,5 +53,12 @@ namespace GameBrowser.Resolvers
                                                         {"TurboGrafx16", 34},
                                                         {"Windows", 1}
                                                     };
+
+        public static string AttemptGetGamePlatformTypeFromPath(string path)
+        {
+            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => path.StartsWith(s.Path + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));
+
+            return system != null ? system.ConsoleType : null;
+        }
     }
 }

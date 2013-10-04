@@ -34,7 +34,7 @@ namespace GameBrowser.Resolvers
                     {
                         return null;
                     }
-                    // It's a game system if the parent is the Game Root, or the folder contains folder.xml
+
                     var system =
                         configuredSystems.FirstOrDefault(
                             s => string.Equals(args.Path, s.Path, StringComparison.OrdinalIgnoreCase));

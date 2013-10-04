@@ -115,7 +115,7 @@ namespace GameBrowser.Providers.GamesDb
         /// </summary>
         public override MetadataProviderPriority Priority
         {
-            get { return MetadataProviderPriority.Second; }
+            get { return MetadataProviderPriority.Third; }
         }
 
 

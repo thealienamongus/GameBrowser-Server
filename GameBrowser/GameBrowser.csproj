@@ -35,17 +35,17 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MediaBrowser.Common, Version=3.0.5023.36665, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MediaBrowser.Common, Version=3.0.5023.37143, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MediaBrowser.Common.3.0.216\lib\net45\MediaBrowser.Common.dll</HintPath>
+      <HintPath>..\packages\MediaBrowser.Common.3.0.217\lib\net45\MediaBrowser.Common.dll</HintPath>
     </Reference>
-    <Reference Include="MediaBrowser.Controller, Version=3.0.5023.36665, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MediaBrowser.Controller, Version=3.0.5023.37143, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MediaBrowser.Server.Core.3.0.216\lib\net45\MediaBrowser.Controller.dll</HintPath>
+      <HintPath>..\packages\MediaBrowser.Server.Core.3.0.217\lib\net45\MediaBrowser.Controller.dll</HintPath>
     </Reference>
-    <Reference Include="MediaBrowser.Model, Version=3.0.5023.36665, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MediaBrowser.Model, Version=3.0.5023.37142, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MediaBrowser.Common.3.0.216\lib\net45\MediaBrowser.Model.dll</HintPath>
+      <HintPath>..\packages\MediaBrowser.Common.3.0.217\lib\net45\MediaBrowser.Model.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.64.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,12 +99,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Providers\DisplayMediaTypeProvider.cs" />
     <Compile Include="Providers\EmuMovies\EmuMoviesGameProvider.cs" />
     <Compile Include="Providers\EmuMovies\EmuMoviesMediaTypes.cs" />
     <Compile Include="Providers\EmuMovies\EmuMoviesUrls.cs" />
     <Compile Include="Providers\GamesDb\TgdbGamePlatformProvider.cs" />
     <Compile Include="Providers\GamesDb\TgdbGameProvider.cs" />
     <Compile Include="Providers\GamesDb\TgdbUrls.cs" />
+    <Compile Include="Providers\GameSystemNameProvider.cs" />
+    <Compile Include="Providers\GameSystemProvider.cs" />
     <Compile Include="Resolvers\PlatformResolver.cs" />
     <Compile Include="Resolvers\GameResolver.cs" />
     <Compile Include="Resolvers\ResolverHelper.cs" />
