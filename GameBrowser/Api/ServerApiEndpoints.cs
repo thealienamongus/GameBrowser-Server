@@ -55,9 +55,9 @@ namespace GameBrowser.Api
         /// <returns></returns>
         public object Get(GetConfiguredPlatforms request)
         {
-            _logger.Debug("*** GAMEBROWSER *** GetConfiguredPlatforms request received");
+            _logger.Debug("GetConfiguredPlatforms request received");
 
-            return Plugin.Instance.Configuration.GameSystems ?? null;
+            return Plugin.Instance.Configuration.GameSystems;
         }
 
         /// <summary>
@@ -67,12 +67,13 @@ namespace GameBrowser.Api
         /// <returns></returns>
         public object Get(GetDosGames request)
         {
-            _logger.Debug("*** GAMEBROWSER *** GetDosGames request received");
+            _logger.Debug("GetDosGames request received");
 
             var user = _userManager.Users.FirstOrDefault();
+            if (user == null) return null;
 
             var dosGames = user.RootFolder.GetRecursiveChildren(user)
-                .Where(i => i is Game && ((Game)i).GameSystem.Equals("Dos"))
+                .Where(i => i is Game && ((Game)i).GameSystem.Equals(MediaBrowser.Model.Games.GameSystem.DOS))
                 .OrderBy(i => i.SortName)
                 .ToList();
 
@@ -95,12 +96,13 @@ namespace GameBrowser.Api
         /// <returns></returns>
         public object Get(GetWindowsGames request)
         {
-            _logger.Debug("*** GAMEBROWSER *** GetWindowsGames request received");
+            _logger.Debug("GetWindowsGames request received");
 
             var user = _userManager.Users.FirstOrDefault();
+            if (user == null) return null;
 
             var windowsGames = user.RootFolder.GetRecursiveChildren(user)
-                .Where(i => i is Game && ((Game)i).GameSystem.Equals("Windows"))
+                .Where(i => i is Game && ((Game)i).GameSystem.Equals(MediaBrowser.Model.Games.GameSystem.Windows))
                 .OrderBy(i => i.SortName)
                 .ToList();
 
