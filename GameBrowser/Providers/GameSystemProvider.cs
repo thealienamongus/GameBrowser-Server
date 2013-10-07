@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using GameBrowser.Resolvers;
 using MediaBrowser.Controller.Configuration;
@@ -50,7 +51,10 @@ namespace GameBrowser.Providers
             var platform = ResolverHelper.AttemptGetGamePlatformTypeFromPath(item.Path);
 
             if (platform == null)
+            {
+                SetLastRefreshed(item, DateTime.UtcNow);
                 return FalseTaskResult;
+            }
 
             var game = (Game) item;
 
@@ -223,9 +227,11 @@ namespace GameBrowser.Providers
                     break;
 
                 default:
+                    SetLastRefreshed(game, DateTime.UtcNow);
                     return FalseTaskResult;
             }
 
+            SetLastRefreshed(game, DateTime.UtcNow);
             return TrueTaskResult;
         }
     }

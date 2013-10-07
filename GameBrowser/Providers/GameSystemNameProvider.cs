@@ -52,20 +52,22 @@ namespace GameBrowser.Providers
 
             var configuredSystems = Plugin.Instance.Configuration.GameSystems;
 
-                    if (configuredSystems == null)
-                    {
-                        return FalseTaskResult;
-                    }
+            if (configuredSystems == null)
+            {
+                SetLastRefreshed(gameSystem, DateTime.UtcNow);
+                return FalseTaskResult;
+            }
 
-                    var system =
-                        configuredSystems.FirstOrDefault(
-                            s => string.Equals(item.Path, s.Path, StringComparison.OrdinalIgnoreCase));
+            var system =
+                configuredSystems.FirstOrDefault(
+                    s => string.Equals(item.Path, s.Path, StringComparison.OrdinalIgnoreCase));
 
-                    if (system != null)
-                    {
-                        gameSystem.GameSystemName = system.ConsoleType;
-                    }
+            if (system != null)
+            {
+                gameSystem.GameSystemName = system.ConsoleType;
+            }
 
+            SetLastRefreshed(gameSystem, DateTime.UtcNow);
             return TrueTaskResult;
         }
     }
