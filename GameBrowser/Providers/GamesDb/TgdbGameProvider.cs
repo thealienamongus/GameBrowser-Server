@@ -661,7 +661,7 @@ namespace GameBrowser.Providers.GamesDb
 
             switch (gameSystem)
             {
-                case "Panasonic3DO":
+                case "3DO":
                     tgdbPlatformString = "3DO";
 
                     break;
@@ -676,32 +676,32 @@ namespace GameBrowser.Providers.GamesDb
 
                     break;
 
-                case "Atari2600":
+                case "Atari 2600":
                     tgdbPlatformString = "Atari 2600";
 
                     break;
 
-                case "Atari5200":
+                case "Atari 5200":
                     tgdbPlatformString = "Atari 5200";
 
                     break;
 
-                case "Atari7800":
+                case "Atari 7800":
                     tgdbPlatformString = "Atari 7800";
 
                     break;
 
-                case "AtariXE":
+                case "Atari XE":
                     tgdbPlatformString = "Atari XE";
 
                     break;
 
-                case "AtariJaguar":
+                case "Atari Jaguar":
                     tgdbPlatformString = "Atari Jaguar";
 
                     break;
 
-                case "AtariJaguarCD":
+                case "Atari Jaguar CD":
                     tgdbPlatformString = "Atari Jaguar";
 
                     break;
@@ -711,12 +711,12 @@ namespace GameBrowser.Providers.GamesDb
 
                     break;
 
-                case "Commodore64":
+                case "Commodore 64":
                     tgdbPlatformString = "Commodore 64";
 
                     break;
 
-                case "CommodoreVic20":
+                case "Commodore Vic-20":
                     tgdbPlatformString = "";
 
                     break;
@@ -726,66 +726,66 @@ namespace GameBrowser.Providers.GamesDb
 
                     break;
 
-                case "MicrosoftXBox":
+                case "Xbox":
                     tgdbPlatformString = "Microsoft Xbox";
 
                     break;
 
-                case "NeoGeo":
+                case "Neo Geo":
                     tgdbPlatformString = "NeoGeo";
 
                     break;
 
-                case "Nintendo64":
+                case "Nintendo 64":
                     tgdbPlatformString = "Nintendo 64";
 
                     break;
 
-                case "NintendoDS":
+                case "Nintendo DS":
                     tgdbPlatformString = "Nintendo DS";
 
                     break;
 
-                case "NintendoEntertainmentSystem":
+                case "Nintendo":
                     tgdbPlatformString = "Nintendo Entertainment System (NES)";
 
                     break;
 
-                case "NintendoGameBoy":
+                case "Game Boy":
                     tgdbPlatformString = "Nintendo Game Boy";
 
                     break;
 
-                case "NintendoGameBoyAdvance":
+                case "Game Boy Advance":
                     tgdbPlatformString = "Nintendo Game Boy Advance";
 
                     break;
 
-                case "NintendoGameBoyColor":
+                case "Game Boy Color":
                     tgdbPlatformString = "Nintendo Game Boy Color";
 
                     break;
 
-                case "NintendoGameCube":
+                case "Gamecube":
                     tgdbPlatformString = "Nintendo GameCube";
 
                     break;
 
-                case "NintendoSuperNES":
+                case "Super Nintendo":
                     tgdbPlatformString = "Super Nintendo (SNES)";
 
                     break;
 
-                case "NintendoVirtualBoy":
+                case "Virtual Boy":
 
                     break;
 
-                case "NintendoWii":
+                case "Nintendo Wii":
                     tgdbPlatformString = "Nintendo Wii";
 
                     break;
 
-                case "Dos":
+                case "DOS":
                     tgdbPlatformString = "PC";
 
                     break;
@@ -795,71 +795,71 @@ namespace GameBrowser.Providers.GamesDb
 
                     break;
 
-                case "Sega32X":
+                case "Sega 32X":
                     tgdbPlatformString = "Sega Genesis";
 
                     break;
 
-                case "SegaCD":
+                case "Sega CD":
                     tgdbPlatformString = "Sega Genesis";
 
                     break;
 
-                case "SegaDreamcast":
+                case "Sega Dreamcast":
                     tgdbPlatformString = "Sega Dreamcast";
 
                     break;
 
-                case "SegaGameGear":
+                case "Game Gear":
                     tgdbPlatformString = "Sega Game Gear";
 
                     break;
 
-                case "SegaGenesis":
+                case "Sega Genesis":
                     tgdbPlatformString = "Sega Genesis";
 
                     break;
 
-                case "SegaMasterSystem":
+                case "Sega Master System":
                     tgdbPlatformString = "Sega Master System";
 
                     break;
 
-                case "SegaMegaDrive":
+                case "Sega Mega Drive":
                     tgdbPlatformString = "Sega Genesis";
 
                     break;
 
-                case "SegaSaturn":
+                case "Sega Saturn":
                     tgdbPlatformString = "Sega Saturn";
 
                     break;
 
-                case "SonyPlaystation":
+                case "Sony Playstation":
                     tgdbPlatformString = "Sony Playstation";
 
                     break;
 
-                case "SonyPlaystation2":
+                case "PS2":
                     tgdbPlatformString = "Sony Playstation 2";
 
                     break;
 
-                case "SonyPSP":
+                case "PSP":
                     tgdbPlatformString = "Sony PSP";
 
                     break;
 
-                case "TurboGrafx16":
+                case "TurboGrafx 16":
                     tgdbPlatformString = "TurboGrafx 16";
 
                     break;
 
-                case "TurboGrafxCD":
+                case "TurboGrafx CD":
                     tgdbPlatformString = "TurboGrafx 16";
                     break;
 
-                case "ZxSpectrum":
+                case "ZX Spectrum":
                     tgdbPlatformString = "";
                     break;
             }

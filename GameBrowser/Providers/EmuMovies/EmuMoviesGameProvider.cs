@@ -245,7 +245,7 @@ namespace GameBrowser.Providers.EmuMovies
 
             switch (platform)
             {
-                case "Panasonic3DO":
+                case "3DO":
                     emuMoviesPlatform = "Panasonic_3DO";
 
                     break;
@@ -260,32 +260,32 @@ namespace GameBrowser.Providers.EmuMovies
 
                     break;
 
-                case "Atari2600":
+                case "Atari 2600":
                     emuMoviesPlatform = "Atari_2600";
 
                     break;
 
-                case "Atari5200":
+                case "Atari 5200":
                     emuMoviesPlatform = "Atari_5200";
 
                     break;
 
-                case "Atari7800":
+                case "Atari 7800":
                     emuMoviesPlatform = "Atari_7800";
 
                     break;
 
-                case "AtariXE":
+                case "Atari XE":
                     emuMoviesPlatform = "Atari_8_bit";
 
                     break;
 
-                case "AtariJaguar":
+                case "Atari Jaguar":
                     emuMoviesPlatform = "Atari_Jaguar";
 
                     break;
 
-                case "AtariJaguarCD":
+                case "Atari Jaguar CD":
                     emuMoviesPlatform = "Atari_Jaguar";
 
                     break;
@@ -295,12 +295,12 @@ namespace GameBrowser.Providers.EmuMovies
 
                     break;
 
-                case "Commodore64":
+                case "Commodore 64":
                     emuMoviesPlatform = "Commodore_64";
 
                     break;
 
-                case "CommodoreVic20":
+                case "Commodore Vic-20":
                     emuMoviesPlatform = "";
 
                     break;
@@ -310,67 +310,67 @@ namespace GameBrowser.Providers.EmuMovies
 
                     break;
 
-                case "MicrosoftXBox":
+                case "Xbox":
                     emuMoviesPlatform = "Microsoft_Xbox";
 
                     break;
 
-                case "NeoGeo":
+                case "Neo Geo":
                     emuMoviesPlatform = "SNK_Neo_Geo_AES";
 
                     break;
 
-                case "Nintendo64":
+                case "Nintendo 64":
                     emuMoviesPlatform = "Nintendo_N64";
 
                     break;
 
-                case "NintendoDS":
+                case "Nintendo DS":
                     emuMoviesPlatform = "Nintendo_DS";
 
                     break;
 
-                case "NintendoEntertainmentSystem":
+                case "Nintendo":
                     emuMoviesPlatform = "Nintendo_NES";
 
                     break;
 
-                case "NintendoGameBoy":
+                case "Game Boy":
                     emuMoviesPlatform = "Nintendo_Game_Boy";
 
                     break;
 
-                case "NintendoGameBoyAdvance":
+                case "Game Boy Advance":
                     emuMoviesPlatform = "Nintendo_Game_Boy_Advance";
 
                     break;
 
-                case "NintendoGameBoyColor":
+                case "Game Boy Color":
                     emuMoviesPlatform = "Nintendo_Game_Boy_Color";
 
                     break;
 
-                case "NintendoGameCube":
+                case "Gamecube":
                     emuMoviesPlatform = "Nintendo_GameCube";
 
                     break;
 
-                case "NintendoSuperNES":
+                case "Super Nintendo":
                     emuMoviesPlatform = "Nintendo_SNES";
 
                     break;
 
-                case "NintendoVirtualBoy":
+                case "Virtual Boy":
                     emuMoviesPlatform = "";
 
                     break;
 
-                case "NintendoWii":
+                case "Nintendo Wii":
                     emuMoviesPlatform = "";
 
                     break;
 
-                case "Dos":
+                case "DOS":
                     emuMoviesPlatform = "";
 
                     break;
@@ -380,71 +380,71 @@ namespace GameBrowser.Providers.EmuMovies
 
                     break;
 
-                case "Sega32X":
+                case "Sega 32X":
                     emuMoviesPlatform = "Sega_Genesis";
 
                     break;
 
-                case "SegaCD":
+                case "Sega CD":
                     emuMoviesPlatform = "Sega_Genesis";
 
                     break;
 
-                case "SegaDreamcast":
+                case "Dreamcast":
                     emuMoviesPlatform = "Sega_Dreamcast";
 
                     break;
 
-                case "SegaGameGear":
+                case " Game Gear":
                     emuMoviesPlatform = "Sega_Game_Gear";
 
                     break;
 
-                case "SegaGenesis":
+                case "Sega Genesis":
                     emuMoviesPlatform = "Sega_Genesis";
 
                     break;
 
-                case "SegaMasterSystem":
+                case "Sega Master System":
                     emuMoviesPlatform = "Sega_Master_System";
 
                     break;
 
-                case "SegaMegaDrive":
+                case "Sega Mega Drive":
                     emuMoviesPlatform = "Sega_Genesis";
 
                     break;
 
-                case "SegaSaturn":
+                case "Sega Saturn":
                     emuMoviesPlatform = "Sega_Saturn";
 
                     break;
 
-                case "SonyPlaystation":
+                case "Sony Playstation":
                     emuMoviesPlatform = "Sony_Playstation";
 
                     break;
 
-                case "SonyPlaystation2":
+                case "PS2":
                     emuMoviesPlatform = "Sony_Playstation_2";
 
                     break;
 
-                case "SonyPSP":
+                case "PSP":
                     emuMoviesPlatform = "Sony_PSP";
 
                     break;
 
-                case "TurboGrafx16":
+                case "TurboGrafx 16":
                     emuMoviesPlatform = "NEC_TurboGrafx_16";
 
                     break;
 
-                case "TurboGrafxCD":
+                case "TurboGrafx CD":
                     emuMoviesPlatform = "NEC_TurboGrafx_16";
                     break;
 
-                case "ZxSpectrum":
+                case "ZX Spectrum":
                     emuMoviesPlatform = "";
                     break;
             }

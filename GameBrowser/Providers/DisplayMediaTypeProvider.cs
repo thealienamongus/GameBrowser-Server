@@ -39,7 +39,7 @@ namespace GameBrowser.Providers
 
             switch (platform)
             {
-                case "Panasonic3DO":
+                case "3DO":
                     game.DisplayMediaType = "Panasonic3doGame";
 
                     break;
@@ -54,32 +54,32 @@ namespace GameBrowser.Providers
 
                     break;
 
-                case "Atari2600":
+                case "Atari 2600":
                     game.DisplayMediaType = "Atari2600Game";
 
                     break;
 
-                case "Atari5200":
+                case "Atari 5200":
                     game.DisplayMediaType = "Atari5200Game";
 
                     break;
 
-                case "Atari7800":
+                case "Atari 7800":
                     game.DisplayMediaType = "Atari7800Game";
 
                     break;
 
-                case "AtariXE":
+                case "Atari XE":
                     game.DisplayMediaType = "AtariXeGame";
 
                     break;
 
-                case "AtariJaguar":
+                case "Atari Jaguar":
                     game.DisplayMediaType = "JaguarGame";
 
                     break;
 
-                case "AtariJaguarCD":
+                case "Atari Jaguar CD":
                     game.DisplayMediaType = "JaguarGame";
 
                     break;
@@ -89,12 +89,12 @@ namespace GameBrowser.Providers
 
                     break;
 
-                case "Commodore64":
+                case "Commodore 64":
                     game.DisplayMediaType = "C64Game";
 
                     break;
 
-                case "CommodoreVic20":
+                case "Commodore Vic-20":
                     game.DisplayMediaType = "Vic20Game";
 
                     break;
@@ -104,67 +104,67 @@ namespace GameBrowser.Providers
 
                     break;
 
-                case "MicrosoftXBox":
+                case "Xbox":
                     game.DisplayMediaType = "XboxGame";
 
                     break;
 
-                case "NeoGeo":
+                case "Neo Geo":
                     game.DisplayMediaType = "NeoGeoGame";
 
                     break;
 
-                case "Nintendo64":
+                case "Nintendo 64":
                     game.DisplayMediaType = "N64Game";
 
                     break;
 
-                case "NintendoDS":
+                case "Nintendo DS":
                     game.DisplayMediaType = "NesGame";
 
                     break;
 
-                case "NintendoEntertainmentSystem":
+                case "Nintendo":
                     game.DisplayMediaType = "NesGame";
 
                     break;
 
-                case "NintendoGameBoy":
+                case "Game Boy":
                     game.DisplayMediaType = "GameBoyGame";
 
                     break;
 
-                case "NintendoGameBoyAdvance":
+                case "Game Boy Advance":
                     game.DisplayMediaType = "GameBoyAdvanceGame";
 
                     break;
 
-                case "NintendoGameBoyColor":
+                case "Game Boy Color":
                     game.DisplayMediaType = "GameBoyColorGame";
 
                     break;
 
-                case "NintendoGameCube":
+                case "Gamecube":
                     game.DisplayMediaType = "GameCubeGame";
 
                     break;
 
-                case "NintendoSuperNES":
+                case "Super Nintendo":
                     game.DisplayMediaType = "SnesGame";
 
                     break;
 
-                case "NintendoVirtualBoy":
+                case "Virtual Boy":
                     game.DisplayMediaType = "NesGame";
 
                     break;
 
-                case "NintendoWii":
+                case "Nintendo Wii":
                     game.DisplayMediaType = "NesGame";
 
                     break;
 
-                case "Dos":
+                case "DOS":
                     game.DisplayMediaType = "DosGame";
 
                     break;
@@ -174,71 +174,71 @@ namespace GameBrowser.Providers
 
                     break;
 
-                case "Sega32X":
+                case "Sega 32X":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaCD":
+                case "Sega CD":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaDreamcast":
+                case "Dreamcast":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaGameGear":
+                case "Game Gear":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaGenesis":
+                case "Sega Genesis":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaMasterSystem":
+                case "Sega Master System":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaMegaDrive":
+                case "Sega Mega Drive":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SegaSaturn":
+                case "Sega Saturn":
                     game.DisplayMediaType = "GenesisGame";
 
                     break;
 
-                case "SonyPlaystation":
+                case "Sony Playstation":
                     game.DisplayMediaType = "PsOneGame";
 
                     break;
 
-                case "SonyPlaystation2":
+                case "PS2":
                     game.DisplayMediaType = "Ps2Game";
 
                     break;
 
-                case "SonyPSP":
+                case "PSP":
                     game.DisplayMediaType = "PlayStationPortableGame";
 
                     break;
 
-                case "TurboGrafx16":
+                case "TurboGrafx 16":
                     game.DisplayMediaType = "TurboGrafx16Game";
 
                     break;
 
-                case "TurboGrafxCD":
+                case "TurboGrafx CD":
                     game.DisplayMediaType = "TurboGrafx16Game";
                     break;
 
-                case "ZxSpectrum":
+                case "ZX Spectrum":
                     game.DisplayMediaType = "ZXSpectrumGame";
                     break;
 

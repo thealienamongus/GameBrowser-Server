@@ -60,7 +60,7 @@ namespace GameBrowser.Providers
 
             switch (platform)
             {
-                case "Panasonic3DO":
+                case "3DO":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Panasonic3DO;
                     break;
 
@@ -72,27 +72,27 @@ namespace GameBrowser.Providers
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Arcade;
                     break;
 
-                case "Atari2600":
+                case "Atari 2600":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Atari2600;
                     break;
 
-                case "Atari5200":
+                case "Atari 5200":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Atari5200;
                     break;
 
-                case "Atari7800":
+                case "Atari 7800":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Atari7800;
                     break;
 
-                case "AtariXE":
+                case "Atari XE":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.AtariXE;
                     break;
 
-                case "AtariJaguar":
+                case "Atari Jaguar":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.AtariJaguar;
                     break;
 
-                case "AtariJaguarCD":
+                case "Atari Jaguar CD":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.AtariJaguarCD;
                     break;
 
@@ -100,11 +100,11 @@ namespace GameBrowser.Providers
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Colecovision;
                     break;
 
-                case "Commodore64":
+                case "Commodore 64":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Commodore64;
                     break;
 
-                case "CommodoreVic20":
+                case "Commodore Vic-20":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.CommodoreVic20;
                     break;
 
@@ -112,55 +112,55 @@ namespace GameBrowser.Providers
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Intellivision;
                     break;
 
-                case "MicrosoftXBox":
+                case "Xbox":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.MicrosoftXBox;
                     break;
 
-                case "NeoGeo":
+                case "Neo Geo":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.NeoGeo;
                     break;
 
-                case "Nintendo64":
+                case "Nintendo 64":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Nintendo64;
                     break;
 
-                case "NintendoDS":
+                case "Nintendo DS":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoDS;
                     break;
 
-                case "NintendoEntertainmentSystem":
+                case "Nintendo":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Nintendo;
                     break;
 
-                case "NintendoGameBoy":
+                case "Game Boy":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameBoy;
                     break;
 
-                case "NintendoGameBoyAdvance":
+                case "Game Boy Advance":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameBoyAdvance;
                     break;
 
-                case "NintendoGameBoyColor":
+                case "Game Boy Color":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameBoyColor;
                     break;
 
-                case "NintendoGameCube":
+                case "Gamecube":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.NintendoGameCube;
                     break;
 
-                case "NintendoSuperNES":
+                case "Super Nintendo":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SuperNintendo;
                     break;
 
-                case "NintendoVirtualBoy":
+                case "Virtual Boy":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.VirtualBoy;
                     break;
 
-                case "NintendoWii":
+                case "Nintendo Wii":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Wii;
                     break;
 
-                case "Dos":
+                case "DOS":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.DOS;
                     game.IsInstalledOnClient = true;
                     break;
@@ -170,59 +170,59 @@ namespace GameBrowser.Providers
                     game.IsInstalledOnClient = true;
                     break;
 
-                case "Sega32X":
+                case "Sega 32X":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.Sega32X;
                     break;
 
-                case "SegaCD":
+                case "Sega CD":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaCD;
                     break;
 
-                case "SegaDreamcast":
+                case "Dreamcast":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaDreamcast;
                     break;
 
-                case "SegaGameGear":
+                case "Game Gear":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaGameGear;
                     break;
 
-                case "SegaGenesis":
+                case "Sega Genesis":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaGenesis;
                     break;
 
-                case "SegaMasterSystem":
+                case "Sega Master System":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaMasterSystem;
                     break;
 
-                case "SegaMegaDrive":
+                case "Sega Mega Drive":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaMegaDrive;
                     break;
 
-                case "SegaSaturn":
+                case "Sega Saturn":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SegaSaturn;
                     break;
 
-                case "SonyPlaystation":
+                case "Sony Playstation":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SonyPlaystation;
                     break;
 
-                case "SonyPlaystation2":
+                case "PS2":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SonyPlaystation2;
                     break;
 
-                case "SonyPSP":
+                case "PSP":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.SonyPSP;
                     break;
 
-                case "TurboGrafx16":
+                case "TurboGrafx 16":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.TurboGrafx16;
                     break;
 
-                case "TurboGrafxCD":
+                case "TurboGrafx CD":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.TurboGrafxCD;
                     break;
 
-                case "ZxSpectrum":
+                case "ZX Spectrum":
                     game.GameSystem = MediaBrowser.Model.Games.GameSystem.ZxSpectrum;
                     break;
 
