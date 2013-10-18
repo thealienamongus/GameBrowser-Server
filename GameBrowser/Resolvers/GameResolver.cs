@@ -116,8 +116,8 @@ namespace GameBrowser.Resolvers
                 case "3DO":
                     return new[] { ".iso", ".cue" };
 
-                case "Amiga": // still need to add
-                    return new[] { ".iso" };
+                case "Amiga": 
+                    return new[] { ".iso", ".adf" };
 
                 case "Arcade":
                     return new[] { ".zip" };

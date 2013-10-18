@@ -395,7 +395,7 @@ namespace GameBrowser.Providers.EmuMovies
 
                     break;
 
-                case " Game Gear":
+                case "Game Gear":
                     emuMoviesPlatform = "Sega_Game_Gear";
 
                     break;
