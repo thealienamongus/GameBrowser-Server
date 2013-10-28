@@ -151,7 +151,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         private async Task FetchGameData(Game game, CancellationToken cancellationToken)
         {
-            var gameId = game.GetProviderId("GamesDb") ??  await FindGameId(game, cancellationToken).ConfigureAwait(false);
+            var gameId = game.GetProviderId(MetadataProviders.Gamesdb) ??  await FindGameId(game, cancellationToken).ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(gameId)) return;
 
@@ -194,7 +194,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         private async Task ProcessGameXml(Game game, string id, XmlDocument xmlDocument, CancellationToken cancellationToken)
         {
-            game.SetProviderId("GamesDb", id);
+            game.SetProviderId(MetadataProviders.Gamesdb, id);
 
             var gameName = xmlDocument.SafeGetString("//Game/GameTitle");
             if (!string.IsNullOrEmpty(gameName) && !game.LockedFields.Contains(MetadataFields.Name))
