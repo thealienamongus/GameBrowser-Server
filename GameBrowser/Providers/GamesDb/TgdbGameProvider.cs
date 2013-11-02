@@ -75,7 +75,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGameProvider 1.01";
+                return "TgdbGameProvider 1.02";
             }
         }
 
@@ -300,7 +300,7 @@ namespace GameBrowser.Providers.GamesDb
             var bannerUrl = xmlDocument.SafeGetString("//Game/Images/banner");
             if (!string.IsNullOrEmpty(bannerUrl))
             {
-                if (!game.HasLocalImage("banner"))
+                if (game.GetImage(ImageType.Banner) == null)
                 {
                     await
                         _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + bannerUrl,
@@ -314,7 +314,7 @@ namespace GameBrowser.Providers.GamesDb
 
             if (nodes != null && nodes.Count > 0)
             {
-                if (!game.HasLocalImage("folder"))
+                if (game.GetImage(ImageType.Primary) == null)
                 {
                     var folderUrl = nodes[0].InnerText;
 
@@ -329,7 +329,7 @@ namespace GameBrowser.Providers.GamesDb
 
             if (nodes != null && nodes.Count > 0)
             {
-                if (!game.HasLocalImage("BoxRear"))
+                if (game.GetImage(ImageType.BoxRear) == null)
                 {
                     var boxRearUrl = nodes[0].InnerText;
 
@@ -352,7 +352,7 @@ namespace GameBrowser.Providers.GamesDb
                 {
                     var backdropName = "backdrop" + (i == 0 ? "" : i.ToString(CultureInfo.InvariantCulture));
 
-                    if (ConfigurationManager.Configuration.RefreshItemImages || !game.HasLocalImage(backdropName))
+                    if (ConfigurationManager.Configuration.RefreshItemImages || game.BackdropImagePaths.Count <= i)
                     {
                         var backdropUrl = nodes[i].InnerText;
 

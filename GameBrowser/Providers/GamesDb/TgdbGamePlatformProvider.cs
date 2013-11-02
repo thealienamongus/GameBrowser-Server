@@ -60,7 +60,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGamePlatformProvider 1.0";
+                return "TgdbGamePlatformProvider 1.01";
             }
         }
 
@@ -235,7 +235,7 @@ namespace GameBrowser.Providers.GamesDb
             var bannerUrl = xmlDocument.SafeGetString("//Platform/Images/banner");
             if (!string.IsNullOrEmpty(bannerUrl))
             {
-                if (!console.HasLocalImage("banner"))
+                if (console.GetImage(ImageType.Banner) == null)
                 {
                     await
                         _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
@@ -244,7 +244,7 @@ namespace GameBrowser.Providers.GamesDb
                 }
             }
 
-            if (!console.HasLocalImage("folder"))
+            if (console.GetImage(ImageType.Primary) == null)
             {
                 // Don't know why all platforms are saved as back rather than front.
                 var nodes = xmlDocument.SelectNodes("//Platform/Images/boxart[@side='back']");
@@ -282,7 +282,7 @@ namespace GameBrowser.Providers.GamesDb
                 for (var i = 0; i < numberToFetch; i++)
                 {
                     var backdropName = "backdrop" + (i == 0 ? "" : i.ToString(CultureInfo.InvariantCulture));
-                    if (ConfigurationManager.Configuration.RefreshItemImages || !console.HasLocalImage(backdropName))
+                    if (ConfigurationManager.Configuration.RefreshItemImages || console.BackdropImagePaths.Count <= i)
                     {
                         var backdropUrl = bNodes[i].InnerText;
                         await
@@ -291,8 +291,6 @@ namespace GameBrowser.Providers.GamesDb
                                                        cancellationToken).ConfigureAwait(false);
                     }
                 }
-            }
-            _logger.Info("27");
-        }
+            }}
     }
 }
