@@ -35,17 +35,17 @@ namespace GameBrowser.Api
     public class GameBrowserUriService : IRestfulService
     {
         private readonly ILogger _logger;
-        private readonly IUserManager _userManager;
+        private readonly ILibraryManager _libraryManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="logger"></param>
-        /// <param name="userManager"></param>
-        public GameBrowserUriService(ILogger logger, IUserManager userManager)
+        /// <param name="libraryManager"></param>
+        public GameBrowserUriService(ILogger logger, ILibraryManager libraryManager)
         {
             _logger = logger;
-            _userManager = userManager;
+            _libraryManager = libraryManager;
         }
 
         /// <summary>
@@ -69,10 +69,7 @@ namespace GameBrowser.Api
         {
             _logger.Debug("GetDosGames request received");
 
-            var user = _userManager.Users.FirstOrDefault();
-            if (user == null) return null;
-
-            var dosGames = user.RootFolder.GetRecursiveChildren(user)
+            var dosGames = _libraryManager.RootFolder.RecursiveChildren
                 .Where(i => i is Game && ((Game)i).GameSystem.Equals(MediaBrowser.Model.Games.GameSystem.DOS))
                 .OrderBy(i => i.SortName)
                 .ToList();
@@ -98,10 +95,7 @@ namespace GameBrowser.Api
         {
             _logger.Debug("GetWindowsGames request received");
 
-            var user = _userManager.Users.FirstOrDefault();
-            if (user == null) return null;
-
-            var windowsGames = user.RootFolder.GetRecursiveChildren(user)
+            var windowsGames = _libraryManager.RootFolder.RecursiveChildren
                 .Where(i => i is Game && ((Game)i).GameSystem.Equals(MediaBrowser.Model.Games.GameSystem.Windows))
                 .OrderBy(i => i.SortName)
                 .ToList();

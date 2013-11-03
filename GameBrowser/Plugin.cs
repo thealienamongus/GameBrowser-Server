@@ -29,7 +29,6 @@ namespace GameBrowser
 
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
-        private static IUserManager _userManager;
         private static ILibraryManager _libraryManager;
         private readonly GameBrowserUriService _gameBrowserUriService;
 
@@ -78,11 +77,10 @@ namespace GameBrowser
         {
             Instance = this;
             _libraryManager = libraryManager;
-            _userManager = userManager;
             _logger = logManager.GetLogger("GameBrowser");
             _httpClient = httpClient;
 
-            _gameBrowserUriService = new GameBrowserUriService(_logger, _userManager);
+            _gameBrowserUriService = new GameBrowserUriService(_logger, _libraryManager);
         }
 
         /// <summary>
