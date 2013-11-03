@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,6 +20,7 @@ namespace GameBrowser.Providers.GamesDb
     {
         private static IHttpClient _httpClient;
         private readonly IProviderManager _providerManager;
+        private readonly ILogger _logger;
         
         private static readonly Regex[] NameMatches = new[] {
             new Regex(@"(?<name>.*)\((?<year>\d{4}\))"), // matches "My Game (2001)" and gives us the name and the year
@@ -34,6 +34,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             _httpClient = httpClient;
             _providerManager = providerManager;
+            _logger = logManager.GetLogger("Gamebrowser");
         }
 
 
@@ -215,7 +216,7 @@ namespace GameBrowser.Providers.GamesDb
                 }
                 catch (Exception ex)
                 {
-                    
+                    _logger.ErrorException("error parsing release date", ex);
                 }
             }
 
@@ -342,26 +343,29 @@ namespace GameBrowser.Providers.GamesDb
 
             nodes = xmlDocument.SelectNodes("//Game/Images/fanart/original");
 
-            if (nodes != null && nodes.Count > 0)
+            if (nodes == null || nodes.Count < 1) return;
+
+            var currentBackdropCount = game.BackdropImagePaths.Count;
+            
+            var numberToFetch = Math.Min(ConfigurationManager.Configuration.MaxBackdrops, nodes.Count);
+
+            for (var i = 0; i < nodes.Count; i++)
             {
-                game.BackdropImagePaths = new List<string>();
-
-                var numberToFetch = Math.Min(ConfigurationManager.Configuration.MaxBackdrops, nodes.Count);
-
-                for (var i = 0; i < numberToFetch; i++)
+                if (game.ContainsImageWithSourceUrl(nodes[i].InnerText))
                 {
-                    var backdropName = "backdrop" + (i == 0 ? "" : i.ToString(CultureInfo.InvariantCulture));
-
-                    if (ConfigurationManager.Configuration.RefreshItemImages || game.BackdropImagePaths.Count <= i)
-                    {
-                        var backdropUrl = nodes[i].InnerText;
-
-                        await
-                            _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + backdropUrl,
-                                                       Plugin.Instance.TgdbSemiphore, ImageType.Backdrop, i,
-                                                       cancellationToken).ConfigureAwait(false);
-                    }
+                    continue;
                 }
+
+                var backdropUrl = nodes[i].InnerText;
+
+                await
+                    _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + backdropUrl,
+                                                Plugin.Instance.TgdbSemiphore, ImageType.Backdrop, currentBackdropCount,
+                                                cancellationToken).ConfigureAwait(false);
+
+                currentBackdropCount++;
+
+                if (game.BackdropImagePaths.Count >= numberToFetch) break;
             }
         }
 

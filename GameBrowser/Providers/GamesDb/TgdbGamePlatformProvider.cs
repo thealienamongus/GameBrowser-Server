@@ -273,24 +273,31 @@ namespace GameBrowser.Providers.GamesDb
 
             var bNodes = xmlDocument.SelectNodes("//Platform/Images/fanart/original");
 
-            if (bNodes != null && bNodes.Count > 0)
+            if (bNodes == null || bNodes.Count == 0) return;
+
+            var currentBackdropCount = console.BackdropImagePaths.Count;
+
+            var numberToFetch = Math.Min(ConfigurationManager.Configuration.MaxBackdrops, bNodes.Count);
+
+            for (var i = 0; i < bNodes.Count; i++)
             {
-                console.BackdropImagePaths = new List<string>();
-
-                var numberToFetch = Math.Min(ConfigurationManager.Configuration.MaxBackdrops, bNodes.Count);
-
-                for (var i = 0; i < numberToFetch; i++)
+                if (console.ContainsImageWithSourceUrl(bNodes[i].InnerText))
                 {
-                    var backdropName = "backdrop" + (i == 0 ? "" : i.ToString(CultureInfo.InvariantCulture));
-                    if (ConfigurationManager.Configuration.RefreshItemImages || console.BackdropImagePaths.Count <= i)
-                    {
-                        var backdropUrl = bNodes[i].InnerText;
-                        await
-                            _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
-                                                       Plugin.Instance.TgdbSemiphore, ImageType.Backdrop, i,
-                                                       cancellationToken).ConfigureAwait(false);
-                    }
+                    continue;
                 }
-            }}
+
+                var backdropUrl = bNodes[i].InnerText;
+                
+                await
+                    _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + backdropUrl,
+                                               Plugin.Instance.TgdbSemiphore, ImageType.Backdrop, currentBackdropCount,
+                                               cancellationToken).ConfigureAwait(false);
+
+                currentBackdropCount++;
+
+                if (console.BackdropImagePaths.Count >= numberToFetch) break;
+            }
+
+        }
     }
 }
