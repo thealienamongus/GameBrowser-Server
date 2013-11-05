@@ -16,13 +16,6 @@ namespace GameBrowser.Providers.GamesDb
 {
     class ManualTgdbGameImageProvider : IImageProvider
     {
-        private readonly ILogger _logger;
-
-
-        public ManualTgdbGameImageProvider(ILogManager logger)
-        {
-            _logger = logger.GetLogger("Gamebrowser");
-        }
 
         public bool Supports(BaseItem item)
         {
@@ -48,7 +41,6 @@ namespace GameBrowser.Providers.GamesDb
 
             if (!string.IsNullOrEmpty(gameId))
             {
-                _logger.Debug("GetAllImages: gameId found");
                 var xmlPath = TgdbGameProvider.Current.GetTgdbXmlPath(gameId);
 
                 try
@@ -69,7 +61,6 @@ namespace GameBrowser.Providers.GamesDb
 
         private void AddImages(List<RemoteImageInfo> list, string xmlPath, CancellationToken cancellationToken)
         {
-            _logger.Debug("AddImages");
             using (var streamReader = new StreamReader(xmlPath, Encoding.UTF8))
             {
                 // Use XmlReader for best performance
@@ -95,7 +86,6 @@ namespace GameBrowser.Providers.GamesDb
                             {
                                 case "Images":
                                     {
-                                        _logger.Debug("AddImages: Images node found");
                                         using (var subReader = reader.ReadSubtree())
                                         {
                                             AddImages(list, subReader, cancellationToken);
@@ -104,7 +94,6 @@ namespace GameBrowser.Providers.GamesDb
                                     }
 
                                 default:
-                                    _logger.Debug("AddImages: element name = " + reader.Name);
                                     reader.Skip();
                                     break;
                             }
@@ -128,7 +117,6 @@ namespace GameBrowser.Providers.GamesDb
                     {
                         case "fanart":
                             {
-                                _logger.Debug("AddImages: fanart node found");
                                 using (var subReader = reader.ReadSubtree())
                                 {
                                     PopulateImageCategory(list, subReader, cancellationToken, ImageType.Backdrop);
@@ -137,32 +125,27 @@ namespace GameBrowser.Providers.GamesDb
                             }
                         case "boxart":
                             {
-                                _logger.Debug("AddImages: boxart node found");
                                 var side = reader.GetAttribute("side");
 
                                 if (side == null) break;
 
                                 if (side.Equals("front", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    _logger.Debug("AddImages: side is front");
                                     PopulateImage(list, reader, cancellationToken, ImageType.Primary);
                                 }
                                 else if (side.Equals("back", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    _logger.Debug("AddImages: side is back");
                                     PopulateImage(list, reader, cancellationToken, ImageType.BoxRear);
                                 }
                                 break;
                             }
                         case "banner":
                             {
-                                _logger.Debug("AddImages: banner node found");
                                 PopulateImage(list, reader, cancellationToken, ImageType.Banner);
                                 break;
                             }
                         case "clearlogo":
                             {
-                                _logger.Debug("AddImages: clearlogo node found");
                                 PopulateImage(list, reader, cancellationToken, ImageType.Logo);
                                 break;
                             }
@@ -182,7 +165,6 @@ namespace GameBrowser.Providers.GamesDb
 
         private void PopulateImage(List<RemoteImageInfo> list, XmlReader reader, CancellationToken cancellationToken, ImageType type)
         {
-            _logger.Debug("PopulateImage");
             cancellationToken.ThrowIfCancellationRequested();
 
             if (reader.NodeType == XmlNodeType.Element)
@@ -191,7 +173,6 @@ namespace GameBrowser.Providers.GamesDb
 
                 if (!string.IsNullOrEmpty(url))
                 {
-                    _logger.Debug("PopulateImage: creating RemoteImageinfo object");
                     var info = new RemoteImageInfo
                     {
                         Type = type,
@@ -210,7 +191,6 @@ namespace GameBrowser.Providers.GamesDb
 
         private void PopulateImageCategory(List<RemoteImageInfo> list, XmlReader reader, CancellationToken cancellationToken, ImageType type)
         {
-            _logger.Debug("PopulateImageCategory");
             reader.MoveToContent();
 
             while (reader.Read())
@@ -223,12 +203,10 @@ namespace GameBrowser.Providers.GamesDb
                     {
                         case "original":
                             {
-                                _logger.Debug("PopulateImageCategory: orginal node found");
                                 var url = reader.ReadString();
 
                                 if (!string.IsNullOrEmpty(url))
                                 {
-                                    _logger.Debug("PopulateImageCategory: create RemoteImageInfo");
                                     var info = new RemoteImageInfo
                                     {
                                         Type = type,
