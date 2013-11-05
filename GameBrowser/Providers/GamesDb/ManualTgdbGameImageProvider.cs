@@ -9,7 +9,6 @@ using System.Xml;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
-using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Providers;
 
 namespace GameBrowser.Providers.GamesDb
@@ -120,6 +119,14 @@ namespace GameBrowser.Providers.GamesDb
                                 using (var subReader = reader.ReadSubtree())
                                 {
                                     PopulateImageCategory(list, subReader, cancellationToken, ImageType.Backdrop);
+                                }
+                                break;
+                            }
+                        case "screenshot":
+                            {
+                                using (var subReader = reader.ReadSubtree())
+                                {
+                                    PopulateImageCategory(list, subReader, cancellationToken, ImageType.Screenshot);
                                 }
                                 break;
                             }
