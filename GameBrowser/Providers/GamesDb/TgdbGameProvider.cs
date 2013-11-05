@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using GameBrowser.Extensions;
 using MediaBrowser.Common.Net;
+using MediaBrowser.Controller;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
@@ -21,7 +23,9 @@ namespace GameBrowser.Providers.GamesDb
         private static IHttpClient _httpClient;
         private readonly IProviderManager _providerManager;
         private readonly ILogger _logger;
-        
+
+        internal static TgdbGameProvider Current { get; private set; }
+
         private static readonly Regex[] NameMatches = new[] {
             new Regex(@"(?<name>.*)\((?<year>\d{4}\))"), // matches "My Game (2001)" and gives us the name and the year
             new Regex(@"(?<name>.*)") // last resort matches the whole string as the name
@@ -35,6 +39,7 @@ namespace GameBrowser.Providers.GamesDb
             _httpClient = httpClient;
             _providerManager = providerManager;
             _logger = logManager.GetLogger("Gamebrowser");
+            Current = this;
         }
 
 
@@ -76,7 +81,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGameProvider 1.02";
+                return "TgdbGameProvider 1.04";
             }
         }
 
@@ -174,13 +179,60 @@ namespace GameBrowser.Providers.GamesDb
         {
             var url = string.Format(TgdbUrls.GetInfo, id);
 
+            var xmlPath = GetTgdbXmlPath(id);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(xmlPath));
+
             using (var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
             {
                 var doc = new XmlDocument();
                 doc.Load(stream);
+                doc.Save(xmlPath);
 
                 return doc;
             }
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tgdbId"></param>
+        /// <returns></returns>
+        public string GetTgdbXmlPath(string tgdbId)
+        {
+            var gameDataPath = GetGameDataPath(ConfigurationManager.ApplicationPaths, tgdbId);
+            return Path.Combine(gameDataPath, "tgdb.xml");
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="applicationPaths"></param>
+        /// <param name="tgdbId"></param>
+        /// <returns></returns>
+        internal static string GetGameDataPath(IServerApplicationPaths applicationPaths, string tgdbId)
+        {
+            var dataPath = Path.Combine(GetGamesDataPath(applicationPaths), tgdbId);
+
+            return dataPath;
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="applicationPaths"></param>
+        /// <returns></returns>
+        internal static string GetGamesDataPath(IServerApplicationPaths applicationPaths)
+        {
+            var dataPath = Path.Combine(applicationPaths.DataPath, "tgdb-games");
+
+            return dataPath;
         }
 
 
