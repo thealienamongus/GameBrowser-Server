@@ -13,18 +13,24 @@ using MediaBrowser.Model.Providers;
 
 namespace GameBrowser.Providers.GamesDb
 {
-    class ManualTgdbGameImageProvider : IImageProvider
+    class ManualTgdbImageProvider : IImageProvider
     {
+        private bool _isConsole;
 
         public bool Supports(BaseItem item)
-        {
-            return item is Game;
+        { 
+            return item is Game || item is GameSystem;
         }
 
 
 
         public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, ImageType imageType, CancellationToken cancellationToken)
         {
+            if (item is GameSystem)
+                _isConsole = true;
+            else
+                _isConsole = false;
+
             var images = await GetAllImages(item, cancellationToken).ConfigureAwait(false);
 
             return images.Where(i => i.Type == imageType);
@@ -36,11 +42,11 @@ namespace GameBrowser.Providers.GamesDb
         {
             var list = new List<RemoteImageInfo>();
 
-            var gameId = item.GetProviderId(MetadataProviders.Gamesdb);
+            var tgdbId = item.GetProviderId(MetadataProviders.Gamesdb);
 
-            if (!string.IsNullOrEmpty(gameId))
+            if (!string.IsNullOrEmpty(tgdbId))
             {
-                var xmlPath = TgdbGameProvider.Current.GetTgdbXmlPath(gameId);
+                var xmlPath = TgdbGameProvider.Current.GetTgdbXmlPath(tgdbId);
 
                 try
                 {
@@ -71,32 +77,12 @@ namespace GameBrowser.Providers.GamesDb
                     ValidationType = ValidationType.None
                 }))
                 {
-                    //reader.MoveToContent();
-                    reader.ReadToDescendant("Game");
-
-                    // Loop through each element
-                    while (reader.Read())
+                    // With the exception of one element both games and gamesystems use the same xml structure for images.
+                    reader.ReadToDescendant("Images");
+                    
+                    using (var subReader = reader.ReadSubtree())
                     {
-                        cancellationToken.ThrowIfCancellationRequested();
-
-                        if (reader.NodeType == XmlNodeType.Element)
-                        {
-                            switch (reader.Name)
-                            {
-                                case "Images":
-                                    {
-                                        using (var subReader = reader.ReadSubtree())
-                                        {
-                                            AddImages(list, subReader, cancellationToken);
-                                        }
-                                        break;
-                                    }
-
-                                default:
-                                    reader.Skip();
-                                    break;
-                            }
-                        }
+                        AddImages(list, subReader, cancellationToken);
                     }
                 }
             }
@@ -142,7 +128,9 @@ namespace GameBrowser.Providers.GamesDb
                                 }
                                 else if (side.Equals("back", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    PopulateImage(list, reader, cancellationToken, ImageType.BoxRear);
+                                    // Have to account for console primary images being uploaded as side-back
+                                    PopulateImage(list, reader, cancellationToken,
+                                                  _isConsole ? ImageType.Primary : ImageType.BoxRear);
                                 }
                                 break;
                             }
@@ -176,6 +164,8 @@ namespace GameBrowser.Providers.GamesDb
 
             if (reader.NodeType == XmlNodeType.Element)
             {
+                var width = Convert.ToInt32(reader.GetAttribute("width"));
+                var height = Convert.ToInt32(reader.GetAttribute("height"));
                 var url = reader.ReadString();
 
                 if (!string.IsNullOrEmpty(url))
@@ -183,8 +173,8 @@ namespace GameBrowser.Providers.GamesDb
                     var info = new RemoteImageInfo
                     {
                         Type = type,
-                        Width = Convert.ToInt32(reader.GetAttribute("width")),
-                        Height = Convert.ToInt32(reader.GetAttribute("height")),
+                        Width = width,
+                        Height = height,
                         ProviderName = Name,
                         Url = TgdbUrls.BaseImagePath + url
                     };
@@ -210,6 +200,8 @@ namespace GameBrowser.Providers.GamesDb
                     {
                         case "original":
                             {
+                                var width = Convert.ToInt32(reader.GetAttribute("width"));
+                                var height = Convert.ToInt32(reader.GetAttribute("height"));
                                 var url = reader.ReadString();
 
                                 if (!string.IsNullOrEmpty(url))
@@ -217,8 +209,8 @@ namespace GameBrowser.Providers.GamesDb
                                     var info = new RemoteImageInfo
                                     {
                                         Type = type,
-                                        Width = Convert.ToInt32(reader.GetAttribute("width")),
-                                        Height = Convert.ToInt32(reader.GetAttribute("height")),
+                                        Width = width,
+                                        Height = height,
                                         ProviderName = Name,
                                         Url = TgdbUrls.BaseImagePath + url
                                     };

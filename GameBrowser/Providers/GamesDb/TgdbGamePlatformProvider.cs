@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGamePlatformProvider 1.01";
+                return "TgdbGamePlatformProvider 1.03";
             }
         }
 
@@ -153,16 +154,14 @@ namespace GameBrowser.Providers.GamesDb
         /// <returns></returns>
         private async Task FetchConsoleData(GameSystem console, CancellationToken cancellationToken)
         {
-            var consoleId = console.GetProviderId("GamesDb") ?? FindPlatformId(console);
+            var consoleId = console.GetProviderId(MetadataProviders.Gamesdb) ?? FindPlatformId(console);
 
             if (!string.IsNullOrEmpty(consoleId))
             {
-                _logger.Info("Tgdb provider id is " + consoleId);
                 var xml = await FetchConsoleXml(consoleId, cancellationToken).ConfigureAwait(false);
 
                 if (xml != null)
                 {
-                    _logger.Info("Tgdb provider xml stream exists");
                     await ProcessConsoleXml(console, xml, cancellationToken);
                 }
                 else
@@ -187,7 +186,7 @@ namespace GameBrowser.Providers.GamesDb
 
                 if (id != null)
                 {
-                    console.SetProviderId("GamesDb", id.ToString());
+                    console.SetProviderId(MetadataProviders.Gamesdb, id.ToString());
 
                     return id.ToString();
                 }
@@ -206,10 +205,15 @@ namespace GameBrowser.Providers.GamesDb
         {
             var url = string.Format(TgdbUrls.GetPlatform, id);
 
+            var xmlPath = TgdbGameProvider.Current.GetTgdbXmlPath(id);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(xmlPath));
+
             using (var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, cancellationToken).ConfigureAwait(false))
             {
                 var doc = new XmlDocument();
                 doc.Load(stream);
+                doc.Save(xmlPath);
 
                 return doc;
             }
