@@ -180,7 +180,7 @@ namespace GameBrowser.Resolvers
                     return new[] { ".iso", ".bin", ".img", ".gcm" };
 
                 case "Super Nintendo":
-                    return new[] { ".smc", ".zip", ".fam", ".rom", ".sfc" };
+                    return new[] { ".smc", ".zip", ".fam", ".rom", ".sfc", ".fig" };
 
                 case "Virtual Boy":
                     return new[] {".vb"};
