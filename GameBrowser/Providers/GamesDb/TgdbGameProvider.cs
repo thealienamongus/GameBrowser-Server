@@ -81,7 +81,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGameProvider 1.04";
+                return "TgdbGameProvider 1.05";
             }
         }
 
@@ -428,7 +428,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="game"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<string> FindGameId(Game game, CancellationToken cancellationToken)
+        public async Task<string> FindGameId(Game game, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

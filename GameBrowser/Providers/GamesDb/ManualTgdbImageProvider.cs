@@ -38,11 +38,11 @@ namespace GameBrowser.Providers.GamesDb
 
 
 
-        public Task<IEnumerable<RemoteImageInfo>> GetAllImages(BaseItem item, CancellationToken cancellationToken)
+        public async Task<IEnumerable<RemoteImageInfo>> GetAllImages(BaseItem item, CancellationToken cancellationToken)
         {
             var list = new List<RemoteImageInfo>();
 
-            var tgdbId = item.GetProviderId(MetadataProviders.Gamesdb);
+            var tgdbId = item.GetProviderId(MetadataProviders.Gamesdb) ?? await FindId(item, cancellationToken);
 
             if (!string.IsNullOrEmpty(tgdbId))
             {
@@ -59,7 +59,21 @@ namespace GameBrowser.Providers.GamesDb
 
             }
 
-            return Task.FromResult<IEnumerable<RemoteImageInfo>>(list);
+            return list;
+        }
+
+
+
+        private async Task<string> FindId(BaseItem item, CancellationToken cancellationToken)
+        {
+            if (item is Game)
+            {
+                return await TgdbGameProvider.Current.FindGameId((Game)item, cancellationToken);
+            }
+            
+            // else it's a gamesystem
+            return TgdbGamePlatformProvider.Current.FindPlatformId((GameSystem) item);
+            
         }
 
 

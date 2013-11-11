@@ -22,6 +22,8 @@ namespace GameBrowser.Providers.GamesDb
         private static IHttpClient _httpClient;
         private static IProviderManager _providerManager;
         private readonly ILogger _logger;
+
+        internal static TgdbGamePlatformProvider Current { get; private set; }
         
         /// <summary>
         /// 
@@ -36,6 +38,7 @@ namespace GameBrowser.Providers.GamesDb
             _httpClient = httpClient;
             _providerManager = providerManager;
             _logger = LogManager.GetLogger("GameBrowser");
+            Current = this;
         }
 
 
@@ -59,7 +62,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             get
             {
-                return "TgdbGamePlatformProvider 1.03";
+                return "TgdbGamePlatformProvider 1.04";
             }
         }
 
@@ -176,7 +179,7 @@ namespace GameBrowser.Providers.GamesDb
 
 
 
-        private string FindPlatformId(GameSystem console)
+        public string FindPlatformId(GameSystem console)
         {
             var platformSettings = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(gs => console.Path.Equals(gs.Path));
 
