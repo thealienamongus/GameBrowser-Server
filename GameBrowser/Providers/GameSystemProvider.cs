@@ -44,15 +44,16 @@ namespace GameBrowser.Providers
         /// </summary>
         /// <param name="item"></param>
         /// <param name="force"></param>
+        /// <param name="providerInfo"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
+        public override Task<bool> FetchAsync(BaseItem item, bool force, BaseProviderInfo providerInfo, CancellationToken cancellationToken)
         {
             var platform = ResolverHelper.AttemptGetGamePlatformTypeFromPath(item.Path);
 
             if (platform == null)
             {
-                SetLastRefreshed(item, DateTime.UtcNow);
+                SetLastRefreshed(item, DateTime.UtcNow, providerInfo);
                 return FalseTaskResult;
             }
 
@@ -227,11 +228,11 @@ namespace GameBrowser.Providers
                     break;
 
                 default:
-                    SetLastRefreshed(game, DateTime.UtcNow);
+                    SetLastRefreshed(game, DateTime.UtcNow, providerInfo);
                     return FalseTaskResult;
             }
 
-            SetLastRefreshed(game, DateTime.UtcNow);
+            SetLastRefreshed(game, DateTime.UtcNow, providerInfo);
             return TrueTaskResult;
         }
     }

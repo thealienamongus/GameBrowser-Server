@@ -92,13 +92,14 @@ namespace GameBrowser.Providers.GamesDb
         /// </summary>
         /// <param name="item"></param>
         /// <param name="force"></param>
+        /// <param name="providerInfo"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override async Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
+        public override async Task<bool> FetchAsync(BaseItem item, bool force, BaseProviderInfo providerInfo, CancellationToken cancellationToken)
         {
             if (HasAltMeta(item) && !force)
             {
-                SetLastRefreshed(item, DateTime.UtcNow);
+                SetLastRefreshed(item, DateTime.UtcNow, providerInfo);
                 return true;
             }
 
@@ -106,7 +107,7 @@ namespace GameBrowser.Providers.GamesDb
 
             await FetchConsoleData((GameSystem) item, cancellationToken).ConfigureAwait(false);
 
-            SetLastRefreshed(item, DateTime.UtcNow);
+            SetLastRefreshed(item, DateTime.UtcNow, providerInfo);
             return true;
         }
 

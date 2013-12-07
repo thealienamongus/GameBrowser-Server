@@ -44,9 +44,10 @@ namespace GameBrowser.Providers
         /// </summary>
         /// <param name="item"></param>
         /// <param name="force"></param>
+        /// <param name="providerInfo"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
+        public override Task<bool> FetchAsync(BaseItem item, bool force, BaseProviderInfo providerInfo, CancellationToken cancellationToken)
         {
             var gameSystem = (GameSystem) item;
 
@@ -54,7 +55,7 @@ namespace GameBrowser.Providers
 
             if (configuredSystems == null)
             {
-                SetLastRefreshed(gameSystem, DateTime.UtcNow);
+                SetLastRefreshed(gameSystem, DateTime.UtcNow, providerInfo);
                 return FalseTaskResult;
             }
 
@@ -67,7 +68,7 @@ namespace GameBrowser.Providers
                 gameSystem.GameSystemName = system.ConsoleType;
             }
 
-            SetLastRefreshed(gameSystem, DateTime.UtcNow);
+            SetLastRefreshed(gameSystem, DateTime.UtcNow, providerInfo);
             return TrueTaskResult;
         }
     }

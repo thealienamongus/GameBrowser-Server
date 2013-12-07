@@ -89,9 +89,10 @@ namespace GameBrowser.Providers.EmuMovies
         /// </summary>
         /// <param name="item"></param>
         /// <param name="force"></param>
+        /// <param name="providerInfo"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override async Task<bool> FetchAsync(BaseItem item, bool force, CancellationToken cancellationToken)
+        public override async Task<bool> FetchAsync(BaseItem item, bool force, BaseProviderInfo providerInfo, CancellationToken cancellationToken)
         {
             var game = (Game)item;
 
@@ -102,7 +103,7 @@ namespace GameBrowser.Providers.EmuMovies
 
             await Task.WhenAll(tCabinetArt, tDiscArt, tSnaps, tTitleArt).ConfigureAwait(false);
 
-            SetLastRefreshed(item, DateTime.UtcNow);
+            SetLastRefreshed(item, DateTime.UtcNow, providerInfo);
             return true;
         }
 
