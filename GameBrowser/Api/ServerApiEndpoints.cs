@@ -5,8 +5,9 @@ using GameBrowser.Api.Querying;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
+using MediaBrowser.Controller.Net;
 using MediaBrowser.Model.Logging;
-using ServiceStack.ServiceHost;
+using ServiceStack;
 
 namespace GameBrowser.Api
 {
