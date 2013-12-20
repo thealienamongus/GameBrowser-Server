@@ -354,7 +354,7 @@ namespace GameBrowser.Providers.GamesDb
             var bannerUrl = xmlDocument.SafeGetString("//Game/Images/banner");
             if (!string.IsNullOrEmpty(bannerUrl))
             {
-                if (game.GetImage(ImageType.Banner) == null)
+                if (game.GetImagePath(ImageType.Banner) == null)
                 {
                     await
                         _providerManager.SaveImage(game, TgdbUrls.BaseImagePath + bannerUrl,
@@ -368,7 +368,7 @@ namespace GameBrowser.Providers.GamesDb
 
             if (nodes != null && nodes.Count > 0)
             {
-                if (game.GetImage(ImageType.Primary) == null)
+                if (game.GetImagePath(ImageType.Primary) == null)
                 {
                     var folderUrl = nodes[0].InnerText;
 
@@ -383,7 +383,7 @@ namespace GameBrowser.Providers.GamesDb
 
             if (nodes != null && nodes.Count > 0)
             {
-                if (game.GetImage(ImageType.BoxRear) == null)
+                if (game.GetImagePath(ImageType.BoxRear) == null)
                 {
                     var boxRearUrl = nodes[0].InnerText;
 

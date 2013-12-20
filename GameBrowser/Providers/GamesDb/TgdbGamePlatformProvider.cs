@@ -241,7 +241,7 @@ namespace GameBrowser.Providers.GamesDb
             var bannerUrl = xmlDocument.SafeGetString("//Platform/Images/banner");
             if (!string.IsNullOrEmpty(bannerUrl))
             {
-                if (console.GetImage(ImageType.Banner) == null)
+                if (console.GetImagePath(ImageType.Banner) == null)
                 {
                     await
                         _providerManager.SaveImage(console, TgdbUrls.BaseImagePath + bannerUrl,
@@ -250,7 +250,7 @@ namespace GameBrowser.Providers.GamesDb
                 }
             }
 
-            if (console.GetImage(ImageType.Primary) == null)
+            if (console.GetImagePath(ImageType.Primary) == null)
             {
                 // Don't know why all platforms are saved as back rather than front.
                 var nodes = xmlDocument.SelectNodes("//Platform/Images/boxart[@side='back']");
