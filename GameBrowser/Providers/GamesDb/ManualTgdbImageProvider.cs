@@ -17,14 +17,14 @@ namespace GameBrowser.Providers.GamesDb
     {
         private bool _isConsole;
 
-        public bool Supports(BaseItem item)
+        public bool Supports(IHasImages item)
         { 
             return item is Game || item is GameSystem;
         }
 
 
 
-        public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, ImageType imageType, CancellationToken cancellationToken)
+        public async Task<IEnumerable<RemoteImageInfo>> GetImages(IHasImages item, ImageType imageType, CancellationToken cancellationToken)
         {
             if (item is GameSystem)
                 _isConsole = true;
@@ -38,11 +38,13 @@ namespace GameBrowser.Providers.GamesDb
 
 
 
-        public async Task<IEnumerable<RemoteImageInfo>> GetAllImages(BaseItem item, CancellationToken cancellationToken)
+        public async Task<IEnumerable<RemoteImageInfo>> GetAllImages(IHasImages item, CancellationToken cancellationToken)
         {
             var list = new List<RemoteImageInfo>();
 
-            var tgdbId = item.GetProviderId(MetadataProviders.Gamesdb) ?? await FindId(item, cancellationToken);
+            var baseItem = (BaseItem)item;
+
+            var tgdbId = baseItem.GetProviderId(MetadataProviders.Gamesdb) ?? await FindId(baseItem, cancellationToken);
 
             if (!string.IsNullOrEmpty(tgdbId))
             {
