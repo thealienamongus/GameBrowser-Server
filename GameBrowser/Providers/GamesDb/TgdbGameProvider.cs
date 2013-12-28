@@ -399,8 +399,8 @@ namespace GameBrowser.Providers.GamesDb
             if (nodes == null || nodes.Count < 1) return;
 
             var currentBackdropCount = game.BackdropImagePaths.Count;
-            
-            var numberToFetch = Math.Min(ConfigurationManager.Configuration.MaxBackdrops, nodes.Count);
+
+            var numberToFetch = Math.Min(ConfigurationManager.Configuration.GameOptions.MaxBackdrops, nodes.Count);
 
             for (var i = 0; i < nodes.Count; i++)
             {
