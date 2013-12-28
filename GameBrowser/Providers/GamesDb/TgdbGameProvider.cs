@@ -401,10 +401,18 @@ namespace GameBrowser.Providers.GamesDb
             var currentBackdropCount = game.BackdropImagePaths.Count;
 
             var numberToFetch = Math.Min(ConfigurationManager.Configuration.GameOptions.MaxBackdrops, nodes.Count);
+            var minimumWidth = ConfigurationManager.Configuration.GameOptions.MinBackdropWidth;
 
             for (var i = 0; i < nodes.Count; i++)
             {
                 if (game.ContainsImageWithSourceUrl(nodes[i].InnerText))
+                {
+                    continue;
+                }
+
+                var xmlWidthValue = nodes[i].Attributes["width"].Value;
+
+                if (xmlWidthValue == null || Convert.ToInt32(xmlWidthValue) < minimumWidth)
                 {
                     continue;
                 }

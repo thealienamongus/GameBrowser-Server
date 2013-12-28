@@ -265,6 +265,8 @@ namespace GameBrowser.Providers.GamesDb
                 }
             }
 
+            // TODO figure out why this is commented out and do something about it.
+
             //string consoleArt = xmlDocument.SafeGetString("//Platform/Images/consoleart");
 
             //if (!string.IsNullOrEmpty(consoleArt))
@@ -284,10 +286,18 @@ namespace GameBrowser.Providers.GamesDb
             var currentBackdropCount = console.BackdropImagePaths.Count;
 
             var numberToFetch = Math.Min(ConfigurationManager.Configuration.GameOptions.MaxBackdrops, bNodes.Count);
+            var minimumWidth = ConfigurationManager.Configuration.GameOptions.MinBackdropWidth;
 
             for (var i = 0; i < bNodes.Count; i++)
             {
                 if (console.ContainsImageWithSourceUrl(bNodes[i].InnerText))
+                {
+                    continue;
+                }
+
+                var xmlWidthValue = bNodes[i].Attributes["width"].Value;
+
+                if (xmlWidthValue == null || Convert.ToInt32(xmlWidthValue) < minimumWidth)
                 {
                     continue;
                 }
