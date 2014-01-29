@@ -1,4 +1,9 @@
-﻿using System;
+﻿using MediaBrowser.Common.Net;
+using MediaBrowser.Controller.Entities;
+using MediaBrowser.Controller.Providers;
+using MediaBrowser.Model.Entities;
+using MediaBrowser.Model.Providers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,23 +11,23 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using MediaBrowser.Controller.Entities;
-using MediaBrowser.Controller.Providers;
-using MediaBrowser.Model.Entities;
-using MediaBrowser.Model.Providers;
 
 namespace GameBrowser.Providers.GamesDb
 {
-    class ManualTgdbImageProvider : IImageProvider
+    class ManualTgdbImageProvider : IRemoteImageProvider
     {
         private bool _isConsole;
+        private readonly IHttpClient _httpClient;
+
+        public ManualTgdbImageProvider(IHttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
 
         public bool Supports(IHasImages item)
         { 
             return item is Game || item is GameSystem;
         }
-
-
 
         public async Task<IEnumerable<RemoteImageInfo>> GetImages(IHasImages item, ImageType imageType, CancellationToken cancellationToken)
         {
@@ -35,8 +40,6 @@ namespace GameBrowser.Providers.GamesDb
 
             return images.Where(i => i.Type == imageType);
         }
-
-
 
         public async Task<IEnumerable<RemoteImageInfo>> GetAllImages(IHasImages item, CancellationToken cancellationToken)
         {
@@ -250,11 +253,32 @@ namespace GameBrowser.Providers.GamesDb
             get { return "TheGamesDB"; }
         }
 
-
-
         public int Order
         {
             get { return 0; }
+        }
+
+        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
+        {
+            return _httpClient.GetResponse(new HttpRequestOptions
+            {
+                CancellationToken = cancellationToken,
+                Url = url,
+                ResourcePool = Plugin.Instance.TgdbSemiphore
+            });
+        }
+
+        public IEnumerable<ImageType> GetSupportedImages(IHasImages item)
+        {
+            return new List<ImageType>
+            {
+                ImageType.Primary,
+                ImageType.Backdrop,
+                ImageType.BoxRear,
+                ImageType.Logo,
+                ImageType.Banner,
+                ImageType.Screenshot
+            };
         }
     }
 }
