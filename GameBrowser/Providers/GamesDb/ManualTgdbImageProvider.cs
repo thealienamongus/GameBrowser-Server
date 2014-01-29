@@ -252,9 +252,9 @@ namespace GameBrowser.Providers.GamesDb
 
 
 
-        public int Priority
+        public int Order
         {
-            get { return 1; }
+            get { return 0; }
         }
     }
 }
