@@ -210,18 +210,6 @@ namespace GameBrowser.Resolvers
             }
             return null;
         }
-        
-        public static string GetDisplayMediaTypeFromGamePath(IFileSystem fileSystem, string path)
-        {
-            var platform = AttemptGetGamePlatformTypeFromPath(fileSystem, path);
-
-            if (string.IsNullOrEmpty(platform))
-            {
-                return null;
-            }
-
-            return GetDisplayMediaTypeFromPlatform(platform);
-        }
 
         public static string GetDisplayMediaTypeFromPlatform(string platform)
         {

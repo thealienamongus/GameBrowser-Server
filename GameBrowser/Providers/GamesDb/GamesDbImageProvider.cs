@@ -243,7 +243,7 @@ namespace GameBrowser.Providers.GamesDb
 
         public string Name
         {
-            get { return "TheGamesDB"; }
+            get { return "GamesDb"; }
         }
 
         public int Order
