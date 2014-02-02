@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using GameBrowser.Library.Utils;
+﻿using GameBrowser.Library.Utils;
+using MediaBrowser.Common.IO;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Resolvers;
+using MediaBrowser.Model.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using MediaBrowser.Model.Logging;
+using GameSystem = MediaBrowser.Model.Games.GameSystem;
 
 namespace GameBrowser.Resolvers
 {
@@ -16,11 +18,14 @@ namespace GameBrowser.Resolvers
     public class GameResolver : ItemResolver<Game>
     {
         private readonly ILogger _logger;
+        private readonly IFileSystem _fileSystem; 
 
-        public GameResolver(ILogger logger)
+        public GameResolver(ILogger logger, IFileSystem fileSystem)
         {
             _logger = logger;
+            _fileSystem = fileSystem;
         }
+
         /// <summary>
         /// Run before any core resolvers
         /// </summary>
@@ -39,7 +44,7 @@ namespace GameBrowser.Resolvers
         /// <returns>Game.</returns>
         protected override Game Resolve(ItemResolveArgs args)
         {
-            var platform = ResolverHelper.AttemptGetGamePlatformTypeFromPath(args.Path);
+            var platform = ResolverHelper.AttemptGetGamePlatformTypeFromPath(_fileSystem, args.Path);
 
             if (!string.IsNullOrEmpty(platform))
             {
@@ -98,6 +103,14 @@ namespace GameBrowser.Resolvers
             }
 
             var game = new Game {Path = gameFiles[0].FullName};
+
+            game.GameSystem = ResolverHelper.GetGameSystemFromPlatform(consoleType);
+
+            game.IsInstalledOnClient =
+                string.Equals(game.GameSystem, GameSystem.Windows, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(game.GameSystem, GameSystem.DOS, StringComparison.OrdinalIgnoreCase);
+
+            game.DisplayMediaType = ResolverHelper.GetDisplayMediaTypeFromPlatform(consoleType);
 
             if (gameFiles.Count > 1)
             {

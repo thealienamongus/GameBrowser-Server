@@ -14,28 +14,22 @@ using System.Xml;
 
 namespace GameBrowser.Providers.GamesDb
 {
-    class ManualTgdbImageProvider : IRemoteImageProvider
+    class GamesDbImageProvider : IRemoteImageProvider
     {
-        private bool _isConsole;
         private readonly IHttpClient _httpClient;
 
-        public ManualTgdbImageProvider(IHttpClient httpClient)
+        public GamesDbImageProvider(IHttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
         public bool Supports(IHasImages item)
-        { 
+        {
             return item is Game || item is GameSystem;
         }
 
         public async Task<IEnumerable<RemoteImageInfo>> GetImages(IHasImages item, ImageType imageType, CancellationToken cancellationToken)
         {
-            if (item is GameSystem)
-                _isConsole = true;
-            else
-                _isConsole = false;
-
             var images = await GetAllImages(item, cancellationToken).ConfigureAwait(false);
 
             return images.Where(i => i.Type == imageType);
@@ -45,45 +39,46 @@ namespace GameBrowser.Providers.GamesDb
         {
             var list = new List<RemoteImageInfo>();
 
-            var baseItem = (BaseItem)item;
+            var xmlPath = await GetXmlPath(item, cancellationToken).ConfigureAwait(false);
 
-            var tgdbId = baseItem.GetProviderId(MetadataProviders.Gamesdb) ?? await FindId(baseItem, cancellationToken);
-
-            if (!string.IsNullOrEmpty(tgdbId))
+            if (!string.IsNullOrEmpty(xmlPath))
             {
-                var xmlPath = TgdbGameProvider.Current.GetTgdbXmlPath(tgdbId);
 
                 try
                 {
-                    AddImages(list, xmlPath, cancellationToken);
+                    AddImages(list, item is GameSystem, xmlPath, cancellationToken);
                 }
                 catch (FileNotFoundException)
                 {
                     // Carry on.
                 }
-
             }
 
             return list;
         }
 
-
-
-        private async Task<string> FindId(BaseItem item, CancellationToken cancellationToken)
+        private async Task<string> GetXmlPath(IHasImages item, CancellationToken cancellationToken)
         {
+            var id = item.GetProviderId(MetadataProviders.Gamesdb);
+
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+
             if (item is Game)
             {
-                return await TgdbGameProvider.Current.FindGameId((Game)item, cancellationToken);
+                await GamesDbGameProvider.Current.EnsureCacheFile(id, cancellationToken).ConfigureAwait(false);
+
+                return GamesDbGameProvider.Current.GetCacheFilePath(id);
             }
-            
-            // else it's a gamesystem
-            return TgdbGamePlatformProvider.Current.FindPlatformId((GameSystem) item);
-            
+
+            await GamesDbGameSystemProvider.Current.EnsureCacheFile(id, cancellationToken).ConfigureAwait(false);
+
+            return GamesDbGameSystemProvider.Current.GetCacheFilePath(id);
         }
 
-
-
-        private void AddImages(List<RemoteImageInfo> list, string xmlPath, CancellationToken cancellationToken)
+        private void AddImages(List<RemoteImageInfo> list, bool isConsole, string xmlPath, CancellationToken cancellationToken)
         {
             using (var streamReader = new StreamReader(xmlPath, Encoding.UTF8))
             {
@@ -98,18 +93,16 @@ namespace GameBrowser.Providers.GamesDb
                 {
                     // With the exception of one element both games and gamesystems use the same xml structure for images.
                     reader.ReadToDescendant("Images");
-                    
+
                     using (var subReader = reader.ReadSubtree())
                     {
-                        AddImages(list, subReader, cancellationToken);
+                        AddImages(list, isConsole, subReader, cancellationToken);
                     }
                 }
             }
         }
 
-
-
-        private void AddImages(List<RemoteImageInfo> list, XmlReader reader, CancellationToken cancellationToken)
+        private void AddImages(List<RemoteImageInfo> list, bool isConsole, XmlReader reader, CancellationToken cancellationToken)
         {
             reader.MoveToContent();
 
@@ -149,7 +142,7 @@ namespace GameBrowser.Providers.GamesDb
                                 {
                                     // Have to account for console primary images being uploaded as side-back
                                     PopulateImage(list, reader, cancellationToken,
-                                                  _isConsole ? ImageType.Primary : ImageType.BoxRear);
+                                                  isConsole ? ImageType.Primary : ImageType.BoxRear);
                                 }
                                 break;
                             }
