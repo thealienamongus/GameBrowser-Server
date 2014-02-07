@@ -18,7 +18,7 @@ using System.Xml;
 
 namespace GameBrowser.Providers.GamesDb
 {
-    public class GamesDbGameProvider : IRemoteMetadataProvider<Game>
+    public class GamesDbGameProvider : IRemoteMetadataProvider<Game, GameInfo>
     {
         internal static GamesDbGameProvider Current;
 
@@ -37,11 +37,11 @@ namespace GameBrowser.Providers.GamesDb
             Current = this;
         }
 
-        public async Task<MetadataResult<Game>> GetMetadata(ItemId id, CancellationToken cancellationToken)
+        public async Task<MetadataResult<Game>> GetMetadata(GameInfo id, CancellationToken cancellationToken)
         {
             var result = new MetadataResult<Game>();
 
-            var gameId = id.GetProviderId(MetadataProviders.Gamesdb) ?? await FindGameId((GameId)id, cancellationToken).ConfigureAwait(false);
+            var gameId = id.GetProviderId(MetadataProviders.Gamesdb) ?? await FindGameId(id, cancellationToken).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(gameId))
             {
@@ -129,7 +129,7 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="item">The item.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Task{System.String}.</returns>
-        private async Task<string> FindGameId(GameId item, CancellationToken cancellationToken)
+        private async Task<string> FindGameId(GameInfo item, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

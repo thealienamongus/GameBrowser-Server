@@ -1,6 +1,7 @@
 ﻿using GameBrowser.Resolvers;
 using MediaBrowser.Common.IO;
 using MediaBrowser.Controller.Entities;
+using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Providers;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace GameBrowser.Providers
 {
     public class CustomGameProvider : ICustomMetadataProvider<Game>
     {
-        private readonly Task _cachedResult = Task.FromResult(true);
+        private readonly Task<ItemUpdateType> _cachedResult = Task.FromResult(ItemUpdateType.Unspecified);
+        private readonly Task<ItemUpdateType> _cachedResultWithUpdate = Task.FromResult(ItemUpdateType.MetadataImport);
 
         private readonly IFileSystem _fileSystem;
 
@@ -18,8 +20,10 @@ namespace GameBrowser.Providers
             _fileSystem = fileSystem;
         }
 
-        public Task FetchAsync(Game item, CancellationToken cancellationToken)
+        public Task<ItemUpdateType> FetchAsync(Game item, CancellationToken cancellationToken)
         {
+            var result = _cachedResult;
+
             string platform = null;
 
             if (string.IsNullOrEmpty(item.DisplayMediaType))
@@ -29,6 +33,7 @@ namespace GameBrowser.Providers
                 if (!string.IsNullOrEmpty(platform))
                 {
                     item.DisplayMediaType = ResolverHelper.GetDisplayMediaTypeFromPlatform(platform);
+                    result = _cachedResultWithUpdate;
                 }
             }
 
@@ -39,10 +44,11 @@ namespace GameBrowser.Providers
                 if (!string.IsNullOrEmpty(platform))
                 {
                     item.GameSystem = ResolverHelper.GetGameSystemFromPlatform(platform);
+                    result = _cachedResultWithUpdate;
                 }
             }
-            
-            return _cachedResult;
+
+            return result;
         }
 
         public string Name

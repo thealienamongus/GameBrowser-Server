@@ -1,6 +1,7 @@
 ﻿using GameBrowser.Resolvers;
 using MediaBrowser.Common.IO;
 using MediaBrowser.Controller.Entities;
+using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Providers;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace GameBrowser.Providers
 {
     public class CustomGameSystemProvider : ICustomMetadataProvider<GameSystem>
     {
-        private readonly Task _cachedResult = Task.FromResult(true);
+        private readonly Task<ItemUpdateType> _cachedResult = Task.FromResult(ItemUpdateType.Unspecified);
+        private readonly Task<ItemUpdateType> _cachedResultWithUpdate = Task.FromResult(ItemUpdateType.MetadataImport);
 
         private readonly IFileSystem _fileSystem;
 
@@ -18,11 +20,12 @@ namespace GameBrowser.Providers
             _fileSystem = fileSystem;
         }
 
-        public Task FetchAsync(GameSystem item, CancellationToken cancellationToken)
+        public Task<ItemUpdateType> FetchAsync(GameSystem item, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(item.GameSystemName))
             {
                 item.GameSystemName = ResolverHelper.AttemptGetGamePlatformTypeFromPath(_fileSystem, item.Path);
+                return _cachedResultWithUpdate;
             }
             
             return _cachedResult;

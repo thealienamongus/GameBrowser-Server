@@ -16,7 +16,7 @@ using System.Xml;
 
 namespace GameBrowser.Providers.GamesDb
 {
-    public class GamesDbGameSystemProvider : IRemoteMetadataProvider<GameSystem>
+    public class GamesDbGameSystemProvider : IRemoteMetadataProvider<GameSystem, GameSystemInfo>
     {
         internal static GamesDbGameSystemProvider Current;
 
@@ -35,11 +35,11 @@ namespace GameBrowser.Providers.GamesDb
             Current = this;
         }
 
-        public async Task<MetadataResult<GameSystem>> GetMetadata(ItemId id, CancellationToken cancellationToken)
+        public async Task<MetadataResult<GameSystem>> GetMetadata(GameSystemInfo id, CancellationToken cancellationToken)
         {
             var result = new MetadataResult<GameSystem>();
 
-            var gameId = id.GetProviderId(MetadataProviders.Gamesdb) ?? FindPlatformId((GameSystemId)id);
+            var gameId = id.GetProviderId(MetadataProviders.Gamesdb) ?? FindPlatformId(id);
 
             if (!string.IsNullOrEmpty(gameId))
             {
@@ -126,7 +126,7 @@ namespace GameBrowser.Providers.GamesDb
             }
         }
 
-        public string FindPlatformId(GameSystemId console)
+        public string FindPlatformId(GameSystemInfo console)
         {
             var platformSettings = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(gs => console.Path.Equals(gs.Path));
 
