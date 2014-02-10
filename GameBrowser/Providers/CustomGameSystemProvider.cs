@@ -10,7 +10,7 @@ namespace GameBrowser.Providers
 {
     public class CustomGameSystemProvider : ICustomMetadataProvider<GameSystem>
     {
-        private readonly Task<ItemUpdateType> _cachedResult = Task.FromResult(ItemUpdateType.Unspecified);
+        private readonly Task<ItemUpdateType> _cachedResult = Task.FromResult(ItemUpdateType.None);
         private readonly Task<ItemUpdateType> _cachedResultWithUpdate = Task.FromResult(ItemUpdateType.MetadataImport);
 
         private readonly IFileSystem _fileSystem;
@@ -20,7 +20,7 @@ namespace GameBrowser.Providers
             _fileSystem = fileSystem;
         }
 
-        public Task<ItemUpdateType> FetchAsync(GameSystem item, CancellationToken cancellationToken)
+        public Task<ItemUpdateType> FetchAsync(GameSystem item, IDirectoryService directoryService, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(item.GameSystemName))
             {
