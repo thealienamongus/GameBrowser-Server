@@ -21,7 +21,7 @@ namespace GameBrowser.Providers.EmuMovies
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<RemoteImageInfo>> GetAllImages(IHasImages item, CancellationToken cancellationToken)
+        public async Task<IEnumerable<RemoteImageInfo>> GetImages(IHasImages item, CancellationToken cancellationToken)
         {
             var list = new List<RemoteImageInfo>();
 
