@@ -255,7 +255,9 @@ namespace GameBrowser.Providers.GamesDb
 
         public IEnumerable<ImageType> GetSupportedImages(IHasImages item)
         {
-            return new List<ImageType>
+            if (item is Game)
+            {
+                return new List<ImageType>
             {
                 ImageType.Primary,
                 ImageType.Backdrop,
@@ -263,6 +265,18 @@ namespace GameBrowser.Providers.GamesDb
                 ImageType.Logo,
                 ImageType.Banner,
                 ImageType.Screenshot
+            };
+            }
+
+            // GameSystem
+            // TODO: Are these correct?
+            return new List<ImageType>
+            {
+                ImageType.Primary,
+                ImageType.Backdrop,
+                ImageType.BoxRear,
+                ImageType.Logo,
+                ImageType.Banner
             };
         }
     }
