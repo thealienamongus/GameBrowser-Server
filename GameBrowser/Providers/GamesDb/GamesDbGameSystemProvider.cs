@@ -7,7 +7,9 @@ using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
+using MediaBrowser.Model.Providers;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -146,6 +148,16 @@ namespace GameBrowser.Providers.GamesDb
         public string Name
         {
             get { return "GamesDb"; }
+        }
+
+        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameSystemInfo searchInfo, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

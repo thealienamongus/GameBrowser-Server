@@ -6,6 +6,7 @@ using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
+using MediaBrowser.Model.Providers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -693,5 +694,15 @@ namespace GameBrowser.Providers.GamesDb
             return tgdbPlatformString;
         }
 
+
+        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameInfo searchInfo, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
