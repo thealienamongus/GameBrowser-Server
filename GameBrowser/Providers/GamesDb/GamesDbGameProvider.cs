@@ -42,7 +42,7 @@ namespace GameBrowser.Providers.GamesDb
         {
             var result = new MetadataResult<Game>();
 
-            var gameId = id.GetProviderId(MetadataProviders.Gamesdb) ?? await FindGameId(id, cancellationToken).ConfigureAwait(false);
+            var gameId = id.GetProviderId(GamesDbExternalId.KeyName) ?? await FindGameId(id, cancellationToken).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(gameId))
             {
@@ -56,7 +56,7 @@ namespace GameBrowser.Providers.GamesDb
                 result.Item = new Game();
                 result.HasMetadata = true;
 
-                result.Item.SetProviderId(MetadataProviders.Gamesdb, gameId);
+                result.Item.SetProviderId(GamesDbExternalId.KeyName, gameId);
                 ProcessGameXml(result.Item, doc);
             }
 

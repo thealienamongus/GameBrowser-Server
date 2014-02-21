@@ -51,7 +51,7 @@ namespace GameBrowser.Providers.GamesDb
 
         private async Task<string> GetXmlPath(IHasImages item, CancellationToken cancellationToken)
         {
-            var id = item.GetProviderId(MetadataProviders.Gamesdb);
+            var id = item.GetProviderId(GamesDbExternalId.KeyName);
 
             if (string.IsNullOrEmpty(id))
             {
