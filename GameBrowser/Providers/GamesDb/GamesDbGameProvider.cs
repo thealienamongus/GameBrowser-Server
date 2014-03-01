@@ -63,6 +63,21 @@ namespace GameBrowser.Providers.GamesDb
             return result;
         }
 
+        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
+        {
+            return _httpClient.GetResponse(new HttpRequestOptions
+            {
+                CancellationToken = cancellationToken,
+                Url = url,
+                ResourcePool = Plugin.Instance.TgdbSemiphore
+            });
+        }
+
+        public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameInfo searchInfo, CancellationToken cancellationToken)
+        {
+            return new List<RemoteSearchResult>();
+        }
+
         private readonly Task _cachedResult = Task.FromResult(true);
         
         internal Task EnsureCacheFile(string gamesDbId, CancellationToken cancellationToken)
@@ -694,15 +709,5 @@ namespace GameBrowser.Providers.GamesDb
             return tgdbPlatformString;
         }
 
-
-        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameInfo searchInfo, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

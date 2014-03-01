@@ -37,6 +37,21 @@ namespace GameBrowser.Providers.GamesDb
             Current = this;
         }
 
+        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
+        {
+            return _httpClient.GetResponse(new HttpRequestOptions
+            {
+                CancellationToken = cancellationToken,
+                Url = url,
+                ResourcePool = Plugin.Instance.TgdbSemiphore
+            });
+        }
+
+        public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameSystemInfo searchInfo, CancellationToken cancellationToken)
+        {
+            return new List<RemoteSearchResult>();
+        }
+
         public async Task<MetadataResult<GameSystem>> GetMetadata(GameSystemInfo id, CancellationToken cancellationToken)
         {
             var result = new MetadataResult<GameSystem>();
@@ -148,16 +163,6 @@ namespace GameBrowser.Providers.GamesDb
         public string Name
         {
             get { return "GamesDb"; }
-        }
-
-        public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameSystemInfo searchInfo, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }
