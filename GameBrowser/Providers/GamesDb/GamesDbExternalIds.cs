@@ -13,7 +13,7 @@ namespace GameBrowser.Providers.GamesDb
 
         public string Name
         {
-            get { return "GamesDb"; }
+            get { return "Gamesdb"; }
         }
 
         public bool Supports(IHasProviderIds item)
