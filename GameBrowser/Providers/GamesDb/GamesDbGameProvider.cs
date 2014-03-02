@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Linq;
 
 namespace GameBrowser.Providers.GamesDb
 {
@@ -42,7 +43,14 @@ namespace GameBrowser.Providers.GamesDb
         {
             var result = new MetadataResult<Game>();
 
-            var gameId = id.GetProviderId(GamesDbExternalId.KeyName) ?? await FindGameId(id, cancellationToken).ConfigureAwait(false);
+            var gameId = id.GetProviderId(GamesDbExternalId.KeyName);
+
+            if (string.IsNullOrEmpty(gameId))
+            {
+                var searchResults = await FindGames(id, true, cancellationToken).ConfigureAwait(false);
+
+                gameId = searchResults.Select(i => i.GetProviderId(GamesDbExternalId.KeyName)).FirstOrDefault(i => !string.IsNullOrEmpty(i));
+            }
 
             if (!string.IsNullOrEmpty(gameId))
             {
@@ -75,11 +83,51 @@ namespace GameBrowser.Providers.GamesDb
 
         public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(GameInfo searchInfo, CancellationToken cancellationToken)
         {
-            return new List<RemoteSearchResult>();
+            var gameId = searchInfo.GetProviderId(GamesDbExternalId.KeyName);
+
+            // Single search result using id-based search
+            if (!string.IsNullOrEmpty(gameId))
+            {
+                await EnsureCacheFile(gameId, cancellationToken).ConfigureAwait(false);
+
+                var path = GetCacheFilePath(gameId);
+
+                var doc = new XmlDocument();
+                doc.Load(path);
+
+                var searchResult = new RemoteSearchResult();
+
+                var gameName = doc.SafeGetString("//Game/GameTitle");
+                if (!string.IsNullOrEmpty(gameName))
+                    searchResult.Name = gameName;
+
+                var gameReleaseDate = doc.SafeGetString("//Game/ReleaseDate");
+                if (!string.IsNullOrEmpty(gameReleaseDate))
+                {
+                    try
+                    {
+                        if (gameReleaseDate.Length == 4)
+                            searchResult.ProductionYear = Int32.Parse(gameReleaseDate);
+                        else if (gameReleaseDate.Length > 4)
+                        {
+                            searchResult.PremiereDate = Convert.ToDateTime(gameReleaseDate).ToUniversalTime();
+                            searchResult.ProductionYear = searchResult.PremiereDate.Value.Year;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.ErrorException("error parsing release date", ex);
+                    }
+                }
+
+                return new[] { searchResult };
+            }
+
+            return await FindGames(searchInfo, false, cancellationToken).ConfigureAwait(false);
         }
 
         private readonly Task _cachedResult = Task.FromResult(true);
-        
+
         internal Task EnsureCacheFile(string gamesDbId, CancellationToken cancellationToken)
         {
             var path = GetCacheFilePath(gamesDbId);
@@ -145,28 +193,37 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="item">The item.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Task{System.String}.</returns>
-        private async Task<string> FindGameId(GameInfo item, CancellationToken cancellationToken)
+        private async Task<IEnumerable<RemoteSearchResult>> FindGames(GameInfo item, bool matchExactName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             var name = item.Name;
             var platform = GetTgdbPlatformFromGameSystem(item.GameSystem);
-            var year = string.Empty;
+            var year = item.Year;
 
             foreach (var re in NameMatches)
             {
-                Match m = re.Match(name);
+                var m = re.Match(name);
                 if (m.Success)
                 {
                     name = m.Groups["name"].Value.Trim();
-                    year = m.Groups["year"] != null ? m.Groups["year"].Value : null;
+
+                    if (!year.HasValue)
+                    {
+                        var yearValue = m.Groups["year"];
+
+                        if (yearValue != null && !string.IsNullOrWhiteSpace(yearValue.Value))
+                        {
+                            int yearNum;
+                            if (Int32.TryParse(yearValue.Value, out yearNum))
+                            {
+                                year = yearNum;
+                            }
+                        }
+                    }
+
                     break;
                 }
-            }
-
-            if (string.IsNullOrEmpty(year) && item.Year != null)
-            {
-                year = item.Year.ToString();
             }
 
             string workingName = name;
@@ -187,9 +244,7 @@ namespace GameBrowser.Providers.GamesDb
                     workingName = name;
             }
 
-            var id = await AttemptFindId(workingName, year, platform);
-
-            return id;
+            return await AttemptFindGames(workingName, year, platform, matchExactName).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -199,9 +254,9 @@ namespace GameBrowser.Providers.GamesDb
         /// <param name="year"></param>
         /// <param name="platform"></param>
         /// <returns></returns>
-        private async Task<string> AttemptFindId(string name, string year, string platform)
+        private async Task<IEnumerable<RemoteSearchResult>> AttemptFindGames(string name, int? year, string platform, bool exactName)
         {
-            string url = string.IsNullOrEmpty(platform) ? string.Format(TgdbUrls.GetGames, UrlEncode(name)) : string.Format(TgdbUrls.GetGamesByPlatform, UrlEncode(name), platform);
+            var url = string.IsNullOrEmpty(platform) ? string.Format(TgdbUrls.GetGames, UrlEncode(name)) : string.Format(TgdbUrls.GetGamesByPlatform, UrlEncode(name), platform);
 
             var stream = await _httpClient.Get(url, Plugin.Instance.TgdbSemiphore, CancellationToken.None);
 
@@ -209,59 +264,86 @@ namespace GameBrowser.Providers.GamesDb
 
             doc.Load(stream);
 
-            if (doc.HasChildNodes)
+            var nodes = doc.SelectNodes("//Game");
+
+            if (nodes == null)
             {
-                var nodes = doc.SelectNodes("//Game");
+                return new List<RemoteSearchResult>();
+            }
 
-                if (nodes != null && nodes.Count > 0)
-                {
-                    var comparableName = GetComparableName(name);
+            var comparableName = GetComparableName(name);
 
-                    foreach (XmlNode node in nodes)
+            var returnList = nodes.Cast<XmlNode>()
+                .Select(GetSearchResult)
+                .Where(i => i != null)
+                .ToList();
+
+            if (exactName)
+            {
+                returnList = returnList.Where(i => string.Equals(i.Name, comparableName, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            var index = 0;
+            var resultTuples = returnList.Select(result => new Tuple<RemoteSearchResult, int>(result, index++)).ToList();
+
+            return resultTuples.OrderBy(i => string.Equals(i.Item1.Name, comparableName, StringComparison.OrdinalIgnoreCase) ? 0 : 1)
+                    .ThenBy(i =>
                     {
-                        var n = node.SelectSingleNode("./GameTitle");
-
-                        if (n == null) continue;
-
-                        var title = n.InnerText;
-
-                        if (GetComparableName(title) != comparableName) continue;
-
-                        // Name is the same, need to verify year if possible
-                        if (!string.IsNullOrEmpty(year))
+                        if (year.HasValue)
                         {
-                            var n2 = node.SelectSingleNode("./ReleaseDate");
-
-                            if (n2 != null)
+                            if (i.Item1.ProductionYear.HasValue)
                             {
-                                var ry = n2.InnerText;
-                                // TGDB will return both 1993 and 12/10/1993 so I need to account for both
-                                if (ry.Length > 4)
-                                    ry = ry.Substring(ry.LastIndexOf('/') + 1);
-
-                                int tgdbReleaseYear;
-                                if (Int32.TryParse(ry, out tgdbReleaseYear))
-                                {
-                                    int localReleaseYear;
-                                    if (Int32.TryParse(year, out localReleaseYear))
-                                    {
-                                        if (Math.Abs(tgdbReleaseYear - localReleaseYear) > 1) // Allow a 1 year variance
-                                        {
-                                            continue;
-                                        }
-
-                                    }
-                                }
+                                return Math.Abs(year.Value - i.Item1.ProductionYear.Value);
                             }
                         }
 
-                        // We have our match
-                        var idNode = node.SelectSingleNode("./id");
+                        return 0;
+                    })
+                    .ThenBy(i => i.Item2)
+                    .Select(i => i.Item1);
+        }
 
-                        if (idNode != null)
-                            return idNode.InnerText;
-                    }
+        private RemoteSearchResult GetSearchResult(XmlNode node)
+        {
+            var n = node.SelectSingleNode("./GameTitle");
+
+            if (n == null) return null;
+
+            var title = n.InnerText;
+            int? year = null;
+
+            var n2 = node.SelectSingleNode("./ReleaseDate");
+
+            if (n2 != null)
+            {
+                var ry = n2.InnerText;
+
+                // TGDB will return both 1993 and 12/10/1993 so I need to account for both
+                if (ry.Length > 4)
+                    ry = ry.Substring(ry.LastIndexOf('/') + 1);
+
+                int tgdbReleaseYear;
+                if (Int32.TryParse(ry, out tgdbReleaseYear))
+                {
+                    year = tgdbReleaseYear;
                 }
+            }
+
+            // We have our match
+            var idNode = node.SelectSingleNode("./id");
+
+            if (idNode != null)
+            {
+                var result = new RemoteSearchResult
+                {
+                    Name = title,
+                    SearchProviderName = Name,
+                    ProductionYear = year
+                };
+
+                result.SetProviderId(GamesDbExternalId.KeyName, idNode.InnerText);
+
+                return result;
             }
 
             return null;
@@ -270,7 +352,7 @@ namespace GameBrowser.Providers.GamesDb
         private const string Remove = "\"'!`?";
         // "Face/Off" support.
         private const string Spacers = "/,.:;\\(){}[]+-_=–*"; // (there are not actually two - they are different char codes)
-        
+
         /// <summary>
         /// 
         /// </summary>
