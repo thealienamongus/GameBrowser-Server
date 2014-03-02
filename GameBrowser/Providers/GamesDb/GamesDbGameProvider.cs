@@ -191,6 +191,7 @@ namespace GameBrowser.Providers.GamesDb
         /// Finds the game identifier.
         /// </summary>
         /// <param name="item">The item.</param>
+        /// <param name="matchExactName">if set to <c>true</c> [match exact name].</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Task{System.String}.</returns>
         private async Task<IEnumerable<RemoteSearchResult>> FindGames(GameInfo item, bool matchExactName, CancellationToken cancellationToken)
@@ -248,12 +249,13 @@ namespace GameBrowser.Providers.GamesDb
         }
 
         /// <summary>
-        /// 
+        /// Attempts the find games.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="year"></param>
-        /// <param name="platform"></param>
-        /// <returns></returns>
+        /// <param name="name">The name.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="platform">The platform.</param>
+        /// <param name="exactName">if set to <c>true</c> [exact name].</param>
+        /// <returns>Task{IEnumerable{RemoteSearchResult}}.</returns>
         private async Task<IEnumerable<RemoteSearchResult>> AttemptFindGames(string name, int? year, string platform, bool exactName)
         {
             var url = string.IsNullOrEmpty(platform) ? string.Format(TgdbUrls.GetGames, UrlEncode(name)) : string.Format(TgdbUrls.GetGamesByPlatform, UrlEncode(name), platform);
@@ -275,7 +277,21 @@ namespace GameBrowser.Providers.GamesDb
 
             var returnList = nodes.Cast<XmlNode>()
                 .Select(GetSearchResult)
-                .Where(i => i != null)
+                .Where(i =>
+                {
+                    if (i != null)
+                    {
+                        // If a year was supplied enforce it
+                        if (year.HasValue && i.ProductionYear.HasValue)
+                        {
+                            return Math.Abs(year.Value - i.ProductionYear.Value) <= 1;
+                        }
+
+                        return true;
+                    }
+
+                    return false;
+                })
                 .ToList();
 
             if (exactName)
