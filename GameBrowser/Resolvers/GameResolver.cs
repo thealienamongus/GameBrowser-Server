@@ -102,11 +102,13 @@ namespace GameBrowser.Resolvers
                 return null;
             }
 
-            var game = new Game {Path = gameFiles[0].FullName};
+            var game = new Game
+            {
+                Path = gameFiles[0].FullName,
+                GameSystem = ResolverHelper.GetGameSystemFromPlatform(consoleType)
+            };
 
-            game.GameSystem = ResolverHelper.GetGameSystemFromPlatform(consoleType);
-
-            game.IsInstalledOnClient =
+            game.IsPlaceHolder =
                 string.Equals(game.GameSystem, GameSystem.Windows, StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(game.GameSystem, GameSystem.DOS, StringComparison.OrdinalIgnoreCase);
 
