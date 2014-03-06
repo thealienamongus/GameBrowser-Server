@@ -18,7 +18,7 @@ namespace GameBrowser.Resolvers
     public class GameResolver : ItemResolver<Game>
     {
         private readonly ILogger _logger;
-        private readonly IFileSystem _fileSystem; 
+        private readonly IFileSystem _fileSystem;
 
         public GameResolver(ILogger logger, IFileSystem fileSystem)
         {
@@ -54,7 +54,7 @@ namespace GameBrowser.Resolvers
                 }
 
                 // For MAME we will allow all games in the same dir
-                if ( string.Equals(platform, "Arcade"))
+                if (string.Equals(platform, "Arcade"))
                 {
                     var extension = Path.GetExtension(args.Path);
 
@@ -75,7 +75,7 @@ namespace GameBrowser.Resolvers
                     }
                 }
             }
-            
+
             return null;
         }
 
@@ -131,7 +131,7 @@ namespace GameBrowser.Resolvers
                 case "3DO":
                     return new[] { ".iso", ".cue" };
 
-                case "Amiga": 
+                case "Amiga":
                     return new[] { ".iso", ".adf" };
 
                 case "Arcade":
@@ -198,16 +198,16 @@ namespace GameBrowser.Resolvers
                     return new[] { ".smc", ".zip", ".fam", ".rom", ".sfc", ".fig" };
 
                 case "Virtual Boy":
-                    return new[] {".vb"};
+                    return new[] { ".vb" };
 
                 case "Nintendo Wii":
                     return new[] { ".iso", ".dol", ".ciso", ".wbfs", ".wad", ".gcz" };
 
                 case "DOS":
-                    return new[] {".gbdos"};
+                    return new[] { ".gbdos", ".disc" };
 
                 case "Windows":
-                    return new[] { ".gbwin" };
+                    return new[] { ".gbwin", ".disc" };
 
                 case "Sega 32X":
                     return new[] { ".iso", ".bin", ".img", ".zip", ".32x" };
@@ -246,15 +246,15 @@ namespace GameBrowser.Resolvers
                     return new[] { ".pce", ".zip" };
 
                 case "TurboGrafx CD":
-                    return new[] {".bin", ".iso"};
+                    return new[] { ".bin", ".iso" };
 
                 case "ZX Spectrum":
-                    return new[] {".z80", ".tap", ".tzx"};
+                    return new[] { ".z80", ".tap", ".tzx" };
 
                 default:
                     return new string[] { };
             }
-            
+
         }
     }
 }
