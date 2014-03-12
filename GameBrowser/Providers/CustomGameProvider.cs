@@ -28,7 +28,7 @@ namespace GameBrowser.Providers
 
             if (string.IsNullOrEmpty(item.DisplayMediaType))
             {
-                platform = platform ?? ResolverHelper.AttemptGetGamePlatformTypeFromPath(_fileSystem, item.Path);
+                platform = ResolverHelper.AttemptGetGamePlatformTypeFromPath(_fileSystem, item.Path);
 
                 if (!string.IsNullOrEmpty(platform))
                 {
