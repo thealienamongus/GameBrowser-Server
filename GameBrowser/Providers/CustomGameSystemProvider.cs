@@ -24,7 +24,7 @@ namespace GameBrowser.Providers
         {
             if (string.IsNullOrEmpty(item.GameSystemName))
             {
-                item.GameSystemName = ResolverHelper.AttemptGetGamePlatformTypeFromPath(_fileSystem, item.Path);
+                item.GameSystemName = ResolverHelper.GetGameSystemFromPath(_fileSystem, item.Path);
                 return _cachedResultWithUpdate;
             }
             

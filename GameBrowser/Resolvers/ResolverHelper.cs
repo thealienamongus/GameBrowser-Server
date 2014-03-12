@@ -58,12 +58,12 @@ namespace GameBrowser.Resolvers
 
         public static string AttemptGetGamePlatformTypeFromPath(IFileSystem fileSystem, string path)
         {
-            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => fileSystem.ContainsSubPath(s.Path, path));
+            var system = Plugin.Instance.Configuration.GameSystems.FirstOrDefault(s => fileSystem.ContainsSubPath(s.Path, path) || string.Equals(s.Path, path, StringComparison.OrdinalIgnoreCase));
 
             return system != null ? system.ConsoleType : null;
         }
 
-        public static string GetGameSystemFromGamePath(IFileSystem fileSystem, string path)
+        public static string GetGameSystemFromPath(IFileSystem fileSystem, string path)
         {
             var platform = AttemptGetGamePlatformTypeFromPath(fileSystem, path);
 
@@ -72,7 +72,7 @@ namespace GameBrowser.Resolvers
                 return null;
             }
 
-            return GetGameSystemFromPlatform(path);
+            return GetGameSystemFromPlatform(platform);
         }
 
         public static string GetGameSystemFromPlatform(string platform)
